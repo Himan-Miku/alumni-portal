@@ -1,13 +1,16 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
+import mongoose, { MongooseError } from "mongoose";
 
 const connectDB = async (): Promise<void> => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI!);
-    console.log("MongoDB connected successfully");
-  } catch (error) {}
+    const mongoConnection = await mongoose.connect(process.env.MONGODB_URI!);
+    console.log(`Mongo running at : ${mongoConnection.connection.name}`);
+  } catch (error) {
+    if (error instanceof MongooseError) {
+      console.log(error.message);
+    } else {
+      console.log("Unknown Error while connecting to Mongo");
+    }
+  }
 };
 
 export default connectDB;
