@@ -8,7 +8,7 @@ const connectDB = async (): Promise<void> => {
     if (error instanceof MongooseError) {
       console.log(error.message);
     } else {
-      console.log("Unknown Error while connecting to Mongo");
+      console.log("Unknown Error while connecting to Mongo", error);
     }
   }
 };
