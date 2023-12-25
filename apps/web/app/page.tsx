@@ -1,144 +1,216 @@
+import * as React from "react";
 import Image from "next/image";
-import { Card } from "@repo/ui/card";
-import { Code } from "@repo/ui/code";
-import styles from "./page.module.css";
-import { Button } from "@repo/ui/button";
-
-function Gradient({
-  conic,
-  className,
-  small,
-}: {
-  small?: boolean;
-  conic?: boolean;
-  className?: string;
-}): JSX.Element {
+const Home = () => {
   return (
-    <span
-      className={[
-        styles.gradient,
-        conic ? styles.glowConic : undefined,
-        small ? styles.gradientSmall : styles.gradientLarge,
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-    />
-  );
-}
+    <div className="w-full h-full">
+      <div className="home-image relative">
+        <div className="absolute bottom-0 left-0 right-0 top-0 home-background w-full h-full ">
+          <div className="flex h-full items-center justify-center flex-col text-white ">
+            <div className="text-white text-center">
+              <h2 className="uppercase text-[50px] font-[400] text-center tracking-[1px] ">
+                " Welcome to RSCOE Alumni Portal "
+              </h2>
+              <h4
+                className="after:content-[''] after:top-[25%] after:ml-3 after:bg-white after:w-[50%] after:absolute after:h-[5px]  
+        before:content-[''] before:top-[25%]  before:bg-white before:w-[50%] before:absolute before:h-[5px] before:left-[-12%]
+        relative  text-[15px] font-semibold text-center uppercase tracking-[2px] leading-5 "
+              >
+                by RSCOE Community
+              </h4>
+              <h4 className=" text-[15px] font-semibold text-center uppercase tracking-[2px] leading-5 my-2">
+                RSCOE Initiative
+              </h4>
+            </div>
+            <h3 className="font-[700] w-1/3 text-center text-4xl tracking-tighter my-6">
+              "The Forever Titans: Honoring the legacy of our graduates."
+            </h3>
+            <p className="w-1/2 font-sans font-[400] text-xl text-center mt-4">
+              Alumni are the living legacy of our college. Join us on our alumni
+              portal to celebrate your achievements, reconnect with classmates,
+              and shape the future of our institution
+            </p>
+          </div>
+        </div>
+      </div>
+      <section className="w-full  h-[70vh] ">
+        <h3
+          className="text-center text-4xl font-sans m-4 font-[400] relative underline-offset-[10px] underline
+      "
+        >
+          “ Why Alumni Portal ? ”
+        </h3>
 
-const LINKS = [
-  {
-    title: "Docs",
-    href: "https://turbo.build/repo/docs",
-    description: "Find in-depth information about Turborepo features and API.",
-  },
-  {
-    title: "Learn",
-    href: "https://turbo.build/repo/docs/handbook",
-    description: "Learn more about monorepos with our handbook.",
-  },
-  {
-    title: "Templates",
-    href: "https://turbo.build/repo/docs/getting-started/from-example",
-    description: "Choose from over 15 examples and deploy with a single click.",
-  },
-  {
-    title: "Deploy",
-    href: "https://vercel.com/new",
-    description:
-      " Instantly deploy your Turborepo to a shareable URL with Vercel.",
-  },
-];
-
-export default function Page(): JSX.Element {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          examples/basic&nbsp;
-          <Code className={styles.code}>web</Code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            By{" "}
+        <div className="flex  gap-4 justify-start items-center font-sans ">
+          <div className="home-section-div">
             <Image
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              height={24}
-              priority
-              src="/vercel.svg"
-              width={100}
+              src="/home/Feeds.svg"
+              alt="feed.svg"
+              width={70}
+              height={70}
             />
-          </a>
-        </div>
-      </div>
-
-      <Button appName="web" className={styles.button}>
-        Click me!
-      </Button>
-
-      <div className={styles.hero}>
-        <div className={styles.heroContent}>
-          <div className={styles.logos}>
-            <div className={styles.circles}>
-              <Image
-                alt=""
-                height={614}
-                src="circles.svg"
-                width={614}
-                style={{ pointerEvents: "none" }}
-              />
-            </div>
-            <div className={styles.logoGradientContainer}>
-              <Gradient className={styles.logoGradient} conic small />
-            </div>
-
-            <div className={styles.logo}>
-              <Image
-                alt="Turborepo"
-                height={120}
-                priority
-                src="turborepo.svg"
-                width={120}
-                style={{ pointerEvents: "none" }}
-              />
-            </div>
+            <h5 className="home-icons-heading">Feed</h5>
+            <p className="home-icons-subheading">
+              Alumni can share any notable achievements or awards that they've
+              received in their professional or personal life, as well as any
+              significant contributions they've made to their community or
+              industry.
+            </p>
           </div>
-          <Gradient className={styles.backgroundGradient} conic />
-          <div className={styles.turborepoWordmarkContainer}>
-            <svg
-              className={styles.turborepoWordmark}
-              viewBox="0 0 506 50"
-              width={200}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Turborepo logo</title>
-              <path d="M53.7187 12.0038V1.05332H0.945312V12.0038H20.8673V48.4175H33.7968V12.0038H53.7187Z" />
-              <path d="M83.5362 49.1431C99.764 49.1431 108.67 40.8972 108.67 27.3081V1.05332H95.7401V26.0547C95.7401 33.6409 91.7821 37.9287 83.5362 37.9287C75.2904 37.9287 71.3324 33.6409 71.3324 26.0547V1.05332H58.4029V27.3081C58.4029 40.8972 67.3084 49.1431 83.5362 49.1431Z" />
-              <path d="M128.462 32.7174H141.325L151.484 48.4175H166.327L154.848 31.3321C161.313 29.0232 165.271 23.8778 165.271 16.8853C165.271 6.72646 157.685 1.05332 146.141 1.05332H115.532V48.4175H128.462V32.7174ZM128.462 22.4925V11.8719H145.481C150.033 11.8719 152.54 13.8509 152.54 17.2152C152.54 20.3816 150.033 22.4925 145.481 22.4925H128.462Z" />
-              <path d="M171.287 48.4175H205.128C215.683 48.4175 221.752 43.404 221.752 35.0262C221.752 29.419 218.189 25.593 213.967 23.8778C216.87 22.4925 220.432 19.1942 220.432 13.9828C220.432 5.60502 214.495 1.05332 204.006 1.05332H171.287V48.4175ZM183.689 19.59V11.542H202.687C206.249 11.542 208.228 12.9273 208.228 15.566C208.228 18.2047 206.249 19.59 202.687 19.59H183.689ZM183.689 29.2871H203.875C207.371 29.2871 209.284 31.0022 209.284 33.5749C209.284 36.1476 207.371 37.8628 203.875 37.8628H183.689V29.2871Z" />
-              <path d="M253.364 0.261719C236.806 0.261719 224.866 10.6185 224.866 24.7354C224.866 38.8523 236.806 49.2091 253.364 49.2091C269.922 49.2091 281.796 38.8523 281.796 24.7354C281.796 10.6185 269.922 0.261719 253.364 0.261719ZM253.364 11.4761C262.072 11.4761 268.602 16.6215 268.602 24.7354C268.602 32.8493 262.072 37.9947 253.364 37.9947C244.656 37.9947 238.126 32.8493 238.126 24.7354C238.126 16.6215 244.656 11.4761 253.364 11.4761Z" />
-              <path d="M300.429 32.7174H313.292L323.451 48.4175H338.294L326.815 31.3321C333.28 29.0232 337.238 23.8778 337.238 16.8853C337.238 6.72646 329.652 1.05332 318.108 1.05332H287.499V48.4175H300.429V32.7174ZM300.429 22.4925V11.8719H317.448C322 11.8719 324.507 13.8509 324.507 17.2152C324.507 20.3816 322 22.4925 317.448 22.4925H300.429Z" />
-              <path d="M343.254 1.05332V48.4175H389.299V37.467H355.92V29.7489H385.539V19.0622H355.92V12.0038H389.299V1.05332H343.254Z" />
-              <path d="M408.46 33.3111H425.677C437.221 33.3111 444.807 27.7699 444.807 17.2152C444.807 6.59453 437.221 1.05332 425.677 1.05332H395.53V48.4175H408.46V33.3111ZM408.46 22.5585V11.8719H424.951C429.569 11.8719 432.076 13.8509 432.076 17.2152C432.076 20.5135 429.569 22.5585 424.951 22.5585H408.46Z" />
-              <path d="M476.899 0.261719C460.341 0.261719 448.401 10.6185 448.401 24.7354C448.401 38.8523 460.341 49.2091 476.899 49.2091C493.456 49.2091 505.33 38.8523 505.33 24.7354C505.33 10.6185 493.456 0.261719 476.899 0.261719ZM476.899 11.4761C485.606 11.4761 492.137 16.6215 492.137 24.7354C492.137 32.8493 485.606 37.9947 476.899 37.9947C468.191 37.9947 461.66 32.8493 461.66 24.7354C461.66 16.6215 468.191 11.4761 476.899 11.4761Z" />
-            </svg>
+          <div className="home-section-div">
+            <Image
+              src="/home/conference.svg"
+              alt="conference.svg"
+              width={70}
+              height={70}
+            />
+            <h5 className="home-icons-heading">Alumni Talk</h5>
+            <p className="home-icons-subheading">
+              The Alumni Talk option is a valuable resource for our alumni
+              community, offering a platform where graduates can connect with
+              each other, learn from expert speakers, and grow both personally
+              and professionally.
+            </p>
+          </div>
+          <div className="home-section-div">
+            <Image
+              src="/home/agenda.svg"
+              alt="Alumni Directory.svg"
+              width={70}
+              height={70}
+            />
+            <h5 className="home-icons-heading">Alumni Directory</h5>
+            <p className="home-icons-subheading">
+              Connect, network, and forge lasting relationships with your fellow
+              alumni.Looking to reconnect with old classmates? Our Alumni
+              Directory has got you covered.
+            </p>
+          </div>
+          <div className="home-section-div">
+            <Image
+              src="/home/public-relation.svg"
+              alt="Alumni Engage.svg"
+              width={70}
+              height={70}
+            />
+            <h5 className="home-icons-heading">Alumni Engage</h5>
+            <p className="home-icons-subheading">
+              The Alumni Engage section is designed to help our alumni community
+              stay connected and engaged with our college/university.Alumni
+              Engage offers a range of activities and resources to help you
+              connect with your fellow graduates.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
+      <div className="w-full h-[110vh] bg-[#161A30] flex justify-start items-center flex-col">
+        <h2 className="text-[#EA906C] font-sans text-center text-4xl leading-9 font-[900] underline underline-offset-[12px] decoration-white decoration-4 mt-12">
+          " Alumni Talk Series "
+        </h2>
+        <div className="grid grid-cols-2 gap-16 mt-10 overflow-auto">
+          <iframe
+            width="560"
+            height="300"
+            src="https://www.youtube.com/embed/wKeZ88BJA5o?si=DDsZVDJ3hITWFsjz"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
 
-      <div className={styles.grid}>
-        {LINKS.map(({ title, href, description }) => (
-          <Card className={styles.card} href={href} key={title} title={title}>
-            {description}
-          </Card>
-        ))}
+          <iframe
+            width="560"
+            height="300"
+            src="https://www.youtube.com/embed/8tWLo4RJ9Lk?si=B5HEQ6GTLE1lJ8iB"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+
+          <iframe
+            width="560"
+            height="300"
+            src="https://www.youtube.com/embed/DhkNlFp6DG0?si=wkh9TDrUJyLcaflx"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+
+          <iframe
+            width="560"
+            height="300"
+            src="https://www.youtube.com/embed/TeUQGd7XOD8?si=lphZoxSgNwtVAZ8F"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+        </div>
       </div>
-    </main>
+      <div className="w-full h-[130vh] font-sans flex justify-start  flex-col">
+        <h3 className="text-4xl font-[700] relative p-5 my-3 text-center">
+          "Voices of Authority: Embracing Our Alumni Portal"
+          <span className="flex-1 after:w-1/2 after:h-1 after:bg-black after:absolute after:top-[80%] after:left-[25%] after: after:content-['']"></span>
+        </h3>
+        <div className="flex gap-8 m-8 p-2  ">
+          <Image
+            src="/home/Principal.jpeg"
+            alt="Principal.jpg"
+            width={540}
+            height={342}
+            className="rounded-md "
+          ></Image>
+          <div className="gap-6 mt-10 ml-10">
+            <h4 className="text-3xl font-[700] p-2">Dr. R.K Jain</h4>
+            <h5 className="text-xl font-[600] p-2">Director, RSCOE</h5>
+            <p className="w-[80%] p-2 text-md">
+              Dear Friends, It is with immense pride, that I introduce you to an
+              entirely new approach of learning in our college. An approach,
+              where traditional methods of learning go hand in hand with modern
+              learning techniques, keeping with the current trends and
+              technology. We facilitate our students to excel academically and
+              to develop their personalities in diverse fields. To this end, we
+              have complemented academics with other developmental activities
+              such as performing arts, sports, hobbies and technical clubs, to
+              name a few.
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-8 m-8 p-2  ">
+          <div className="w-[60%] gap-6 mt-10 ml-10">
+            <h4 className="text-3xl font-[700] p-2">Dr. S P Rao Borde</h4>
+            <h5 className="text-xl font-[600] p-2">Dean of SI&IR's, RSCOE</h5>
+            <p className="w-[80%] p-2 text-md">
+              Dear Friends, From The Dean of SI&IR's Desk, I would like to
+              introduce our campus, Rajarshi Shahu College of Engineering
+              (RSCOE), an autonomous institute which is in the band 250 to 300
+              of MHRD-NIRF 2022 and is also accredited by NAAC and NBA. Our
+              college is the flagship institute of JSPM and TSSM Group of
+              Institutes, Pune, Maharashtra. RSCOE is now also known as TEDxJSPM
+              RSCOE. Being an autonomous institute, the companies like Veritas,
+              TCS, KPIT & Persistent Systems, Bentley Institute, IIT Ropar, and
+              Builders Association of India contributed to the curriculum
+              integration, giving an opportunity to students from various social
+              and economic backgrounds to be part of excelling in higher
+              education.
+            </p>
+          </div>
+          <Image
+            src="/home/Spraoborde.jpeg"
+            alt="TPO.jpg"
+            width={540}
+            height={342}
+            className="rounded-md"
+          ></Image>
+        </div>
+      </div>
+      <div className="w-[100%] font-sans h-[115vh] bg-[#D9D9D9] flex justify-start items-center flex-col gap-5 p-10">
+        <h3 className="text-4xl font-[700] underline underline-offset-8  ">
+          “Memories We Will Never Forget”
+        </h3>
+        <Image
+          src="/home/alumni-meet.jpeg"
+          alt="alumni-meet.jpg"
+          width={900}
+          height={600}
+          className=""
+        ></Image>
+      </div>
+    </div>
   );
-}
+};
+
+export default Home;
