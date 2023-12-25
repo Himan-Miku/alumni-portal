@@ -206,7 +206,6 @@ const Home = () => {
           alt="alumni-meet.jpg"
           width={900}
           height={600}
-         
           className=""
         ></Image>
       </div>
