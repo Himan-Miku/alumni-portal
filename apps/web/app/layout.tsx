@@ -17,7 +17,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className={`${poppins.variable}`}>
+      <body className={poppins.className + " bg-commonbg flex flex-col gap-2"}>
         <Navbar></Navbar>
         {children}
       </body>
