@@ -1,5 +1,5 @@
 import React from "react";
-import EventCard from "./components/EventCard";
+import EventCard  from "./components/EventCard";
 
 const Events = () => {
   return <div className="h-max w-[100%]  bg-white">
@@ -22,6 +22,7 @@ const Events = () => {
 
     {/* //Using flex Layout */}
     <div className="flex flex-wrap justify-center items-center">
+      <EventCard/>
       <EventCard/>
       <EventCard/>
       <EventCard/>
