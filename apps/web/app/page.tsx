@@ -156,14 +156,15 @@ const Home = () => {
         </div>
       </div>
       <div className="w-full font-sans flex justify-start  flex-col">
-        <h3 className="text-4xl font-[700] relative p-5 my-3 text-center">
-          "Voices of Authority: Embracing Our Alumni Portal"
-          <span className="flex-1 after:w-1/2 after:h-1 after:bg-black after:absolute after:top-[80%] after:left-[25%] after: after:content-['']"></span>
+        <h3 className="text-4xl font-[700]  relative p-5 my-3 text-center flex flex-col items-center gap-2">
+          <span>"Voices of Authority: Embracing Our Alumni Portal"</span>
+          <div className="w-[50%] h-1 bg-black"></div>
         </h3>
+
         <div className="flex flex-col gap-10 px-12">
           <div
-            className="flex flex-col md:flex-row items-center glass rounded-sm
-          justify-center gap-8 "
+            className="flex flex-col xl:flex-row items-center glass rounded-sm
+          justify-center gap-8"
           >
             <Image
               src="/home/Principal.jpeg"
