@@ -25,6 +25,9 @@ const config = {
         Alumi_home: "url('/home/Alumi_home.jpeg')",
       },
       colors: {
+        commonbg: "#D9D9D9",
+        bluebg: "#2B2A4C",
+        text: "#EA906C",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -33,6 +33,4 @@ const Events = () => {
     <div className="h-10"></div>  
 
   </div>;
-};
-
-export default Events;
+}

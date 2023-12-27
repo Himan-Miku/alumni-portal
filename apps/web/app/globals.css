@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -71,35 +72,77 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
 }
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
+
 @layer components {
   .home-image {
-    background-image: url("../public/home/Web_Photo_Editor.jpg");
+    background-image: url("/home/Web_Photo_Editor.jpg");
     aspect-ratio: 16/9;
 
     background-repeat: no-repeat;
     background-size: contain;
+    /* background-color: red; */
   }
   .home-background {
     background-color: rgba(0, 0, 0, 0.5);
+  }
+  a {
+    /* font-weight: 800; */
+    position: relative;
+  }
+  a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    /* display: block; */
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: rgb(49, 49, 49);
+    transition:
+      width 0.3s ease 0s,
+      left 0.3s ease 0s;
+    width: 0;
+  }
+  a:hover {
+    color: #ea906c;
+  }
+  a:hover:after {
+    width: 100%;
+    left: 0;
   }
 }
 
 @layer components {
   .home-section-div {
-    @apply flex flex-col justify-center items-center w-1/4 h-full py-4;
+    @apply flex flex-col justify-evenly items-center  w-full lg:w-auto min-h-[20rem] glass p-5;
+  }
+  .yt-videos {
+    @apply w-[48vw] max-w-[32rem] min-w-[24rem] aspect-video;
+  }
+  .image-name {
+    @apply flex flex-col items-center gap-4;
+  }
+  .glass {
+    @apply bg-slate-300 shadow-lg backdrop-blur-md rounded-[10px] p-8;
   }
   .home-icons-heading {
-    @apply text-center flex text-xl font-[700] leading-4 py-4 m-1;
+    @apply text-center flex text-xl font-[700] leading-4;
   }
   .home-icons-subheading {
-    @apply text-[14px] flex leading-loose font-[400] text-center w-full p-8;
+    @apply text-[14px] flex leading-loose font-[400] text-justify w-full ;
+  }
+
+  .selected {
+    @apply bg-slate-200 rounded-md;
   }
 }
