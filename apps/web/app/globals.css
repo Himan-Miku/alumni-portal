@@ -139,7 +139,7 @@
     @apply text-center flex text-xl font-[700] leading-4;
   }
   .home-icons-subheading {
-    @apply text-[14px] flex leading-loose font-[400] text-center w-full;
+    @apply text-[14px] flex leading-loose font-[400] text-justify w-full ;
   }
 
   .selected {
