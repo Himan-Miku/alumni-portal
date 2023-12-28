@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import TalkCard from "./components/TalkCard";
 import { fetchYoutubeData } from "./repository/data";
+import { Item } from "./model/YoutubeModel";
 
 
 
 
 const AlumniTalk = () => {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Item[]>([]);
   const [nextPageToken, setNextPageToken] = useState("");
   const [prePageToken, setPrePageToken] = useState("");
   const [currentPage , setCurrentage] = useState(1);
@@ -48,8 +49,8 @@ const AlumniTalk = () => {
 
     <div className="flex flex-wrap w-full justify-center items-center pt-10">
       {
-        data.map((item, index) => {
-          return <TalkCard key={index} data={item} />;
+        data.map((item) => {
+          return <TalkCard key={item.etag} data={item} />;
         })
       }
     </div>
