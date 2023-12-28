@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const API_KEY = 'AIzaSyBwGzaoE-eBHuiy7b2KSLFDLs7E3ZKGzBQ';
-const API_URL = 'https://www.googleapis.com/youtube/v3/search';
-const CHANNEL_ID = 'UC4Pc9V7-QjsJZKkUS8I0iqw';
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const CHANNEL_ID = process.env.NEXT_PUBLIC_CHANNEL_ID;
 
 
 export const fetchYoutubeData = async (pageToken : string ) => {
