@@ -2,9 +2,10 @@
 import Image from "next/image";
 import { RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
-
+import { SignInButton, SignedIn,SignOutButton, SignedOut, UserButton } from "@clerk/nextjs";
 import RscoeImg from "../../public/rscoe-logo.png";
-import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
+import { useUser } from "@clerk/nextjs";
+
 import {
   Sheet,
   SheetClose,
@@ -22,6 +23,8 @@ const Navbar = () => {
   // const router = useRouter();
   let pathname = usePathname();
 
+  const { isLoaded, isSignedIn, user } = useUser();
+  console.log(user);
   let nav = [
     {
       link: "/",
@@ -66,17 +69,28 @@ const Navbar = () => {
             })}
           </div>
         </div>
-        <div className="hidden lg:flex items-center gap-3 lg:text-lg font-semibold text-slate-700">
-          <div>Sushant Rao</div>
-          <div>
-            <Avatar>
-              <AvatarImage
-                src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
-                alt="@shadcn"
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </div>
+        <div className="hidden  lg:flex items-center gap-3 lg:text-lg font-semibold text-slate-700">
+          <SignedIn>
+            
+              <Link href={"/profile"}  >
+                <div className="flex items-center justify-center gap-2">
+                <h3>{user?.fullName}</h3>
+                <Image
+                  src={user?.imageUrl || "/defaultProfileImage.png"}
+                  alt="ProfileImage"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                </div>
+              </Link>
+            
+          </SignedIn>
+
+          <SignedOut>
+            {/* Signed out users get sign in button */}
+            <SignInButton />
+          </SignedOut>
         </div>
         <div className="lg:hidden  ">
           <Sheet>
@@ -90,13 +104,7 @@ const Navbar = () => {
                 <SheetTitle className="flex items-center gap-2 justify-center glass rounded-md p-3 shadow-md">
                   <div>Sushant Rao</div>
                   <div>
-                    <Avatar>
-                      <AvatarImage
-                        src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
-                        alt="@shadcn"
-                      />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    <UserButton afterSignOutUrl="/" />
                   </div>
                 </SheetTitle>
               </SheetHeader>

@@ -1,5 +1,5 @@
 import "./globals.css";
-
+import { ClerkProvider } from "@clerk/nextjs";
 import { Poppins } from "next/font/google";
 import Navbar from "./components/Navbar";
 
@@ -16,11 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <html lang="en">
-      <body className={poppins.className + " bg-commonbg flex flex-col gap-2"}>
-        <Navbar></Navbar>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={poppins.className + " bg-commonbg flex flex-col gap-2"}
+        >
+          <Navbar></Navbar>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
