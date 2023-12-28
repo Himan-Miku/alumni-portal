@@ -2,8 +2,8 @@ import React from "react";
 import EventCard  from "./components/EventCard";
 
 const Events = () => {
-  return <div className="h-max w-[100%]  bg-white">
-    <h3 className="text-center text-2xl font-sans m-4 font-[400] relative underline-offset-[10px] underline lg:text-4xl">
+  return <div className="h-max w-[100%]">
+    <h3 className="text-center text-3xl font-sans p-4 font-[400] relative underline-offset-[10px] underline lg:text-4xl">
       “ Some Past Events”
     </h3>
 
