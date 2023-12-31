@@ -8,5 +8,6 @@ module.exports = {
         hostname: "img.clerk.com",
       },
     ],
+    domains: ['i.ytimg.com'],
   },
 };
