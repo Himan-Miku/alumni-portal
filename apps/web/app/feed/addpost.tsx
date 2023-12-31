@@ -10,9 +10,9 @@ import Image from "next/image";
 
 const AddPost = () => {
   return (
-    <div className=" lg:col-span-3">
+    <div className="hidden lg:block lg:col-span-3">
       <div className="flex p-4 gap-4 items-start bg-white shadow-md rounded-md">
-        <Avatar className="w-12 h-12">
+        <Avatar className="">
           <AvatarImage
             src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
             alt="DP"

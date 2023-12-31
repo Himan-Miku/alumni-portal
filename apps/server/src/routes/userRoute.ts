@@ -1,7 +1,16 @@
 import { Router } from "express";
-import { AddStudents } from "../controllers/UserController";
+import {
+  AddUser,
+  deleteUser,
+  login,
+  updateUser,
+} from "../controllers/UserController";
+import { isAuthenticated } from "../middlewares/Auth";
+
 let router = Router();
 
-router.route("/signup").post(AddStudents);
+router.route("/signup").post(AddUser);
+router.route("/login").post(login);
+router.route("/user").put(isAuthenticated, updateUser).delete(deleteUser);
 
 export default router;

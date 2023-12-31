@@ -124,7 +124,7 @@
 
 @layer components {
   .home-section-div {
-    @apply flex flex-col justify-evenly items-center  w-full lg:w-auto min-h-[20rem] glass p-5;
+    @apply flex flex-col justify-evenly items-center w-full lg:w-auto min-h-[20rem] glass p-5;
   }
   .yt-videos {
     @apply w-[48vw] max-w-[32rem] min-w-[24rem] aspect-video;
@@ -133,7 +133,7 @@
     @apply flex flex-col items-center gap-4;
   }
   .glass {
-    @apply bg-slate-300 shadow-lg backdrop-blur-md rounded-[10px] p-8;
+    @apply bg-commonbg shadow-lg backdrop-blur-md rounded-md p-8;
   }
   .home-icons-heading {
     @apply text-center flex text-xl font-[700] leading-4;
