@@ -4,6 +4,7 @@ import EventCard  from "./components/EventCard";
 const Events = () => {
   return <div className="h-max w-[100%] ">
     <h3 className="text-center font-semibold text-3xl font-sans m-4 font-[400] relative underline-offset-[10px] underline lg:text-4xl">
+
       “ Some Past Events”
     </h3>
 

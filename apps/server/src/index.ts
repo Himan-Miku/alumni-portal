@@ -1,5 +1,6 @@
 import connectDB from "./config/database";
 import dotenv from "dotenv";
+
 import { Server } from "http";
 
 import app from "./app";
@@ -9,8 +10,12 @@ process.on("uncaughtException", (err) => {
   console.warn("shutting down server");
   process.exit(1);
 });
+import app from "./app";
+import { setCorsOptions } from "./utils/s3Operations";
+
 
 dotenv.config();
+setCorsOptions();
 const PORT = process.env.PORT ? process.env.PORT : 8000;
 
 connectDB();
