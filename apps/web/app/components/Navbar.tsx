@@ -39,10 +39,6 @@ const Navbar = () => {
       link: "/events",
       title: "Events",
     },
-    {
-      link: "/about",
-      title: "About",
-    },
   ];
 
   return (
@@ -50,7 +46,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between p-4 px-10 bg-white">
         <div className="flex items-center gap-16  lg:w-[50%]">
           <Image src={RscoeImg} alt="Logo" className="w-[2.99625rem]"></Image>
-          <div className="  hidden lg:flex w-full gap-12 lg:text-lg font-semibold text-slate-800">
+          <div className="links hidden lg:flex w-full gap-12 lg:text-lg font-semibold text-slate-800">
             {nav?.map((ele, ind) => {
               return (
                 <Link
@@ -66,9 +62,12 @@ const Navbar = () => {
             })}
           </div>
         </div>
+
         <div className="hidden lg:flex items-center gap-3 lg:text-lg font-semibold text-slate-700">
-          <div>Sushant Rao</div>
           <div>
+            <Link href={"/profile"}>Sushant Rao</Link>
+          </div>
+          <Link href={"/profile"}>
             <Avatar>
               <AvatarImage
                 src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
@@ -76,8 +75,9 @@ const Navbar = () => {
               />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-          </div>
+          </Link>
         </div>
+
         <div className="lg:hidden  ">
           <Sheet>
             <SheetTrigger asChild>
@@ -88,18 +88,23 @@ const Navbar = () => {
             <SheetContent className="flex flex-col font-semibold w-72 text-lg text-slate-900 gap-10">
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2 justify-center glass rounded-md p-3 shadow-md">
-                  <div>Sushant Rao</div>
                   <div>
-                    <Avatar>
-                      <AvatarImage
-                        src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
-                        alt="@shadcn"
-                      />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    <Link href={"/profile"}>Sushant Rao</Link>
+                  </div>
+                  <div>
+                    <Link href={"/profile"}>
+                      <Avatar>
+                        <AvatarImage
+                          src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
+                          alt="@shadcn"
+                        />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                    </Link>
                   </div>
                 </SheetTitle>
               </SheetHeader>
+
               <div className="flex w-full flex-col gap-6">
                 {nav?.map((ele, ind) => {
                   return (

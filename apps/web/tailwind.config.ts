@@ -27,6 +27,8 @@ const config = {
       colors: {
         commonbg: "#D9D9D9",
         bluebg: "#2B2A4C",
+        lightgray: "#7A7A7A",
+        graytext: "#3B3B3B",
         text: "#EA906C",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
