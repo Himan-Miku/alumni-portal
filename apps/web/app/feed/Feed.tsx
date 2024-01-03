@@ -15,7 +15,7 @@ import {
 import { RxCross1 } from "react-icons/rx";
 import Showmore from "app/components/Showmore";
 import Image from "next/image";
-import { Button } from "components/ui/button";
+
 import LikeComments from "./LikeComments";
 
 const Feed = () => {
@@ -34,7 +34,7 @@ const Feed = () => {
       {
         user: "ChatGPT",
         desc: "AI Language Model by OpenAI",
-        text: "Woah now thats some kind of shit tbh.Well done dawg ",
+        text: "Woah now thats some kind of shit tbh. Well done dawg ",
       },
     ],
   };

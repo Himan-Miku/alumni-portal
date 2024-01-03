@@ -72,18 +72,19 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+let key = process.env.JWT_SECRET_KEY || "";
+let expire = process.env.JWT_EXPIRE || "4d";
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
-
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
-let key = process.env.JWT_SECRET_KEY || "";
-let expire = process.env.JWT_EXPIRE || "4d";
+
 userSchema.methods.getJwtToken = function () {
+  let key = process.env.JWT_SECRET_KEY || "";
   return jwt.sign({ id: this._id }, key, {
     expiresIn: expire,
   });
