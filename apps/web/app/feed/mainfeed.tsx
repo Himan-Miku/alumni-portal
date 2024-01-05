@@ -1,6 +1,6 @@
 import React from "react";
 import SearchUtility from "./SearchUtility";
-import Feed from "./Feed";
+import Feed from "../components/Feed";
 
 const MainFeed = () => {
   return (

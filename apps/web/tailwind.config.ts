@@ -28,6 +28,7 @@ const config = {
         commonbg: "#D9D9D9",
         bluebg: "#2B2A4C",
         lightgray: "#7A7A7A",
+        medgray: "#262626",
         graytext: "#3B3B3B",
         text: "#EA906C",
         border: "hsl(var(--border))",

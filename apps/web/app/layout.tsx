@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { Poppins } from "next/font/google";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,9 +18,10 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className={poppins.className + " bg-commonbg flex flex-col gap-2"}>
+      <body className={poppins.className + " bg-commonbg flex flex-col gap-2 "}>
         <Navbar></Navbar>
         {children}
+        <Footer></Footer>
       </body>
     </html>
   );

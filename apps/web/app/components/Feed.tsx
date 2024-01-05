@@ -16,7 +16,14 @@ import { RxCross1 } from "react-icons/rx";
 import Showmore from "app/components/Showmore";
 import Image from "next/image";
 
-import LikeComments from "./LikeComments";
+import LikeComments from "../feed/LikeComments";
+interface feedData {
+  name: string;
+  desc: string;
+  imgdesc: string;
+  likes: number;
+  comments: { user: string; desc: string; text: string }[];
+}
 
 const Feed = () => {
   let feed = {
@@ -39,7 +46,7 @@ const Feed = () => {
     ],
   };
   return (
-    <div className="bg-white p-4 rounded-md flex flex-col gap-3">
+    <div className="bg-white p-4 rounded-md flex flex-col gap-3 border-2 border-slate-300">
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <div className="">

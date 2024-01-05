@@ -3,6 +3,7 @@ import React from "react";
 
 const EventCard = () => {
   return (
+
     <div className="flex flex-col justify-start items-center m-5 w-[40vh] md:w-[45vh] lg:w-[50vh] p-5 rounded-lg bg-white hover:scale-105 transition-all shadow-md">
       <Image
         src="/home/alumnievent.png"

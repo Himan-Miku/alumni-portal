@@ -1,10 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 ::-webkit-scrollbar {
   width: 10px;
+  background-color: #2b2a4c;
 }
 
 @layer base {
@@ -84,7 +85,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 @layer components {
@@ -96,6 +97,16 @@
     background-size: contain;
     /* background-color: red; */
   }
+  .analytics-card {
+    @apply flex gap-2 text-sm p-1 hover:bg-slate-300 rounded-md cursor-pointer;
+  }
+  .card-text {
+    @apply font-semibold text-lightgray;
+  }
+  .text-head {
+    @apply text-base text-medgray;
+  }
+
   .home-background {
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -127,8 +138,17 @@
 }
 
 @layer components {
+  .about-heading {
+    @apply flex items-center gap-1 text-graytext font-semibold;
+  }
   .home-section-div {
     @apply flex flex-col justify-evenly items-center w-full lg:w-auto min-h-[20rem] glass p-5;
+  }
+  .about-card {
+    @apply px-7 flex justify-between items-center;
+  }
+  .about-flex {
+    @apply flex flex-col gap-4;
   }
   .yt-videos {
     @apply w-[48vw] max-w-[32rem] min-w-[24rem] aspect-video;

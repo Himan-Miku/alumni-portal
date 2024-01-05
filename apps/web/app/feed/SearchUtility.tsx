@@ -5,7 +5,7 @@ import { Input } from "components/ui/input";
 
 const SearchUtility = () => {
   return (
-    <div className="sticky top-0 z-10">
+    <div className="">
       <div className="flex justify-between px-4 p-1 bg-white rounded-md">
         <input
           type="text"
