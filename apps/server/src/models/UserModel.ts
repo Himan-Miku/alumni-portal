@@ -60,9 +60,6 @@ const userSchema = new mongoose.Schema(
     profilePic: {
       type: String,
     },
-    experience: {
-      type: String,
-    },
     userType: {
       type: String,
       enum: ["Student", "Alumni"],

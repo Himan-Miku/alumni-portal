@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 
 import { Server } from "http";
 
-import app from "./app";
 //handling uncaught exception
 process.on("uncaughtException", (err) => {
   console.error("Uncaught Exception thrown :", err.message);
@@ -12,7 +11,6 @@ process.on("uncaughtException", (err) => {
 });
 import app from "./app";
 import { setCorsOptions } from "./utils/s3Operations";
-
 
 dotenv.config();
 setCorsOptions();

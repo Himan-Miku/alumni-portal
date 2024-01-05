@@ -222,7 +222,7 @@ const Home = () => {
         </div>
       </div>
       <div className="w-[100%] font-sans bg-[#D9D9D9] flex justify-start items-center flex-col gap-10 p-10">
-        <h3 className="text-4xl font-[700] underline underline-offset-8  ">
+        <h3 className="text-4xl font-[700] text-center underline underline-offset-8  ">
           “Memories We Will Never Forget”
         </h3>
         <div className="m-14 my-2">
