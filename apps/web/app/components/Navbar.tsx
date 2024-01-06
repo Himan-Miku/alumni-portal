@@ -4,7 +4,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
 
 import RscoeImg from "../../public/rscoe-logo.png";
-import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
+
 import {
   Sheet,
   SheetClose,
@@ -16,12 +16,17 @@ import {
 } from "components/ui/sheet";
 
 import { Button } from "components/ui/button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react"
+
 
 const Navbar = () => {
   // const router = useRouter();
+  const router = useRouter();
   let pathname = usePathname();
+  const { data: session } = useSession()
 
+  console.log("session",session)
   let nav = [
     {
       link: "/",
@@ -67,16 +72,24 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden lg:flex items-center gap-3 lg:text-lg font-semibold text-slate-700">
-          <div>Sushant Rao</div>
-          <div>
-            <Avatar>
-              <AvatarImage
-                src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
-                alt="@shadcn"
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+        { session?.user ? (
+          <>
+          <Link href='/profile'>
+          
+          <div className="flex gap-2">
+              <div>{session.user.name}</div>
+             <Image src={session?.user?.picture ||  "/user-profile-icon.svg"} alt='Profile.img' width={35} height={35} className="rounded-full "></Image>
           </div>
+          </Link>
+          
+          </>) 
+          :(
+          <>
+          <Link href="/auth/login">
+           <Button className="w-full">Sign In</Button>
+           </Link>
+          </>
+          )}
         </div>
         <div className="lg:hidden  ">
           <Sheet>
@@ -86,20 +99,33 @@ const Navbar = () => {
               </Button>
             </SheetTrigger>
             <SheetContent className="flex flex-col font-semibold w-72 text-lg text-slate-900 gap-10">
+
+              {
+                session?.user ? (
+
               <SheetHeader>
+                <Link href='/auth/login'>
                 <SheetTitle className="flex items-center gap-2 justify-center glass rounded-md p-3 shadow-md">
-                  <div>Sushant Rao</div>
                   <div>
-                    <Avatar>
-                      <AvatarImage
-                        src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
-                        alt="@shadcn"
-                      />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    {session?.user?.name }
+                  </div>
+                  <div>
+                    
+                     <Image src={session?.user.picture || "/user-profile-icon.svg"} alt="profile image" width={30} height={30} className="rounded-full"/>
+                     
+                    
                   </div>
                 </SheetTitle>
-              </SheetHeader>
+                </Link>
+              </SheetHeader>)
+            :(
+            <>
+            
+            <Button className="m-4" onClick={()=>router.push("/auth/login")}> login</Button>
+            
+            </>
+            )  
+            }
               <div className="flex w-full flex-col gap-6">
                 {nav?.map((ele, ind) => {
                   return (
@@ -116,14 +142,22 @@ const Navbar = () => {
                 })}
               </div>
 
-              <SheetFooter className="flex justify-center items-center">
-                <SheetClose asChild>
-                  <Button type="submit">Close</Button>
+              <SheetFooter className="flex justify-center gap-3 items-center w-full">
+                <SheetClose >
+                  {session?.user ? (
+                    <Button onClick={()=>signOut()} className="w-full">Sign Out</Button>
+                  ) : (
+                    <>
+                    </>
+                  )}
+                  
+                
                 </SheetClose>
               </SheetFooter>
             </SheetContent>
           </Sheet>
         </div>
+       
       </div>
     </>
   );
