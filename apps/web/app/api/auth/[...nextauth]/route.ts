@@ -1,5 +1,6 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 
+
 import  bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from 'next-auth';
@@ -7,11 +8,11 @@ import NextAuth from 'next-auth';
 import GoogleProvider from "next-auth/providers/google";
 import LinkedinProvider from 'next-auth/providers/linkedin';
 
-import { NextAuthOptions } from "next-auth";
+
 import User from 'schemas/User';
 import connectDB from "lib/Connection";
 
-export const authOptions:NextAuthOptions={
+ const handler = NextAuth({
       providers: [
         GoogleProvider({
           clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -101,14 +102,8 @@ export const authOptions:NextAuthOptions={
           
           return true;
         }
-      },
-      
-      
-     
-     
-};
-
-export const handler=NextAuth(authOptions);
+      },     
+})
 
 export {handler as GET,handler as POST}
 
