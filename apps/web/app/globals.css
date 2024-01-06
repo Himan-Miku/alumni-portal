@@ -1,7 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #2b2a4c;
+}
 
 @layer base {
   :root {
@@ -80,7 +85,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 @layer components {
@@ -92,14 +97,24 @@
     background-size: contain;
     /* background-color: red; */
   }
+  .analytics-card {
+    @apply flex gap-2 text-sm p-1 hover:bg-slate-300 rounded-md cursor-pointer;
+  }
+  .card-text {
+    @apply font-semibold text-lightgray;
+  }
+  .text-head {
+    @apply text-base text-medgray;
+  }
+
   .home-background {
     background-color: rgba(0, 0, 0, 0.5);
   }
-  a {
+  .links a {
     /* font-weight: 800; */
     position: relative;
   }
-  a:after {
+  .links a:after {
     background: none repeat scroll 0 0 transparent;
     bottom: 0;
     content: "";
@@ -113,18 +128,27 @@
       left 0.3s ease 0s;
     width: 0;
   }
-  a:hover {
+  .links a:hover {
     color: #ea906c;
   }
-  a:hover:after {
+  .links a:hover:after {
     width: 100%;
     left: 0;
   }
 }
 
 @layer components {
+  .about-heading {
+    @apply flex items-center gap-1 text-graytext font-semibold;
+  }
   .home-section-div {
-    @apply flex flex-col justify-evenly items-center  w-full lg:w-auto min-h-[20rem] glass p-5;
+    @apply flex flex-col justify-evenly items-center w-full lg:w-auto min-h-[20rem] glass p-5;
+  }
+  .about-card {
+    @apply px-7 flex justify-between items-center;
+  }
+  .about-flex {
+    @apply flex flex-col gap-4;
   }
   .yt-videos {
     @apply w-[48vw] max-w-[32rem] min-w-[24rem] aspect-video;
@@ -133,13 +157,13 @@
     @apply flex flex-col items-center gap-4;
   }
   .glass {
-    @apply bg-slate-300 shadow-lg backdrop-blur-md rounded-[10px] p-8;
+    @apply bg-commonbg shadow-lg backdrop-blur-md rounded-md p-8;
   }
   .home-icons-heading {
     @apply text-center flex text-xl font-[700] leading-4;
   }
   .home-icons-subheading {
-    @apply text-[14px] flex leading-loose font-[400] text-justify w-full ;
+    @apply text-[14px] flex leading-loose font-[400] text-justify w-full;
   }
 
   .selected {

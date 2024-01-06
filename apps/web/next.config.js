@@ -2,7 +2,17 @@
 module.exports = {
   transpilePackages: ["@repo/ui"],
   images: {
-    domains: ['i.ytimg.com',"lh3.googleusercontent.com"],
-    
+
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      }
+    ],
+
   },
 };

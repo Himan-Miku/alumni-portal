@@ -54,18 +54,16 @@ console.log("session",session)
       link: "/events",
       title: "Events",
     },
-    {
-      link: "/about",
-      title: "About",
-    },
   ];
 
   return (
     <>
-      <div className="flex items-center justify-between p-4 px-10 bg-white">
+      <div className="flex items-center justify-between p-4 px-10 bg-white sticky top-0 z-10 ">
         <div className="flex items-center gap-16  lg:w-[50%]">
-          <Image src={RscoeImg} alt="Logo" className="w-[2.99625rem]"></Image>
-          <div className="  hidden lg:flex w-full gap-12 lg:text-lg font-semibold text-slate-800">
+          <Link href="/">
+            <Image src={RscoeImg} alt="Logo" className="w-[2.99625rem]"></Image>
+          </Link>
+          <div className="links hidden lg:flex w-full gap-12 lg:text-lg font-semibold text-slate-800">
             {nav?.map((ele, ind) => {
               return (
                 <Link
@@ -81,6 +79,7 @@ console.log("session",session)
             })}
           </div>
         </div>
+
         <div className="hidden lg:flex items-center gap-3 lg:text-lg font-semibold text-slate-700">
           {session?.user ? (
             <>
@@ -105,6 +104,7 @@ console.log("session",session)
             </>
           )}
         </div>
+
         <div className="lg:hidden  ">
           <Sheet>
             <SheetTrigger asChild>

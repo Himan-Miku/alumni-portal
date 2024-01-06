@@ -2,7 +2,7 @@ import ErrorHandler from "../utils/ErrorHandler";
 import { Request, Response, NextFunction } from "express";
 import createError, { HttpError } from "http-errors";
 
-module.exports = (
+let errorfn = (
   err: HttpError,
   req: Request,
   res: Response,
@@ -13,10 +13,12 @@ module.exports = (
 
   if (err.name == "CastError") {
     const message = "Resource not found .invalid :" + `${err.stack}`;
-    err = new ErrorHandler(message, 400);
+    err = new HttpError(message);
   }
   res.status(404).json({
     success: false,
     message: err.message,
   });
 };
+
+export default errorfn;
