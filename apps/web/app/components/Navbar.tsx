@@ -18,14 +18,25 @@ import {
 import { Button } from "components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { User} from "next-auth"
+
+interface user extends User{
+  picture?:string,
+}
 
 const Navbar = () => {
   // const router = useRouter();
+  
   const router = useRouter();
   let pathname = usePathname();
   const { data: session } = useSession();
+  const user = session?.user as user;
+  
+ 
 
-  console.log("session", session);
+ 
+console.log("session",session)
+ 
   let nav = [
     {
       link: "/",
@@ -77,7 +88,7 @@ const Navbar = () => {
                 <div className="flex gap-2">
                   <div>{session.user.name}</div>
                   <Image
-                    src={session?.user?.picture || "/user-profile-icon.svg"}
+                    src={user?.picture || "/user-profile-icon.svg"}
                     alt="Profile.img"
                     width={35}
                     height={35}
@@ -110,7 +121,7 @@ const Navbar = () => {
                       <div>
                         <Image
                           src={
-                            session?.user.picture || "/user-profile-icon.svg"
+                            user.picture || "/user-profile-icon.svg"
                           }
                           alt="profile image"
                           width={30}
