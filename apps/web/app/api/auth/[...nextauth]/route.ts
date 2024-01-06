@@ -12,7 +12,7 @@ import LinkedinProvider from 'next-auth/providers/linkedin';
 import User from 'schemas/User';
 import connectDB from "lib/Connection";
 
- const handler = NextAuth({
+export const handler=NextAuth({
       providers: [
         GoogleProvider({
           clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -105,6 +105,6 @@ import connectDB from "lib/Connection";
       },     
 })
 
-export {handler as GET,handler as POST}
+export {handler as GET}
 
 
