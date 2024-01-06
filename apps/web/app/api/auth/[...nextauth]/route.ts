@@ -11,7 +11,7 @@ import { NextAuthOptions } from "next-auth";
 import User from 'schemas/User';
 import connectDB from "lib/Connection";
 
-export const authOptions:NextAuthOptions={
+const authOptions:NextAuthOptions={
       providers: [
         GoogleProvider({
           clientId: process.env.GOOGLE_CLIENT_ID ?? "",
