@@ -5,6 +5,15 @@ import { FiMapPin } from "react-icons/fi";
 import { CgMail } from "react-icons/cg";
 import { Button } from "components/ui/button";
 import { DialogInput } from "app/components/Dialog";
+import { LuBadgeCheck } from "react-icons/lu";
+import { BiSolidBadgeDollar } from "react-icons/bi";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "components/ui/tooltip";
+import { Toggle } from "@radix-ui/react-toggle";
 
 const InfoCard = () => {
   let data = {
@@ -24,8 +33,23 @@ const InfoCard = () => {
         <Avatar className="w-40 h-40 border-2">
           <AvatarImage src="https://avatars.githubusercontent.com/u/127422698?v=4"></AvatarImage>
         </Avatar>
+
         <div>
-          <div className="text-text text-3xl font-semibold">{data?.Name}</div>
+          <div className=" flex  items-center  gap-1 text-yellow-500">
+            <div className="text-text text-3xl font-semibold">{data?.Name}</div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="text-3xl">
+                    <BiSolidBadgeDollar></BiSolidBadgeDollar>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div className="text-lg text-black">Proud Alumni</div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
           <div className="text-white">{data?.about}</div>
         </div>
       </div>

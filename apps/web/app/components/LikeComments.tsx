@@ -3,9 +3,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
 import { Button } from "components/ui/button";
 import React, { useState } from "react";
-import { AiOutlineLike } from "react-icons/ai";
-import { GoComment } from "react-icons/go";
-import { Textarea } from "components/ui/textarea";
+
+import { FaCommentAlt } from "react-icons/fa";
+import { AiFillLike } from "react-icons/ai";
 import { Input } from "components/ui/input";
 
 interface Props {
@@ -14,21 +14,34 @@ interface Props {
 
 const LikeComments = (prop: Props) => {
   let [open, isOpen] = useState<boolean>(false);
+  let [liked, isLiked] = useState<boolean>(false);
+  // console.log(liked);
+
   return (
     <>
       <div className="grid grid-cols-2 gap-8 w-full ">
-        <Button variant={"ghost"} className="flex gap-1 items-center">
-          <AiOutlineLike></AiOutlineLike>
-          <span>Like</span>
+        <Button
+          variant={"ghost"}
+          className={`flex gap-1 items-center font-semibold text-lg`}
+          onClick={() => {
+            isLiked(!liked);
+          }}
+        >
+          <div className={`${liked == true && "text-blue-600"}`}>
+            <AiFillLike></AiFillLike>
+          </div>
+          <span className={`${liked == true && "text-blue-600"}`}>Like</span>
         </Button>
         <Button
           variant={"ghost"}
           onClick={() => {
             isOpen(!open);
           }}
-          className="flex gap-1 items-center"
+          className="flex gap-1 items-center font-semibold text-lg"
         >
-          <GoComment></GoComment>
+          <div>
+            <FaCommentAlt />
+          </div>
           <span>Comment</span>
         </Button>
       </div>

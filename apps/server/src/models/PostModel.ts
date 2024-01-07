@@ -13,12 +13,9 @@ const CommentSchema = new mongoose.Schema({
 
 const PostSchema = new mongoose.Schema(
   {
-    id: {
+    Uid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-    },
-    madeBy: {
-      type: String,
     },
     description: {
       type: String,
@@ -28,9 +25,12 @@ const PostSchema = new mongoose.Schema(
         type: String,
       },
     ],
-    likes: {
-      type: Number,
-    },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     comments: [CommentSchema],
   },
   {

@@ -18,7 +18,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className={poppins.className + " bg-commonbg flex flex-col gap-2 "}>
+      <body className={poppins.className + " bg-commonbg mb-4 "}>
         <Navbar></Navbar>
         {children}
         <Footer></Footer>

@@ -69,7 +69,6 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-let key = process.env.JWT_SECRET_KEY || "";
 let expire = process.env.JWT_EXPIRE || "4d";
 
 userSchema.pre("save", async function (next) {

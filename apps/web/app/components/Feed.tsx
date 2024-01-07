@@ -16,7 +16,7 @@ import { RxCross1 } from "react-icons/rx";
 import Showmore from "app/components/Showmore";
 import Image from "next/image";
 
-import LikeComments from "../feed/LikeComments";
+import LikeComments from "./LikeComments";
 interface feedData {
   name: string;
   desc: string;
@@ -74,7 +74,7 @@ const Feed = () => {
           <RxCross1></RxCross1>
         </div>
       </div>
-      <div className="flex flex-col items-center px-1">
+      <div className="flex flex-col items-center gap-4 px-1">
         <div>
           <Showmore
             text={feed.imgdesc}
@@ -82,26 +82,27 @@ const Feed = () => {
             classText={"text-sm"}
           ></Showmore>
         </div>
-
-        <Carousel className="w-full max-w-xs ">
-          <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <div>
-                    <div className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-4xl font-semibold">
-                        {index + 1}
-                      </span>
+        <div className=" w-[75%] flex justify-center items-center ">
+          <Carousel className="w-full max-w-xs ">
+            <CarouselContent>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <CarouselItem key={index}>
+                  <div className="p-1">
+                    <div>
+                      <div className="flex aspect-square items-center justify-center p-6">
+                        <span className="text-4xl font-semibold">
+                          {index + 1}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
         <div className="flex justify-start items-center gap-1 w-full ">
           <Image src={LikeImg} alt="likes" width={30}></Image>
           <div>{feed.likes}</div>

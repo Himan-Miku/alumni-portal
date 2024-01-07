@@ -11,9 +11,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "components/ui/dialog";
+import { MdPermMedia } from "react-icons/md";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import Media from "public/media.svg";
 import Image from "next/image";
+import { Input } from "components/ui/input";
 
 type receivedMetadata = {
   putUri: string;
@@ -176,7 +178,15 @@ const AddPost = () => {
             </div>
           </DialogTitle>
         </DialogHeader>
-        <div className="py-2 flex flex-col gap-2">
+        <div className="py-2 flex items-start flex-col gap-2">
+          {/* <Button
+            variant={"ghost"}
+            className="flex gap-2"
+            onClick={handleButtonClick}
+          >
+            <Image src={Media} alt="media"></Image>
+            <span>Media</span>
+          </Button> */}
           <ReactTextareaAutosize
             minRows={4}
             maxRows={10}
@@ -198,29 +208,21 @@ const AddPost = () => {
             <></>
           )}
         </div>
-        <DialogFooter className="justify-center">
-          <input
-            type="file"
-            style={{ display: "none" }}
-            ref={fileInput}
-            onChange={handleFileChange}
-          />
-          <DialogClose asChild>
-            <Button type="button" onClick={removeMediaFiles}>
-              Close
+        <DialogFooter className="">
+          <div className="w-full flex justify-between ">
+            <Input
+              type="file"
+              style={{ display: "none" }}
+              ref={fileInput}
+              onChange={handleFileChange}
+            />
+            <Button variant={"ghost"}  onClick={handleButtonClick} className="text-2xl text-bluebg">
+              <MdPermMedia></MdPermMedia>
             </Button>
-          </DialogClose>
-          <Button
-            variant={"ghost"}
-            className="flex gap-2"
-            onClick={handleButtonClick}
-          >
-            <Image src={Media} alt="media"></Image>
-            <span>Media</span>
-          </Button>
-          <Button onClick={handleSubmit} type="submit">
-            Create
-          </Button>
+            <Button onClick={handleSubmit} className="bg-bluebg" type="submit">
+              Create
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -5,11 +5,9 @@ import { Request, Response } from "express";
 import ErrorHandler from "../utils/ErrorHandler";
 import comparePassword from "../utils/PassCheck";
 
-interface IReq extends Request {
-  user: any;
-}
-
 import sendToken from "../utils/jwtToken";
+import { IReq, IRes } from "../utils/Types";
+import { ApiFeatures } from "../utils/ApiFeatures";
 
 export const AddUser = catchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -43,6 +41,18 @@ export const updateUser = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
     let user = await User.updateOne({ _id: req.user._id }, { ...req.body });
     res.status(201).json({
+      success: true,
+      user,
+    });
+  }
+);
+
+export const SearchUser = catchAsyncError(
+  async (req: IReq, res: IRes, next: NextFunction) => {
+    let apifeat = new ApiFeatures(User.find(), req).search();
+    let user = await apifeat.query;
+
+    res.status(200).json({
       success: true,
       user,
     });
