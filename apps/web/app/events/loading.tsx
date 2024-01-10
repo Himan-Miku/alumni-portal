@@ -1,8 +1,7 @@
 export default function Loading() {
-    return (
-      <div className="flex items-center justify-center h-48">
-          <div className="w-20 h-20 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
-        </div>
-    );
-  }
-  
+  return (
+    <div className="flex items-center justify-center h-48">
+      <div className="w-20 h-20 border-t-4 border-slate-500 border-solid rounded-full animate-spin"></div>
+    </div>
+  );
+}

@@ -16,6 +16,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { ScrollArea } from "components/ui/scroll-area";
+import Axios from "app/Axios";
 
 export function SearchDialog() {
   let [search, setSearched] = useState<string>("");
@@ -25,11 +26,9 @@ export function SearchDialog() {
     const debounce = setTimeout(() => {
       search == ""
         ? setFetch([])
-        : axios
-            .get(`http://localhost:8000/api/users?keyword=${search}`, {
-              withCredentials: true,
-            })
-            .then((res) => setFetch(res?.data?.user));
+        : Axios.get(`/api/users?keyword=${search}`, {
+            withCredentials: true,
+          }).then((res) => setFetch(res?.data?.user));
     }, 500);
 
     return () => {

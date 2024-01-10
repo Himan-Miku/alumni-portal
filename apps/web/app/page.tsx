@@ -233,7 +233,7 @@ const Home = () => {
           </h3>
           <div className="w-[50%] h-1 bg-black"></div>
         </div>
-        <div className="m-14 my-2">
+        <div className="m-4 md:mx-20 my-2">
           <Slider
             imgarr={images.map((e) => {
               return "/home/slider/" + e;

@@ -1,8 +1,12 @@
 import "./globals.css";
-
+import Provider from "./components/Provider";
 import { Poppins } from "next/font/google";
 import Navbar from "./components/Navbar";
+
+import { getServerSession } from "next-auth";
+
 import Footer from "./components/Footer";
+import TanstackProvider from "./components/TanstackProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -11,17 +15,22 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}) {
+  const session = getServerSession();
   return (
     <html lang="en">
-      <body className={poppins.className + " bg-commonbg mb-4 "}>
-        <Navbar></Navbar>
-        {children}
-        <Footer></Footer>
+      <body className={poppins.className + " bg-commonbg flex flex-col gap-2"}>
+        <TanstackProvider>
+          <Provider session={session}>
+            <Navbar></Navbar>
+            {children}
+            <Footer></Footer>
+          </Provider>
+        </TanstackProvider>
       </body>
     </html>
   );

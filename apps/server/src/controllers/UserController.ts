@@ -29,7 +29,7 @@ export const login = catchAsyncError(
     if (!user) {
       return next(new ErrorHandler("Email and Password are invalid", 400));
     }
-    const isValid = await comparePassword(password, user?.password);
+    const isValid = await comparePassword(password, user?.password!);
     if (!isValid) {
       return next(new ErrorHandler("Email and Password are invalid", 400));
     }
@@ -39,10 +39,26 @@ export const login = catchAsyncError(
 
 export const updateUser = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
-    let user = await User.updateOne({ _id: req.user._id }, { ...req.body });
+    let user = await User.updateOne({ _id: req.user?._id }, { ...req.body });
     res.status(201).json({
       success: true,
       user,
+    });
+  }
+);
+export const append = catchAsyncError(
+  async (req: IReq, res: Response, next: NextFunction) => {
+    const user = await User.findOne(req?.user?._id);
+    if (!user) return next(new ErrorHandler("No such user found", 404));
+    console.log(user);
+    // console.log(req.body);
+    req.query.key == "exp" && user?.work.push(req.body);
+    req.query.key == "edu" && user?.education.push(req.body);
+    let resp = await user.save();
+
+    res.status(200).json({
+      success: true,
+      resp,
     });
   }
 );
@@ -59,9 +75,22 @@ export const SearchUser = catchAsyncError(
   }
 );
 
+export const selfinfo = catchAsyncError(
+  async (req: IReq, res: IRes, next: NextFunction) => {
+    let data = await User?.findOne({ _id: req.user?._id });
+    if (!data) {
+      return next(new ErrorHandler("No user found ", 404));
+    }
+    res.status(200).json({
+      success: true,
+      user: data,
+    });
+  }
+);
+
 export const deleteUser = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
-    let user = await User.deleteOne({ _id: req.user._id });
+    let user = await User.deleteOne({ _id: req.user?._id });
     res.status(201).json({
       success: true,
       user,

@@ -1,16 +1,30 @@
 export interface User {
   name: string;
-  posts: [];
-  followers: [];
-  following: [];
+  posts?: [];
+  followers?: any[];
+  following?: any[];
   about?: string;
   email: string;
-  password: string;
-  education?: string;
+  password?: string;
+  education?: [
+    {
+      studyfrom: String;
+      studied: String;
+      duration: String;
+      percentage: String;
+    },
+  ];
+  work?: [
+    {
+      company: String;
+      position: String;
+      duration: String;
+    },
+  ];
   dob?: Date;
   gender?: "Male" | "Female" | "Other";
   linkedin?: string;
   github?: string;
-  profilePic?: string;
+  image?: string;
   userType?: "Student" | "Alumni";
 }

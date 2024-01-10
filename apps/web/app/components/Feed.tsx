@@ -17,6 +17,7 @@ import Showmore from "app/components/Showmore";
 import Image from "next/image";
 
 import LikeComments from "./LikeComments";
+import Slider from "./Slider";
 interface feedData {
   name: string;
   desc: string;
@@ -26,6 +27,15 @@ interface feedData {
 }
 
 const Feed = () => {
+  let images = [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "5.jpg",
+    "6.jpg",
+    "7.jpg",
+    "aluimg.jpg",
+  ];
   let feed = {
     name: "Gaurav Hedau",
     desc: "Ex-SDE Intern at @Reclimate | 4th year IT U.G (B.E) | Java | javascript | React…",
@@ -83,25 +93,11 @@ const Feed = () => {
           ></Showmore>
         </div>
         <div className=" w-[75%] flex justify-center items-center ">
-          <Carousel className="w-full max-w-xs ">
-            <CarouselContent>
-              {Array.from({ length: 5 }).map((_, index) => (
-                <CarouselItem key={index}>
-                  <div className="p-1">
-                    <div>
-                      <div className="flex aspect-square items-center justify-center p-6">
-                        <span className="text-4xl font-semibold">
-                          {index + 1}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+          <Slider
+            imgarr={images.map((e) => {
+              return "/home/slider/" + e;
+            })}
+          ></Slider>
         </div>
         <div className="flex justify-start items-center gap-1 w-full ">
           <Image src={LikeImg} alt="likes" width={30}></Image>

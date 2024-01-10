@@ -4,7 +4,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
 
 import RscoeImg from "../../public/rscoe-logo.png";
-import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
+
 import {
   Sheet,
   SheetClose,
@@ -16,11 +16,23 @@ import {
 } from "components/ui/sheet";
 
 import { Button } from "components/ui/button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import { User } from "next-auth";
+
+interface user extends User {
+  picture?: string;
+}
 
 const Navbar = () => {
   // const router = useRouter();
+
+  const { data: session } = useSession();
+  const router = useRouter();
   let pathname = usePathname();
+  const user = session?.user as user;
+
+  // console.log("session", session);
 
   let nav = [
     {
@@ -66,21 +78,31 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-3 lg:text-lg font-semibold text-slate-700">
-          <div>
-            <Link href={"/profile"}>Sushant Rao</Link>
-          </div>
-          <Link href={"/profile"}>
-            <Avatar>
-              <AvatarImage
-                src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
-                alt="@shadcn"
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </Link>
+          {session?.user ? (
+            <>
+              <Link href="/profile">
+                <div className="flex gap-2">
+                  <div>{session.user.name}</div>
+                  <Image
+                    src={user?.picture || "/user-profile-icon.svg"}
+                    alt="Profile.img"
+                    width={35}
+                    height={35}
+                    className="rounded-full "
+                  ></Image>
+                </div>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/auth/login">
+                <Button className="w-full">Sign In</Button>
+              </Link>
+            </>
+          )}
         </div>
 
-        <div className="lg:hidden  ">
+        <div className="lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline">
@@ -89,24 +111,33 @@ const Navbar = () => {
             </SheetTrigger>
             <SheetContent className="flex flex-col font-semibold w-72 text-lg text-slate-900 gap-10">
               <SheetHeader>
-                <SheetTitle className="flex items-center gap-2 justify-center glass rounded-md p-3 shadow-md">
-                  <div>
-                    <Link href={"/profile"}>Sushant Rao</Link>
-                  </div>
-                  <div>
-                    <Link href={"/profile"}>
-                      <Avatar>
-                        <AvatarImage
-                          src="https://avatars.githubusercontent.com/u/127422698?s=96&v=4"
-                          alt="@shadcn"
+                {session?.user ? (
+                  <Link href="/profile">
+                    <SheetTitle className="flex items-center gap-2 justify-center glass rounded-md p-3 shadow-md">
+                      <div>{session?.user?.name}</div>
+                      <div>
+                        <Image
+                          src={user.picture || "/user-profile-icon.svg"}
+                          alt="profile image"
+                          width={30}
+                          height={30}
+                          className="rounded-full"
                         />
-                        <AvatarFallback>CN</AvatarFallback>
-                      </Avatar>
-                    </Link>
-                  </div>
-                </SheetTitle>
+                      </div>
+                    </SheetTitle>
+                  </Link>
+                ) : (
+                  <>
+                    <Button
+                      className="m-4"
+                      onClick={() => router.push("/auth/login")}
+                    >
+                      {" "}
+                      Login
+                    </Button>
+                  </>
+                )}
               </SheetHeader>
-
               <div className="flex w-full flex-col gap-6">
                 {nav?.map((ele, ind) => {
                   return (
@@ -123,9 +154,15 @@ const Navbar = () => {
                 })}
               </div>
 
-              <SheetFooter className="flex justify-center items-center">
-                <SheetClose asChild>
-                  <Button type="submit">Close</Button>
+              <SheetFooter className="flex justify-center gap-3 items-center w-full">
+                <SheetClose>
+                  {session?.user ? (
+                    <Button onClick={() => signOut()} className="w-full">
+                      Sign Out
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
                 </SheetClose>
               </SheetFooter>
             </SheetContent>
