@@ -3,6 +3,7 @@ import { User } from "app/types";
 import axios from "axios";
 import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
 import { Button } from "components/ui/button";
+import { IoSearchOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import {
   Dialog,
@@ -17,18 +18,30 @@ import React from "react";
 import { useState } from "react";
 import { ScrollArea } from "components/ui/scroll-area";
 import Axios from "app/Axios";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useQuery } from "react-query";
 
 export function SearchDialog() {
+  let { data } = useSession();
   let [search, setSearched] = useState<string>("");
   let [fetch, setFetch] = useState<User[]>([]);
+  let [loading, setLoading] = useState<Boolean>(false);
+  const router = useRouter();
 
   React.useEffect(() => {
-    const debounce = setTimeout(() => {
+    const debounce = setTimeout(async () => {
+      if (search == "") setLoading(false);
+      else setLoading(true);
+
       search == ""
         ? setFetch([])
-        : Axios.get(`/api/users?keyword=${search}`, {
+        : await Axios.get(`/api/users?keyword=${search}`, {
             withCredentials: true,
-          }).then((res) => setFetch(res?.data?.user));
+          }).then((res) => {
+            setLoading(false);
+            setFetch(res?.data?.user);
+          });
     }, 500);
 
     return () => {
@@ -39,7 +52,9 @@ export function SearchDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="ghost" className="w-[70%] flex hover:bg-slate-300 ">
-          <div className=" text-left w-full ">Search....</div>
+          <div className=" text-left w-full items-center flex gap-1">
+            <IoSearchOutline /> Search....
+          </div>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[26rem]">
@@ -62,12 +77,18 @@ export function SearchDialog() {
           </div>
           <div className="">
             <ScrollArea className="h-72 rounded-md ">
-              {search != "" && fetch?.length == 0 && <div>No Data Found</div>}
+              {search != "" && fetch?.length == 0 && !loading && (
+                <div>No Data Found</div>
+              )}
+              {loading && <div>Loading...</div>}
               {fetch?.map((el, ind) => {
                 return (
                   <div
                     key={ind}
-                    className=" flex justify-between items-center  p-2 px-4 hover:bg-slate-50"
+                    className=" flex cursor-pointer justify-between items-center p-2 m-2 mx-4 hover:bg-slate-300"
+                    onClick={() => {
+                      router.push(`/user/${el?._id}`);
+                    }}
                   >
                     <div className="flex gap-2">
                       <Avatar>
@@ -80,16 +101,19 @@ export function SearchDialog() {
                       </Avatar>
                       <div className="text-black">
                         <div className="">{el?.name}</div>
-                        <div className="text-sm text-lightgray">
-                          {el?.about}
-                        </div>
+                        <div className="text-sm text-medgray">{el?.about}</div>
                       </div>
                     </div>
-                    <div className="text-sm font-bold text-lightgray">
-                      Followers:
-                      <span className="text-blue-400">
+                    <div className="text-sm  text-lightgray">
+                      {/* Followers: */}
+                      {/* <span className="text-blue-400">
                         {el?.followers?.length}
-                      </span>
+                      </span> */}
+                      {data?.user?.following?.includes(el?._id!) && (
+                        <span className="bg-bluebg p-2 rounded-full text-text">
+                          {"Following "}
+                        </span>
+                      )}
                     </div>
                   </div>
                 );

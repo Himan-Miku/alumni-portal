@@ -2,6 +2,7 @@ import "./globals.css";
 import Provider from "./components/Provider";
 import { Poppins } from "next/font/google";
 import Navbar from "./components/Navbar";
+import { Toaster } from "components/ui/toaster";
 
 import { getServerSession } from "next-auth";
 
@@ -31,6 +32,7 @@ export default async function RootLayout({
             <Footer></Footer>
           </Provider>
         </TanstackProvider>
+        <Toaster />
       </body>
     </html>
   );

@@ -1,32 +1,83 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
-interface Iuser {
-  name: string;
-  email: string;
-  password: string;
-  image: string;
-}
+import { User } from "../app/types";
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    posts: [
+      {
+        id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Post",
+        },
+      },
+    ],
+    followers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    about: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    password: {
+      type: String,
+      // required: true,
+    },
+    education: [
+      {
+        studyfrom: String,
+        studied: String,
+        duration: String,
+        percentage: String,
+      },
+    ],
+    work: [
+      {
+        company: String,
+        position: String,
+        duration: String,
+      },
+    ],
+    dob: {
+      type: Date,
+    },
+    gender: {
+      type: String,
+      enum: ["Male", "Female", "Other"],
+    },
+    linkedin: {
+      type: String,
+    },
+    github: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
+    userType: {
+      type: String,
+      enum: ["Student", "Alumni"],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const userSchema = new Schema<Iuser>({
-  name: {
-    type: String,
-    requied: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-
-    minlength: 5,
-  },
-  image: {
-    type: String,
-  },
-});
-
-const User =
-  (models.User as mongoose.Model<Iuser>) || model<Iuser>("User", userSchema);
-export default User;
+const UserModel =
+  (models.User as mongoose.Model<User>) || model<User>("User", userSchema);
+export default UserModel;

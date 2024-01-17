@@ -1,17 +1,19 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import jwt from "jsonwebtoken";
+
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
 import LinkedinProvider from "next-auth/providers/linkedin";
-
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import User from "schemas/User";
 import connectDB from "lib/Connection";
-import { JWT } from "next-auth/jwt";
+import clientPromise from "./lib/mongodb";
+import { AdapterUser } from "next-auth/adapters";
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
+  // adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -44,7 +46,7 @@ const handler = NextAuth({
           // check password
           const isValid = await bcrypt.compare(
             credentials.password,
-            user.password
+            user?.password!
           );
           if (!isValid) {
             return null;
@@ -59,6 +61,8 @@ const handler = NextAuth({
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+
+  session: { strategy: "jwt" },
   pages: {
     signIn: "/auth/signin",
     // If set, new users will be directed here on first sign in
@@ -66,40 +70,85 @@ const handler = NextAuth({
 
   callbacks: {
     async jwt({ token, user, account }) {
-      // console.log("jwt", account);
-      return token;
-    },
-    async session({ session, token, user }) {
-      session.user = token;
-      // console.log(user);
-      // console.log("callback user", token);
+      // console.log(token,user)
 
-      return session;
-    },
-
-    async signIn(profile) {
-      // console.log(profile.user);
-
-      try {
-        await connectDB();
-        const ifuserexist = await User.findOne({ email: profile.user.email });
-
-        if (!ifuserexist) {
-          let user = await User.create({
-            name: profile.user.name,
-            email: profile.user.email,
-            image: profile.user.image,
-          });
-          console.log(user);
-        }
-      } catch (error) {
-        console.log(error);
-        return false;
+      if (user) {
+        console.log("user found in token", user);
+        token.uid = user?.id;
       }
 
+      return Promise.resolve(token);
+    },
+    async session({ session, token, user }) {
+      // session.user = token;
+      // console.log(token);
+      if (session != undefined && token) {
+        session!.user!.id = token?.uid;
+        await connectDB();
+        const userExists: any = await User.findOne({
+          _id: token?.uid,
+        });
+        let userData = { ...userExists };
+        if (userExists) {
+          // console.log("userData", userData);
+          session!.user = {
+            ...session!.user,
+            id: session!.user?.id!,
+            ...userExists._doc!,
+          };
+        }
+      }
+
+      // console.log("After Mongodb", session.user);
+      // add(userExists!);
+      // console.log(process.env.NODE_ENV);
+      return Promise.resolve(session);
+    },
+    async signIn({ user, account, profile }) {
+      // console.log("user", user);
+      // console.log("account", account);
+      // console.log("profile", profile);
+
+      if (account?.provider == "google") {
+        await connectDB();
+
+        const userExists = await User.findOne({ email: user?.email });
+        console.log("here");
+
+        if (!userExists) {
+          try {
+            let res = await fetch("http://localhost:3000/api/user", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: user?.name,
+                email: user?.email,
+              }),
+            });
+
+            // console.log(user);
+            let response = await res.json();
+            user.id = response.user._id;
+
+            // add(response.user);
+            // user.following = response.user.following;
+            if (res.ok) {
+              return true;
+            }
+          } catch (err) {
+            return false;
+          }
+        }
+
+        user.id = userExists?._id.toString()!;
+      }
       return true;
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

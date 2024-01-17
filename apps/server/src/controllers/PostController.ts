@@ -4,6 +4,7 @@ import User from "../models/UserModel";
 import { Response, NextFunction } from "express";
 import { IReq, IRes } from "../utils/Types";
 import mongoose from "mongoose";
+import { ApiFeatures } from "../utils/ApiFeatures";
 
 type receivedBody = {
   user: string;
@@ -13,9 +14,13 @@ type receivedBody = {
 
 export const ShowPost = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
-    let post = req.query.id
-      ? await Post.find({ _id: req.query.id })
-      : await Post.find();
+    let apifeat = !req.query.limit
+      ? new ApiFeatures(Post.find().populate("Uid"), req).search()
+      : new ApiFeatures(Post.find().populate("Uid"), req)
+          .search()
+          .pagination(Number(req.query.limit!));
+    let post = await apifeat.query;
+    // console.log(req.query, post);
 
     res.status(200).json({
       success: true,

@@ -20,9 +20,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { User } from "next-auth";
 
-interface user extends User {
-  picture?: string;
-}
 
 const Navbar = () => {
   // const router = useRouter();
@@ -30,9 +27,9 @@ const Navbar = () => {
   const { data: session } = useSession();
   const router = useRouter();
   let pathname = usePathname();
-  const user = session?.user as user;
 
-  // console.log("session", session);
+  const user = session?.user;
+  // console.log(user?.following);
 
   let nav = [
     {
@@ -60,6 +57,7 @@ const Navbar = () => {
           <Link href="/">
             <Image src={RscoeImg} alt="Logo" className="w-[2.99625rem]"></Image>
           </Link>
+
           <div className="links hidden lg:flex w-full gap-12 lg:text-lg font-semibold text-slate-800">
             {nav?.map((ele, ind) => {
               return (
@@ -84,7 +82,7 @@ const Navbar = () => {
                 <div className="flex gap-2">
                   <div>{session.user.name}</div>
                   <Image
-                    src={user?.picture || "/user-profile-icon.svg"}
+                    src={user?.image || "/user-profile-icon.svg"}
                     alt="Profile.img"
                     width={35}
                     height={35}
@@ -117,7 +115,7 @@ const Navbar = () => {
                       <div>{session?.user?.name}</div>
                       <div>
                         <Image
-                          src={user.picture || "/user-profile-icon.svg"}
+                          src={user?.image || "/user-profile-icon.svg"}
                           alt="profile image"
                           width={30}
                           height={30}

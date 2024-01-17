@@ -10,7 +10,7 @@ import { isAuthenticated } from "../middlewares/Auth";
 let router = Router();
 
 router.route("/post").post(isAuthenticated, createPost);
-router.route("/showpost").get(isAuthenticated, ShowPost);
+router.route("/showpost").get(ShowPost);
 router.route("/likes/:_id").post(isAuthenticated, likes);
 router.route("/comment/:_id").post(isAuthenticated, comments);
 

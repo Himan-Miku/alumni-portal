@@ -195,7 +195,7 @@ const Home = () => {
             </div>
           </div>
           <div
-            className="flex flex-col-reverse md:flex-row items-center glass rounded-sm
+            className="flex flex-col-reverse xl:flex-row items-center glass rounded-sm
           justify-center gap-8 "
           >
             <div className="flex flex-col gap-2 items-center">

@@ -1,6 +1,7 @@
 import { Avatar } from "components/ui/avatar";
 import { AvatarFallback, AvatarImage } from "components/ui/avatar";
 import React from "react";
+import { motion } from "framer-motion";
 import { AiOutlineLike } from "react-icons/ai";
 import { GoComment } from "react-icons/go";
 import LikeImg from "public/LikeImg.svg";
@@ -18,15 +19,10 @@ import Image from "next/image";
 
 import LikeComments from "./LikeComments";
 import Slider from "./Slider";
-interface feedData {
-  name: string;
-  desc: string;
-  imgdesc: string;
-  likes: number;
-  comments: { user: string; desc: string; text: string }[];
-}
+import { Post, User } from "app/types";
+import { MotionDiv } from "./MotionDiv";
 
-const Feed = () => {
+const Feed = (Prop: { data: Post; index: number }) => {
   let images = [
     "1.jpg",
     "2.jpg",
@@ -55,8 +51,23 @@ const Feed = () => {
       },
     ],
   };
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
   return (
-    <div className="bg-white p-4 rounded-md flex flex-col gap-3 border-2 border-slate-300">
+    <MotionDiv
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      transition={{
+        delay: Prop?.index * 0.25,
+        ease: "easeInOut",
+        duration: 0.5,
+      }}
+      viewport={{ amount: 0 }}
+      className="bg-white p-4 rounded-md flex flex-col gap-3 border-2 border-slate-300"
+    >
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <div className="">
@@ -70,10 +81,12 @@ const Feed = () => {
             </Avatar>
           </div>
           <div>
-            <div className="text-xl font-semibold">{feed.name}</div>
+            <div className="text-xl font-semibold">
+              {Prop?.data?.Uid?.name || feed.name}
+            </div>
             <div className="text-slate-500 text-xs">
               <Showmore
-                text={feed.desc}
+                text={Prop?.data.Uid?.about || ""}
                 limit={80}
                 classText={"text-xs"}
               ></Showmore>
@@ -87,7 +100,7 @@ const Feed = () => {
       <div className="flex flex-col items-center gap-4 px-1">
         <div>
           <Showmore
-            text={feed.imgdesc}
+            text={Prop?.data.description || feed.imgdesc}
             limit={150}
             classText={"text-sm"}
           ></Showmore>
@@ -101,12 +114,12 @@ const Feed = () => {
         </div>
         <div className="flex justify-start items-center gap-1 w-full ">
           <Image src={LikeImg} alt="likes" width={30}></Image>
-          <div>{feed.likes}</div>
+          <div>{Prop?.data.likes || feed.likes}</div>
         </div>
         <div className="w-full h-[1px] my-4 bg-slate-300"></div>
         <LikeComments comments={feed.comments}></LikeComments>
       </div>
-    </div>
+    </MotionDiv>
   );
 };
 

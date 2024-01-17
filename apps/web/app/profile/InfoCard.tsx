@@ -1,9 +1,9 @@
 import { FaLinkedin } from "react-icons/fa";
-import { Avatar, AvatarImage } from "components/ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "components/ui/avatar";
 import React from "react";
-import { FiMapPin } from "react-icons/fi";
+
 import { CgMail } from "react-icons/cg";
-import { Button } from "components/ui/button";
+
 import { DialogInput } from "app/components/Dialog";
 import { FaGithub } from "react-icons/fa";
 import { BiSolidBadgeDollar } from "react-icons/bi";
@@ -13,24 +13,27 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "components/ui/tooltip";
-import { Toggle } from "@radix-ui/react-toggle";
-import Axios from "app/Axios";
+
 import { User } from "app/types";
 import Logout from "app/components/Logout";
+import UtilButton from "app/components/FollowButton";
+// import { AvatarFallback } from "@radix-ui/react-avatar";
 
 interface prop {
   User: User;
+  self?: boolean;
 }
 
 const InfoCard = (Prop: prop) => {
-  console.log(Prop);
   return (
     <div className="bg-white rounded-sm shadow-md ">
       <div className="bg-bluebg flex gap-5 items-center justify-center p-4 rounded-sm">
         <Avatar className="w-40 h-40 border-2">
-          <AvatarImage src="https://avatars.githubusercontent.com/u/127422698?v=4"></AvatarImage>
+          <AvatarImage src={Prop?.User?.image}></AvatarImage>
+          <AvatarFallback className="text-4xl text-medgray font-semibold">
+            {Prop?.User?.name?.slice(0, 1)}
+          </AvatarFallback>
         </Avatar>
-
         <div>
           <div className=" flex  items-center  gap-1 text-yellow-500">
             <div className="text-text text-3xl font-semibold">
@@ -88,13 +91,22 @@ const InfoCard = (Prop: prop) => {
           )}
         </div>
         <div className="mt-4 w-full flex gap-4">
-          <DialogInput
-            dialogRole="profile"
-            buttonName="Edit Profile"
-            userData={Prop?.User}
-            buttoncss="bg-bluebg hover:bg-slate-900 hover:text-white text-white"
-          ></DialogInput>
-          <Logout></Logout>
+          {Prop?.self ? (
+            <>
+              <DialogInput
+                dialogRole="profile"
+                buttonName="Edit Profile"
+                userData={Prop?.User}
+                buttoncss="bg-bluebg hover:bg-slate-900 hover:text-white text-white"
+              ></DialogInput>
+              <Logout></Logout>
+            </>
+          ) : (
+            <>
+              <UtilButton uid={Prop?.User?._id!}></UtilButton>
+              {/* <Button></Button> */}
+            </>
+          )}
         </div>
       </div>
     </div>
