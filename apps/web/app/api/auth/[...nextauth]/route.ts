@@ -6,13 +6,11 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
 import LinkedinProvider from "next-auth/providers/linkedin";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import User from "schemas/User";
 import connectDB from "lib/Connection";
-import clientPromise from "./lib/mongodb";
-import { AdapterUser } from "next-auth/adapters";
 
-export const authOptions: NextAuthOptions = {
+
+const handler = NextAuth({
   // adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
@@ -147,8 +145,6 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
   },
-};
-
-const handler = NextAuth(authOptions);
+});
 
 export { handler as GET, handler as POST };

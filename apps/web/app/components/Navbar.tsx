@@ -18,8 +18,6 @@ import {
 import { Button } from "components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import { User } from "next-auth";
-
 
 const Navbar = () => {
   // const router = useRouter();
