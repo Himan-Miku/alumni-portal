@@ -43,13 +43,15 @@ const Home = () => {
         </div>
       </div>
       <section className="w-full flex flex-col gap-8">
-        <h3
-          className="text-center text-4xl font-sans m-4 font-[700] relative underline-offset-[14px] underline
+        <div className="flex flex-col justify-center items-center">
+          <h3
+            className="text-center text-4xl  m-4 font-[700] 
       "
-        >
-          “ Why Alumni Portal ? ”
-        </h3>
-
+          >
+            " Why Alumni Portal ? "
+          </h3>
+          <div className="w-[50%] h-1 bg-black"></div>
+        </div>
         <div className="grid grid-rows-4 lg:grid-rows-1 lg:grid-cols-4 justify-items-center align-items-stretch gap-5 px-10">
           <div className="home-section-div ">
             <div className="image-name">
@@ -77,7 +79,7 @@ const Home = () => {
                 width={70}
                 height={70}
               />
-              <h5 className="home-icons-heading ">Alumni Talk</h5>
+              <h5 className="home-icons-heading ">" Alumni Talk "</h5>
             </div>
             <p className="home-icons-subheading">
               The Alumni Talk option is a valuable resource for our alumni
@@ -122,9 +124,12 @@ const Home = () => {
         </div>
       </section>
       <div className="w-full  bg-[#161A30] flex justify-start items-center flex-col py-10 px-6">
-        <h2 className="text-[#EA906C] font-sans text-center text-4xl leading-9 font-[900] underline underline-offset-[12px] decoration-white decoration-4 ">
-          " Alumni Talk Series "
-        </h2>
+        <div className="flex flex-col justify-center items-center gap-2">
+          <div className="text-[#EA906C] text-center text-4xl  font-[900] ">
+            " Alumni Talk Series "
+          </div>
+          <div className=" w-[50%] h-1 bg-white"></div>
+        </div>
         <div className=" flex flex-col gap-16 lg:grid lg:grid-cols-2 mt-10">
           <iframe
             className="yt-videos"
@@ -161,7 +166,7 @@ const Home = () => {
           <div className="w-[50%] h-1 bg-black"></div>
         </h3>
 
-        <div className="flex flex-col gap-10 px-12">
+        <div className="flex flex-col gap-10 px-4 md:px-12">
           <div
             className="flex flex-col xl:flex-row items-center glass rounded-sm
           justify-center gap-8"
@@ -171,12 +176,12 @@ const Home = () => {
               alt="Principal.jpg"
               width={540}
               height={342}
-              className="rounded-md aspect-[16/10]"
+              className="rounded-md outline-4  aspect-[16/10]"
             ></Image>
             <div className=" flex flex-col gap-2 items-center">
               <h4 className="text-3xl font-[700] ">Dr. R.K Jain</h4>
               <h5 className="text-xl font-[600] ">Director, RSCOE</h5>
-              <p className="w-[80%] text-md text-justify">
+              <p className="md:w-[80%] text-md text-justify">
                 Dear Friends, It is with immense pride, that I introduce you to
                 an entirely new approach of learning in our college. An
                 approach, where traditional methods of learning go hand in hand
@@ -190,13 +195,13 @@ const Home = () => {
             </div>
           </div>
           <div
-            className="flex flex-col-reverse md:flex-row items-center glass rounded-sm
+            className="flex flex-col-reverse xl:flex-row items-center glass rounded-sm
           justify-center gap-8 "
           >
             <div className="flex flex-col gap-2 items-center">
               <h4 className="text-3xl font-[700]">Dr. S P Rao Borde</h4>
               <h5 className="text-xl font-[600]">Dean of SI&IR's, RSCOE</h5>
-              <p className="w-[80%]  text-md text-justify">
+              <p className="md:w-[80%]  text-md text-justify">
                 Dear Friends, From The Dean of SI&IR's Desk, I would like to
                 introduce our campus, Rajarshi Shahu College of Engineering
                 (RSCOE), an autonomous institute which is in the band 250 to 300
@@ -222,10 +227,13 @@ const Home = () => {
         </div>
       </div>
       <div className="w-[100%] font-sans bg-[#D9D9D9] flex justify-start items-center flex-col gap-10 p-10">
-        <h3 className="text-4xl font-[700] text-center underline underline-offset-8  ">
-          “Memories We Will Never Forget”
-        </h3>
-        <div className="m-14 my-2">
+        <div className="flex flex-col justify-center items-center gap-2">
+          <h3 className="text-4xl font-[700] text-center ">
+            “Memories We Will Never Forget”
+          </h3>
+          <div className="w-[50%] h-1 bg-black"></div>
+        </div>
+        <div className="m-4 md:mx-20 my-2">
           <Slider
             imgarr={images.map((e) => {
               return "/home/slider/" + e;

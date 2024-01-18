@@ -1,6 +1,7 @@
 import { Avatar } from "components/ui/avatar";
 import { AvatarFallback, AvatarImage } from "components/ui/avatar";
 import React from "react";
+import { motion } from "framer-motion";
 import { AiOutlineLike } from "react-icons/ai";
 import { GoComment } from "react-icons/go";
 import LikeImg from "public/LikeImg.svg";
@@ -16,16 +17,21 @@ import { RxCross1 } from "react-icons/rx";
 import Showmore from "app/components/Showmore";
 import Image from "next/image";
 
-import LikeComments from "../feed/LikeComments";
-interface feedData {
-  name: string;
-  desc: string;
-  imgdesc: string;
-  likes: number;
-  comments: { user: string; desc: string; text: string }[];
-}
+import LikeComments from "./LikeComments";
+import Slider from "./Slider";
+import { Post, User } from "app/types";
+import { MotionDiv } from "./MotionDiv";
 
-const Feed = () => {
+const Feed = (Prop: { data: Post; index: number }) => {
+  let images = [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "5.jpg",
+    "6.jpg",
+    "7.jpg",
+    "aluimg.jpg",
+  ];
   let feed = {
     name: "Gaurav Hedau",
     desc: "Ex-SDE Intern at @Reclimate | 4th year IT U.G (B.E) | Java | javascript | React…",
@@ -45,8 +51,23 @@ const Feed = () => {
       },
     ],
   };
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
   return (
-    <div className="bg-white p-4 rounded-md flex flex-col gap-3 border-2 border-slate-300">
+    <MotionDiv
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      transition={{
+        delay: 0.125,
+        ease: "easeInOut",
+        duration: 0.2,
+      }}
+      viewport={{ amount: 0 }}
+      className="bg-white p-4 rounded-md flex flex-col gap-3 border-2 border-slate-300"
+    >
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <div className="">
@@ -60,10 +81,12 @@ const Feed = () => {
             </Avatar>
           </div>
           <div>
-            <div className="text-xl font-semibold">{feed.name}</div>
+            <div className="text-xl font-semibold">
+              {Prop?.data?.Uid?.name || feed.name}
+            </div>
             <div className="text-slate-500 text-xs">
               <Showmore
-                text={feed.desc}
+                text={Prop?.data.Uid?.about || ""}
                 limit={80}
                 classText={"text-xs"}
               ></Showmore>
@@ -74,42 +97,29 @@ const Feed = () => {
           <RxCross1></RxCross1>
         </div>
       </div>
-      <div className="flex flex-col items-center px-1">
+      <div className="flex flex-col items-center gap-4 px-1">
         <div>
           <Showmore
-            text={feed.imgdesc}
+            text={Prop?.data.description || feed.imgdesc}
             limit={150}
             classText={"text-sm"}
           ></Showmore>
         </div>
-
-        <Carousel className="w-full max-w-xs ">
-          <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <div>
-                    <div className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-4xl font-semibold">
-                        {index + 1}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+        <div className=" w-[75%] flex justify-center items-center ">
+          <Slider
+            imgarr={images.map((e) => {
+              return "/home/slider/" + e;
+            })}
+          ></Slider>
+        </div>
         <div className="flex justify-start items-center gap-1 w-full ">
           <Image src={LikeImg} alt="likes" width={30}></Image>
-          <div>{feed.likes}</div>
+          <div>{Prop?.data.likes || feed.likes}</div>
         </div>
         <div className="w-full h-[1px] my-4 bg-slate-300"></div>
         <LikeComments comments={feed.comments}></LikeComments>
       </div>
-    </div>
+    </MotionDiv>
   );
 };
 

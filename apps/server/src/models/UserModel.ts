@@ -39,11 +39,23 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
     },
-    education: {
-      type: String,
-    },
+    education: [
+      {
+        studyfrom: String,
+        studied: String,
+        duration: String,
+        percentage: String,
+      },
+    ],
+    work: [
+      {
+        company: String,
+        position: String,
+        duration: String,
+      },
+    ],
     dob: {
       type: Date,
     },
@@ -57,7 +69,7 @@ const userSchema = new mongoose.Schema(
     github: {
       type: String,
     },
-    profilePic: {
+    image: {
       type: String,
     },
     userType: {
@@ -69,14 +81,13 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-let key = process.env.JWT_SECRET_KEY || "";
 let expire = process.env.JWT_EXPIRE || "4d";
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = await bcrypt.hash(this.password!, 10);
   next();
 });
 

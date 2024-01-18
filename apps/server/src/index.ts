@@ -10,10 +10,10 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 import app from "./app";
-import { setCorsOptions } from "./utils/s3Operations";
+// import { setCorsOptions } from "./utils/s3Operations";
 
 dotenv.config();
-setCorsOptions();
+// setCorsOptions();
 const PORT = process.env.PORT ? process.env.PORT : 8000;
 
 connectDB();

@@ -13,7 +13,8 @@ let errorfn = (
 
   if (err.name == "CastError") {
     const message = "Resource not found .invalid :" + `${err.stack}`;
-    err = new HttpError(message);
+    // console.log(message);
+    // err = new HttpError(message);
   }
   res.status(404).json({
     success: false,

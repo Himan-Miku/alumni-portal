@@ -18,25 +18,17 @@ import {
 import { Button } from "components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import { User} from "next-auth"
-
-interface user extends User{
-  picture?:string,
-}
 
 const Navbar = () => {
   // const router = useRouter();
-  
+
+  const { data: session } = useSession();
   const router = useRouter();
   let pathname = usePathname();
-  const { data: session } = useSession();
-  const user = session?.user as user;
-  
- 
 
- 
-console.log("session",session)
- 
+  const user = session?.user;
+  // console.log(user?.following);
+
   let nav = [
     {
       link: "/",
@@ -58,11 +50,12 @@ console.log("session",session)
 
   return (
     <>
-      <div className="flex items-center justify-between p-4 px-10 bg-white sticky top-0 z-10 ">
+      <div className="flex items-center justify-between p-4 px-10 bg-white sticky top-0 z-20 ">
         <div className="flex items-center gap-16  lg:w-[50%]">
           <Link href="/">
             <Image src={RscoeImg} alt="Logo" className="w-[2.99625rem]"></Image>
           </Link>
+
           <div className="links hidden lg:flex w-full gap-12 lg:text-lg font-semibold text-slate-800">
             {nav?.map((ele, ind) => {
               return (
@@ -87,7 +80,7 @@ console.log("session",session)
                 <div className="flex gap-2">
                   <div>{session.user.name}</div>
                   <Image
-                    src={user?.picture || "/user-profile-icon.svg"}
+                    src={user?.image || "/user-profile-icon.svg"}
                     alt="Profile.img"
                     width={35}
                     height={35}
@@ -105,7 +98,7 @@ console.log("session",session)
           )}
         </div>
 
-        <div className="lg:hidden  ">
+        <div className="lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline">
@@ -113,16 +106,14 @@ console.log("session",session)
               </Button>
             </SheetTrigger>
             <SheetContent className="flex flex-col font-semibold w-72 text-lg text-slate-900 gap-10">
-              {session?.user ? (
-                <SheetHeader>
-                  <Link href="/auth/login">
+              <SheetHeader>
+                {session?.user ? (
+                  <Link href="/profile">
                     <SheetTitle className="flex items-center gap-2 justify-center glass rounded-md p-3 shadow-md">
                       <div>{session?.user?.name}</div>
                       <div>
                         <Image
-                          src={
-                            user.picture || "/user-profile-icon.svg"
-                          }
+                          src={user?.image || "/user-profile-icon.svg"}
                           alt="profile image"
                           width={30}
                           height={30}
@@ -131,18 +122,18 @@ console.log("session",session)
                       </div>
                     </SheetTitle>
                   </Link>
-                </SheetHeader>
-              ) : (
-                <>
-                  <Button
-                    className="m-4"
-                    onClick={() => router.push("/auth/login")}
-                  >
-                    {" "}
-                    login
-                  </Button>
-                </>
-              )}
+                ) : (
+                  <>
+                    <Button
+                      className="m-4"
+                      onClick={() => router.push("/auth/login")}
+                    >
+                      {" "}
+                      Login
+                    </Button>
+                  </>
+                )}
+              </SheetHeader>
               <div className="flex w-full flex-col gap-6">
                 {nav?.map((ele, ind) => {
                   return (

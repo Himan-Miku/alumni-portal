@@ -8,14 +8,14 @@ import { FaArrowRight } from "react-icons/fa";
 
 const Analytics = () => {
   return (
-    <div className="bg-white rounded-sm pt-4 px-4 pb-2 flex flex-col gap-2 shadow-sm">
+    <div className="bg-white rounded-sm pt-4 px-4 pb-2 flex flex-col gap-2 md:gap-3 shadow-sm">
       <div className="text-lightgray font-semibold">
         <div className="text-graytext">Analytics</div>
         <div className="flex gap-1 items-center text-xs">
           <IoIosEye></IoIosEye>Private to you
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid md:grid-cols-3 gap-2">
         <div className="analytics-card ">
           <BsFillPeopleFill size={20}></BsFillPeopleFill>
           <div className="card-text">

@@ -4,11 +4,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
 import SelfInfo from "./selfinfo";
 import MainFeed from "./mainfeed";
 import AddPost from "./addpost";
+import LoadMore from "./LoadMore";
 
-const FeedPage = () => {
+const FeedPage = async () => {
   return (
     <>
-      <div className="px-2">
+      <div className="p-2">
         <div className="grid grid-rows-3  lg:grid-cols-10 gap-3">
           <SelfInfo></SelfInfo>
           <MainFeed></MainFeed>

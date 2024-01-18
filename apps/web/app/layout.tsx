@@ -2,11 +2,12 @@ import "./globals.css";
 import Provider from "./components/Provider";
 import { Poppins } from "next/font/google";
 import Navbar from "./components/Navbar";
+import { Toaster } from "components/ui/toaster";
 
 import { getServerSession } from "next-auth";
 
 import Footer from "./components/Footer";
-
+import TanstackProvider from "./components/TanstackProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,13 +24,15 @@ export default async function RootLayout({
   const session = getServerSession();
   return (
     <html lang="en">
-
       <body className={poppins.className + " bg-commonbg flex flex-col gap-2"}>
-        <Provider session={session}>
-          <Navbar></Navbar>
-          {children}
-        </Provider>
-
+        <TanstackProvider>
+          <Provider session={session}>
+            <Navbar></Navbar>
+            {children}
+            <Footer></Footer>
+          </Provider>
+        </TanstackProvider>
+        <Toaster />
       </body>
     </html>
   );
