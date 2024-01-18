@@ -21,7 +21,7 @@ app.use(
 );
 
 //defining all routes here
-app.use("/api", userRoutes, postRoutes);
+app.use("/api", userRoutes, postRoutes, metadataRoutes);
 
 //error middleware
 app.use(errorfn);
