@@ -1,3 +1,4 @@
+"use client";
 import Axios from "app/Axios";
 import About from "app/profile/About";
 import Activity from "app/profile/Activity";
@@ -31,13 +32,13 @@ export default async function page({ params }: { params: { userid: string } }) {
   );
 }
 
-export async function generateStaticParams() {
-  const UserPromise = GetUsers();
-  const users = (await UserPromise).data?.user!;
+// export async function generateStaticParams() {
+//   const UserPromise = GetUsers();
+//   const users = (await UserPromise).data?.user!;
 
-  return users?.map((ele) => {
-    return {
-      userid: ele?._id,
-    };
-  });
-}
+//   return users?.map((ele) => {
+//     return {
+//       userid: ele?._id,
+//     };
+//   });
+// }

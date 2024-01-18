@@ -30,7 +30,7 @@ const LoadMore = () => {
 
   useEffect(() => {
     if (inView) {
-      console.log("At the end");
+      // console.log("At the end");
       loadMoreFn();
     }
   }, [inView]);
