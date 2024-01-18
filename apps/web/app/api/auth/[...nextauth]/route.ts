@@ -21,6 +21,19 @@ const handler=NextAuth({
         LinkedinProvider({
           clientId: process.env.LINKEDIN_CLIENT_ID ?? "" ,
           clientSecret: process.env.LINKEDIN_CLIENT_SECRET ?? "",
+          authorization: { params: { scope: 'openid profile email' } },
+            issuer: 'https://www.linkedin.com',
+            jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
+            async profile(profile) {
+                return {
+                    id: profile.sub,
+                    name: profile.name,
+                    firstname: profile.given_name,
+                    lastname: profile.family_name,
+                    email: profile.email,
+                    image: profile.picture
+                }
+            },
         }),
         CredentialsProvider({
            id: "credentials",
@@ -69,9 +82,10 @@ const handler=NextAuth({
       callbacks: {
         async jwt({ token, user,account }) {
           // console.log(token,user)
+         
           return  token;
         },
-        async session({ session, token, user, }) {
+        async session({ session, token, user }) {
           // Send properties to the client, like an access_token from a provider.
           session.user = token;
            
@@ -79,6 +93,7 @@ const handler=NextAuth({
         },
         async signIn(profile){
           console.log(profile.user)
+         
 
          try {
           await connectDB();
