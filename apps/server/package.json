@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
-    "build": "tsc -p .",
+    "build": "yarn install && tsc",
     "start": "node dist/index"
   },
   "dependencies": {
