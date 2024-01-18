@@ -57,11 +57,11 @@ export const UpdateFollow = catchAsyncError(
         followUser?.followers.filter((ele) => {
           return String(ele._id) != String(req.user._id!);
         }) || [];
-        
+
       // res.end();
     } else {
-    user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
-    followUser?.followers.push(new mongoose.Types.ObjectId(req.user._id));
+      user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
+      followUser?.followers.push(new mongoose.Types.ObjectId(req.user._id));
     }
     await user?.save();
     await followUser?.save();
@@ -96,6 +96,20 @@ export const append = catchAsyncError(
     res.status(200).json({
       success: true,
       resp,
+    });
+  }
+);
+
+export const PopulatedFollowings = catchAsyncError(
+  async (req: IReq, res: IRes, next: NextFunction) => {
+    const user = await User.find(
+      { _id: req?.user?._id },
+      { followers: 1, following: 1 }
+    ).populate(["followers", "following"]);
+      
+    res?.status(200).json({
+      success: true,
+      user,
     });
   }
 );

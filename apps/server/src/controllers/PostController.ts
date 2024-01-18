@@ -73,7 +73,6 @@ export const likes = catchAsyncError(
       })!;
       post!.likes = temp;
     }
-
     await post?.save();
     // console.log(post);
     res.status(200).json({

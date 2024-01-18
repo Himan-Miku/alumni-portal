@@ -15,10 +15,13 @@ interface Posts {
 
 const Activity = () => {
   let { data } = useSession();
-  let [limit, setLimit] = useState(3);
   let [posts, setPosts] = useState<Post[]>([]);
+  let [clicked, setClick] = useState(false);
 
-  const fetchPage = async (page: number) => {
+  const fetchPage = async (
+    page: number | undefined = undefined,
+    limit: number | undefined = undefined
+  ) => {
     const res = await Axios.get(
       `/api/showpost?_id=${data?.user?._id}&limit=${limit}&page=${page}`,
       {
@@ -29,9 +32,9 @@ const Activity = () => {
     setPosts([...res?.data?.post]);
   };
   useEffect(() => {
-    fetchPage(0);
+    fetchPage(0, 3);
   }, []);
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <div className="bg-white p-5 flex flex-col items-start gap-3 shadow-sm rounded-sm ">
@@ -48,7 +51,17 @@ const Activity = () => {
             return <Feed data={ele} index={ind}></Feed>;
           })}
       </div>
-      <Button className="w-full bg-slate-500">Show more</Button>
+      {!clicked && (
+        <Button
+          onClick={() => {
+            fetchPage();
+            setClick(true);
+          }}
+          className="w-full bg-slate-500"
+        >
+          Show more
+        </Button>
+      )}
     </div>
   );
 };

@@ -8,7 +8,6 @@ import errorfn from "./middlewares/error";
 import metadataRoutes from "./routes/metadataRoute";
 import cors from "cors";
 
-
 const app = express();
 //cookie body and encoded url configurations
 app.use(cookieParser());
@@ -17,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
     origin: "http://localhost:3000",
-    credentials:true
+    credentials: true,
   })
 );
 

@@ -61,9 +61,9 @@ const Feed = (Prop: { data: Post; index: number }) => {
       initial="hidden"
       animate="visible"
       transition={{
-        delay: Prop?.index * 0.25,
+        delay: 0.125,
         ease: "easeInOut",
-        duration: 0.5,
+        duration: 0.2,
       }}
       viewport={{ amount: 0 }}
       className="bg-white p-4 rounded-md flex flex-col gap-3 border-2 border-slate-300"

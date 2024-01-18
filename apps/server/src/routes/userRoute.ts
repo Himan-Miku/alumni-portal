@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   AddUser,
+  PopulatedFollowings,
   SearchUser,
   UpdateFollow,
   append,
@@ -25,6 +26,7 @@ router
   .get(isAuthenticated, selfinfo)
   .put(isAuthenticated, updateUser)
   .delete(isAuthenticated, deleteUser);
+router.route("/followers").get(isAuthenticated, PopulatedFollowings);
 router.route("/user/:_id").get(getUser);
 router.route("/follow/:id").put(isAuthenticated, UpdateFollow);
 router.route("/append").post(isAuthenticated, append);
