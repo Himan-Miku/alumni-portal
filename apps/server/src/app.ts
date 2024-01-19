@@ -5,7 +5,7 @@ import postRoutes from "./routes/postRoute";
 
 import errorfn from "./middlewares/error";
 
-import metadataRoutes from "./routes/metadataRoute";
+// import metadataRoutes from "./routes/metadataRoute";
 import cors from "cors";
 
 const app = express();
@@ -21,7 +21,7 @@ app.use(
 );
 
 //defining all routes here
-app.use("/api", userRoutes, postRoutes, metadataRoutes);
+app.use("/api", userRoutes, postRoutes);
 
 //error middleware
 app.use(errorfn);
