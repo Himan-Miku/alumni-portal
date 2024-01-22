@@ -1,9 +1,7 @@
-import React from "react";
 import SearchUtility from "./SearchUtility";
-import Feed from "../compo/Feed";
+import Feed from "../components/Feed";
 import LoadMore from "./LoadMore";
 import { fetchFeed } from "../../actions/action";
-import { Post } from "app/types";
 
 const MainFeed = async () => {
   let data = await fetchFeed(0);

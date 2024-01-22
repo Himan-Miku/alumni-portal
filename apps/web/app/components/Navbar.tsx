@@ -13,9 +13,9 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "components/ui/sheet";
+} from "shadcn/ui/sheet";
 
-import { Button } from "components/ui/button";
+import { Button } from "shadcn/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 

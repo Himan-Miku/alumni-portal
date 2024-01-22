@@ -4,8 +4,6 @@ import About from "app/profile/About";
 import Activity from "app/profile/Activity";
 import InfoCard from "app/profile/InfoCard";
 import { User } from "app/types";
-import GetUsers from "lib/GetUsers";
-import React from "react";
 
 export const dynamicParams = false;
 

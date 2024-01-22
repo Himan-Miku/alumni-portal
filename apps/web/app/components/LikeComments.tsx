@@ -1,12 +1,12 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
-import { Button } from "components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "shadcn/ui/avatar";
+import { Button } from "shadcn/ui/button";
 import React, { useState } from "react";
 
 import { FaCommentAlt } from "react-icons/fa";
 import { AiFillLike } from "react-icons/ai";
-import { Input } from "components/ui/input";
+import { Input } from "shadcn/ui/input";
 
 interface Props {
   comments: { user: string; desc: string; text: string }[];

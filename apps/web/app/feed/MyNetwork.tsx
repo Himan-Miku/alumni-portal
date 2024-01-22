@@ -1,16 +1,15 @@
 "use client";
 import Axios from "app/Axios";
 import { User } from "app/types";
-import { Button } from "components/ui/button";
+import { Button } from "shadcn/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "components/ui/dialog";
+} from "shadcn/ui/dialog";
 import { useQuery } from "react-query";
 
 export default function DialogDemo() {
@@ -29,9 +28,7 @@ export default function DialogDemo() {
         <DialogHeader>
           <DialogTitle>My Network</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          {}
-        </div>
+        <div className="grid gap-4 py-4">{}</div>
         <DialogFooter>
           <Button type="submit">Save changes</Button>
         </DialogFooter>

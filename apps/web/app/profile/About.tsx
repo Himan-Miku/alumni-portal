@@ -3,9 +3,7 @@ import { MdInfo } from "react-icons/md";
 import { ImOffice } from "react-icons/im";
 import { IoIosBook } from "react-icons/io";
 
-import { DialogInput } from "app/compo/Dialog";
-import { User } from "app/types";
-import { Dialog } from "components/ui/dialog";
+import { DialogInput } from "app/components/Dialog";
 
 interface prop {
   self?: boolean;

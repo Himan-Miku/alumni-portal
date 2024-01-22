@@ -1,11 +1,10 @@
 "use client";
 import Axios from "app/Axios";
-import Feed from "app/compo/Feed";
+import Feed from "app/components/Feed";
 import { Post } from "app/types";
-import { Button } from "components/ui/button";
+import { Button } from "shadcn/ui/button";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
 
 interface Posts {
   data: Post[];

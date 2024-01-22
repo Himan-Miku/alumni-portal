@@ -1,26 +1,16 @@
 "use client";
 import { User } from "app/types";
-import axios from "axios";
-import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
-import { Button } from "components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "shadcn/ui/avatar";
+import { Button } from "shadcn/ui/button";
 import { IoSearchOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "shadcn/ui/dialog";
 import React from "react";
 import { useState } from "react";
-import { ScrollArea } from "components/ui/scroll-area";
+import { ScrollArea } from "shadcn/ui/scroll-area";
 import Axios from "app/Axios";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { useQuery } from "react-query";
 
 export function SearchDialog() {
   let { data } = useSession();

@@ -1,6 +1,3 @@
-import React from "react";
-
-import Analytics from "./Analytics";
 import Activity from "./Activity";
 import UserInfo from "./UserInfo";
 

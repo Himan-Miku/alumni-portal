@@ -1,13 +1,14 @@
 "use client";
-import { RegisterSchema } from "schemas";
+import { LoginSchema } from "schemas";
 import { useState, useTransition } from "react";
 import React from "react";
 import CardWapper from "./CardWapper";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "components/ui/button";
-
+import { Button } from "shadcn/ui/button";
+import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import {
   Form,
   FormControl,
@@ -15,66 +16,56 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "components/ui/form";
-import { Input } from "components/ui/input";
+} from "shadcn/ui/form";
+import { Input } from "shadcn/ui/input";
 
 import { FormError } from "../formerror";
 import { FormSuccess } from "../formSuccess";
-import { Register } from "actions/register";
 import { useRouter } from "next/navigation";
 
-const RegisterationForm = () => {
-  const router=useRouter();
+const LoginForm = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   // 1. Define your form.
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
-      name:"",
       email: "",
       password: "",
     },
   });
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof RegisterSchema>) {
-    setError("")
-    setSuccess("")
-    startTransition(() => {
-      Register(values).then((data) => {  
-        setError(data.error);
-        setSuccess(data.success);
-        if(data.success){
-          router.push("/auth/login")
-        }
+  async function onSubmit(values: z.infer<typeof LoginSchema>) {
+    setError("");
+    setSuccess("");
+    const { email, password } = values;
+    console.log("values", values);
+    startTransition(async () => {
+      const user = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
       });
+      console.log("user", user);
+      if (user?.error == null) {
+        setSuccess("Login Successful");
+        router.push("/profile");
+      } else setError("Invalid Credentials");
     });
-    
   }
+
   return (
     <CardWapper
-      headerLabel="Register to Login"
-      baclButtonLabel="Already have account?"
-      backButtonHref="/auth/login"
+      headerLabel="Enter the email and password"
+      baclButtonLabel="Don't have an account?"
+      backButtonHref="/auth/register"
       showSocial
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-        <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-bold">Name</FormLabel>
-                <FormControl>
-                  <Input  {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name="email"
@@ -91,7 +82,7 @@ const RegisterationForm = () => {
 
           <FormField
             control={form.control}
-            name="password" 
+            name="password"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-bold">Password</FormLabel>
@@ -108,10 +99,10 @@ const RegisterationForm = () => {
               </FormItem>
             )}
           />
-          <FormError message={error}/>
+          <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" className="w-full" disabled={isPending}>
-            Create An Account
+            Login
           </Button>
         </form>
       </Form>
@@ -119,4 +110,4 @@ const RegisterationForm = () => {
   );
 };
 
-export default RegisterationForm;
+export default LoginForm;

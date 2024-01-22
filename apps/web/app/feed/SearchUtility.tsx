@@ -1,5 +1,3 @@
-import { IoMdPeople } from "react-icons/io";
-import React, { useState } from "react";
 import { TbMessage2Minus } from "react-icons/tb";
 import { SearchDialog } from "./SearchDiialog";
 import MyNetwork from "./MyNetwork";

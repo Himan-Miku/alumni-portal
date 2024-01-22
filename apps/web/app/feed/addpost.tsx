@@ -1,6 +1,6 @@
 "use client";
-import { Avatar, AvatarImage, AvatarFallback } from "components/ui/avatar";
-import { Button } from "components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "shadcn/ui/avatar";
+import { Button } from "shadcn/ui/button";
 import { ChangeEvent, useRef, useState } from "react";
 import {
   Dialog,
@@ -10,12 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "components/ui/dialog";
+} from "shadcn/ui/dialog";
 import { MdPermMedia } from "react-icons/md";
 import ReactTextareaAutosize from "react-textarea-autosize";
-import Media from "public/media.svg";
 import Image from "next/image";
-import { Input } from "components/ui/input";
+import { Input } from "shadcn/ui/input";
 
 type receivedMetadata = {
   putUri: string;
@@ -216,7 +215,11 @@ const AddPost = () => {
               ref={fileInput}
               onChange={handleFileChange}
             />
-            <Button variant={"ghost"}  onClick={handleButtonClick} className="text-2xl text-bluebg">
+            <Button
+              variant={"ghost"}
+              onClick={handleButtonClick}
+              className="text-2xl text-bluebg"
+            >
               <MdPermMedia></MdPermMedia>
             </Button>
             <Button onClick={handleSubmit} className="bg-bluebg" type="submit">

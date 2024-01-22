@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
-import { Button } from "components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "shadcn/ui/avatar";
+import { Button } from "shadcn/ui/button";
 import React from "react";
 
 const SelfInfo = () => {
@@ -22,7 +22,6 @@ const SelfInfo = () => {
             />
             <AvatarFallback>SR</AvatarFallback>
           </Avatar>
-          
         </div>
         <hr></hr>
         <div className="grid grid-cols-2 grid-rows-3 text-md font-semibold text-white">

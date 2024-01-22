@@ -3,7 +3,7 @@ import { IoIosEye } from "react-icons/io";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { SiGoogleanalytics } from "react-icons/si";
 import { IoSearchSharp } from "react-icons/io5";
-import { Button } from "components/ui/button";
+import { Button } from "shadcn/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 
 const Analytics = () => {

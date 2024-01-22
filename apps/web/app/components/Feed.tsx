@@ -1,5 +1,5 @@
-import { Avatar } from "components/ui/avatar";
-import { AvatarFallback, AvatarImage } from "components/ui/avatar";
+import { Avatar } from "shadcn/ui/avatar";
+import { AvatarFallback, AvatarImage } from "shadcn/ui/avatar";
 import React from "react";
 import { motion } from "framer-motion";
 import { AiOutlineLike } from "react-icons/ai";
@@ -12,7 +12,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "components/ui/carousel";
+} from "shadcn/ui/carousel";
 import { RxCross1 } from "react-icons/rx";
 import Showmore from "app/compo/Showmore";
 import Image from "next/image";

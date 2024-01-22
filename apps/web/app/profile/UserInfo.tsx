@@ -1,12 +1,11 @@
 "use client";
 
-import React, { use } from "react";
 // import { useQuery } from "react-query";
 import InfoCard from "./InfoCard";
 import About from "./About";
 // import { User } from "app/types";
 // import Axios from "app/Axios";
-// import { Skeleton } from "components/ui/skeleton";
+// import { Skeleton } from "shadcn/ui/skeleton";
 import { useSession } from "next-auth/react";
 
 const UserInfo = () => {

@@ -1,7 +1,7 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "shadcn/ui/avatar";
 import { FaPlus } from "react-icons/fa6";
-import { Button } from "components/ui/button";
+import { Button } from "shadcn/ui/button";
 import { GoPencil } from "react-icons/go";
 import { ImCross } from "react-icons/im";
 import { useRouter } from "next/navigation";
@@ -14,14 +14,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "components/ui/dialog";
-import { Input } from "components/ui/input";
-import { Label } from "components/ui/label";
-import { Textarea } from "components/ui/textarea";
+} from "shadcn/ui/dialog";
+import { Input } from "shadcn/ui/input";
+import { Label } from "shadcn/ui/label";
+import { Textarea } from "shadcn/ui/textarea";
 import { ChangeEvent, useEffect, useState } from "react";
 import { User } from "app/types";
 import { Mutation, useMutation } from "react-query";
-import { useToast } from "components/ui/use-toast";
+import { useToast } from "shadcn/ui/use-toast";
 
 import Axios from "app/Axios";
 import { DialogClose } from "@radix-ui/react-dialog";

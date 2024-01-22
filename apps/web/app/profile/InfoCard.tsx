@@ -1,10 +1,7 @@
 import { FaLinkedin } from "react-icons/fa";
-import { Avatar, AvatarImage, AvatarFallback } from "components/ui/avatar";
-import React from "react";
-
+import { Avatar, AvatarImage, AvatarFallback } from "shadcn/ui/avatar";
 import { CgMail } from "react-icons/cg";
-
-import { DialogInput } from "app/compo/Dialog";
+import { DialogInput } from "app/components/Dialog";
 import { FaGithub } from "react-icons/fa";
 import { BiSolidBadgeDollar } from "react-icons/bi";
 import {
@@ -12,12 +9,10 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "components/ui/tooltip";
-
+} from "shadcn/ui/tooltip";
 import { User } from "app/types";
-import Logout from "app/compo/Logout";
-import UtilButton from "app/compo/FollowButton";
-// import { AvatarFallback } from "@radix-ui/react-avatar";
+import Logout from "app/components/Logout";
+import UtilButton from "app/components/FollowButton";
 
 interface prop {
   User: User;
