@@ -2,6 +2,9 @@
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "components/*": ["components/*"]
+    },
     "plugins": [
       {
         "name": "next"
@@ -13,7 +16,10 @@
     "next.config.js",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "schemas/User.ts", "app/api/[...nextauth]/route.ts", "app/api/auth/[...nextauth]/route.ts"  ],
+    ".next/types/**/*.ts",
+    "schemas/User.ts",
+    "app/api/[...nextauth]/route.ts",
+    "app/api/auth/[...nextauth]/route.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -17,7 +17,7 @@ const delay = (milliseconds: number): Promise<void> => {
 const LoadMore = () => {
   const { ref, inView } = useInView();
   let [data, setData] = useState<Post[]>([]);
-  const [loaded, setPageLoaded] = useState(1);
+  const [loaded, setPageLoaded] = useState(0);
 
   const loadMoreFn = async () => {
     await delay(100);

@@ -11,7 +11,7 @@ const FeedPage = async () => {
     <>
       <div className="p-2">
         <div className="grid grid-rows-3  lg:grid-cols-10 gap-3">
-          <SelfInfo></SelfInfo>
+          {/* <SelfInfo></SelfInfo> */}
           <MainFeed></MainFeed>
           <AddPost></AddPost>
         </div>
