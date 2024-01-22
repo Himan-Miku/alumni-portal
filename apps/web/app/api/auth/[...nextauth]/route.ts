@@ -117,7 +117,7 @@ const handler = NextAuth({
 
         if (!userExists) {
           try {
-            let res = await fetch("http://localhost:3000/api/user", {
+            let res = await fetch("https://alumnirscoe.in/api/user", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
