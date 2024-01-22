@@ -27,7 +27,6 @@ const Navbar = () => {
   let pathname = usePathname();
 
   const user = session?.user;
-  // console.log(user?.following);
 
   let nav = [
     {
