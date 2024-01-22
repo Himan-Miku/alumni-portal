@@ -1,13 +1,11 @@
 "use client";
 import { Button } from "components/ui/button";
 import React from "react";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { RiUserFollowFill } from "react-icons/ri";
-import { SlUserFollow } from "react-icons/sl";
 import { useMutation } from "react-query";
 import Axios from "app/Axios";
 import { RiUserUnfollowFill } from "react-icons/ri";
-import { toast } from "components/ui/use-toast";
 
 interface prop {
   uid: string;
