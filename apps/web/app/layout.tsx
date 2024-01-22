@@ -3,6 +3,7 @@ import Provider from "./compo/Provider";
 import { Poppins } from "next/font/google";
 import Navbar from "./compo/Navbar";
 import { Toaster } from "components/ui/toaster";
+import { Analytics } from "@vercel/analytics/react";
 
 import { getServerSession } from "next-auth";
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
           <Provider session={session}>
             <Navbar></Navbar>
             {children}
+            <Analytics />
             <Footer></Footer>
           </Provider>
         </TanstackProvider>
