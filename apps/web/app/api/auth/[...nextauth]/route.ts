@@ -34,6 +34,7 @@ const handler = NextAuth({
         await connectDB();
         // check to see if email and password is there
         try {
+          console.log(credentials);
           // check to see if user exists
           const user = await User.findOne({ email: credentials.email });
           if (!user) {
@@ -49,9 +50,11 @@ const handler = NextAuth({
             return null;
           }
 
-          // return user
+          // return user;
+          console.log("authorize", user);
           return user;
         } catch (error: any) {
+          console.log(error);
           return error;
         }
       },

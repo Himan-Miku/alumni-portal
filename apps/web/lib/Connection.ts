@@ -7,7 +7,7 @@ const connectDB = async (): Promise<void> => {
   const mongoUrl =
     process.env.NODE_ENV === "production"
       ? process.env.MONGODB_PRODUCTION_URI!
-      : `mongodb://0.0.0.0:27017/alumni_portal`;
+      : process.env.MONGODB_PRODUCTION_URL!;
 
   try {
     const mongoConnection = await mongoose.connect(mongoUrl);
