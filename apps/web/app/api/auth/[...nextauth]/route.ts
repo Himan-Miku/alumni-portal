@@ -19,6 +19,18 @@ const handler = NextAuth({
     LinkedinProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID ?? "",
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET ?? "",
+      authorization: { params: { scope: 'profile email openid' } },
+      issuer: 'https://www.linkedin.com',
+      jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
+      async profile(profile) {
+          return {
+              id: profile.sub,
+              name: profile.name,
+             
+              email: profile.email,
+              image:profile.picture,
+          }
+      },
     }),
     CredentialsProvider({
       id: "credentials",
@@ -109,7 +121,7 @@ const handler = NextAuth({
       // console.log("account", account);
       // console.log("profile", profile);
 
-      if (account?.provider == "google") {
+      if (account?.provider == "google" || account?.provider=="linkedin") {
         await connectDB();
 
         const userExists = await User.findOne({ email: user?.email });
