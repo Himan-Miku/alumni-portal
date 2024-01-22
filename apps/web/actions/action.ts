@@ -6,7 +6,7 @@ import { Post } from "app/types";
 export const fetchFeed = async (page: number) => {
   try {
     const res = await fetch(
-      `http://localhost:8000/api/showpost?page=${page}&limit=3`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}api/showpost?page=${page}&limit=3`,
       {
         credentials: "include",
       }
