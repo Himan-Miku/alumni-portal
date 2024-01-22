@@ -128,7 +128,7 @@ const handler = NextAuth({
               }),
             });
 
-            // console.log(user);
+            console.log(user);
             let response = await res.json();
             user.id = response.user._id;
 
@@ -141,7 +141,7 @@ const handler = NextAuth({
             return false;
           }
         }
-
+        console.log("Login User : ", userExists);
         user.id = userExists?._id.toString()!;
       }
       return true;
