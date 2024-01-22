@@ -6,13 +6,10 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
 import LinkedinProvider from "next-auth/providers/linkedin";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import User from "schemas/User";
 import connectDB from "lib/Connection";
-import clientPromise from "./lib/mongodb";
-import { AdapterUser } from "next-auth/adapters";
 
-export const authOptions: NextAuthOptions = {
+const handler = NextAuth({
   // adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
@@ -37,6 +34,7 @@ export const authOptions: NextAuthOptions = {
         await connectDB();
         // check to see if email and password is there
         try {
+          console.log(credentials);
           // check to see if user exists
           const user = await User.findOne({ email: credentials.email });
           if (!user) {
@@ -52,9 +50,11 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
 
-          // return user
+          // return user;
+          console.log("authorize", user);
           return user;
         } catch (error: any) {
+          console.log(error);
           return error;
         }
       },
@@ -147,8 +147,6 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
   },
-};
-
-const handler = NextAuth(authOptions);
+});
 
 export { handler as GET, handler as POST };

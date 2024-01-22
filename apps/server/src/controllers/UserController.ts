@@ -102,11 +102,11 @@ export const append = catchAsyncError(
 
 export const PopulatedFollowings = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
-    const user = await User.find(
+    const user = await User.findOne(
       { _id: req?.user?._id },
       { followers: 1, following: 1 }
     ).populate(["followers", "following"]);
-      
+
     res?.status(200).json({
       success: true,
       user,

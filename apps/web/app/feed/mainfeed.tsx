@@ -8,7 +8,7 @@ import { Post } from "app/types";
 const MainFeed = async () => {
   let data = await fetchFeed(0);
 
-  console.log(data?.map((ele) => ele));
+  // console.log(data?.map((ele) => ele));
   // console.log(postProp);
   return (
     <>

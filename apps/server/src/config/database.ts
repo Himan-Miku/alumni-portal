@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import mongoose, { MongooseError } from "mongoose";
 
 const connectDB = async (): Promise<void> => {

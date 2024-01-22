@@ -5,7 +5,7 @@ import postRoutes from "./routes/postRoute";
 
 import errorfn from "./middlewares/error";
 
-import metadataRoutes from "./routes/metadataRoute";
+// import metadataRoutes from "./routes/metadataRoute";
 import cors from "cors";
 
 const app = express();
@@ -13,15 +13,16 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   })
 );
 
 //defining all routes here
-app.use("/api", userRoutes, postRoutes, metadataRoutes);
+app.use("/api", userRoutes, postRoutes);
 
 //error middleware
 app.use(errorfn);

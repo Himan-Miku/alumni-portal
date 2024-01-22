@@ -20,7 +20,7 @@ const s3Client = new S3Client({
 
 export const setCorsOptions = async () => {
   const input = {
-    Bucket: "alumni-portal-jspm",
+    Bucket: "alumni-portal-rscoe",
     CORSConfiguration: {
       CORSRules: [
         {
@@ -50,7 +50,7 @@ function generateUUID(namespace: string, name: string) {
 
 export async function getObjectUrl(key: string) {
   const command = new GetObjectCommand({
-    Bucket: "alumni-portal-jspm",
+    Bucket: "alumni-portal-rscoe",
     Key: key,
   });
 
@@ -70,7 +70,7 @@ export async function putObject(
   const key = `${user}/${uuidString.substring(0, 6)}-${fileName}`;
 
   const command = new PutObjectCommand({
-    Bucket: "alumni-portal-jspm",
+    Bucket: "alumni-portal-rscoe",
     Key: key,
     ContentType: contentType,
   });
