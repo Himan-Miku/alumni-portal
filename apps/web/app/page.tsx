@@ -1,6 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
-import Slider from "./components/Slider";
+import Slider from "./compo/Slider";
 const Home = () => {
   let images = [
     "1.jpg",

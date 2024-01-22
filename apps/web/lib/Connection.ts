@@ -4,10 +4,7 @@
 import mongoose, { MongooseError } from "mongoose";
 
 const connectDB = async (): Promise<void> => {
-  const mongoUrl =
-    process.env.NODE_ENV === "production"
-      ? process.env.MONGODB_PRODUCTION_URI!
-      : `mongodb://root:password@localhost:27017/${process.env.DB_NAME}`;
+  const mongoUrl = process.env.MONGODB_PRODUCTION_URI!;
 
   try {
     const mongoConnection = await mongoose.connect(mongoUrl);

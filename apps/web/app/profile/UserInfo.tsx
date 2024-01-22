@@ -22,6 +22,8 @@ const UserInfo = () => {
   // });
   const { data } = useSession();
   let user = data?.user;
+  console.log(user);
+
   return (
     <>
       {/* {user?.isLoading ? (

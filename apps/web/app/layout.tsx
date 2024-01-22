@@ -1,13 +1,13 @@
 import "./globals.css";
-import Provider from "./components/Provider";
+import Provider from "./compo/Provider";
 import { Poppins } from "next/font/google";
-import Navbar from "./components/Navbar";
+import Navbar from "./compo/Navbar";
 import { Toaster } from "components/ui/toaster";
 
 import { getServerSession } from "next-auth";
 
-import Footer from "./components/Footer";
-import TanstackProvider from "./components/TanstackProvider";
+import Footer from "./compo/Footer";
+import TanstackProvider from "./compo/TanstackProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],

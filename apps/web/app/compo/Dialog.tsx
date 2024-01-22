@@ -4,6 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 import { Button } from "components/ui/button";
 import { GoPencil } from "react-icons/go";
 import { ImCross } from "react-icons/im";
+import { useRouter } from "next/navigation";
 
 import {
   Dialog,
@@ -53,6 +54,7 @@ export function DialogInput(Prop?: prop) {
   const [user, setUser] = useState<User>({ ...Prop?.userData! });
   const [image, setImage] = useState<string>("");
   const { toast } = useToast();
+  const router = useRouter();
   const onImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
@@ -111,12 +113,13 @@ export function DialogInput(Prop?: prop) {
     return (
       <form
         onSubmit={(ev) => {
-          // ev.preventDefault();
+          ev.preventDefault();
           // console.log(work);
 
           expmutate.mutate({ data: work });
 
           // console.log(expmutate.data);
+          router.refresh();
         }}
         className="flex flex-col gap-2"
       >
@@ -173,7 +176,8 @@ export function DialogInput(Prop?: prop) {
                         action: "delete",
                         data: { _id: Prop?.exp?._id },
                       });
-                      window.location.reload();
+                      // window.location.reload();
+                      router.refresh();
                     }}
                   >
                     Delete
@@ -225,8 +229,9 @@ export function DialogInput(Prop?: prop) {
         onSubmit={(ev) => {
           edumutate.mutate({ data: ed });
           // console.log(ed);
-          // ev.preventDefault();
+          ev.preventDefault();
           // console.log(expmutate.data);
+          router.refresh();
         }}
         className="flex flex-col gap-2"
       >
@@ -283,7 +288,8 @@ export function DialogInput(Prop?: prop) {
                         action: "delete",
                         data: { _id: Prop?.qual?._id },
                       });
-                      window.location.reload();
+                      // window.location.reload();
+                      router.refresh();
                     }}
                   >
                     Delete
@@ -334,7 +340,7 @@ export function DialogInput(Prop?: prop) {
             <form
               className="flex flex-col gap-3"
               onSubmit={(e) => {
-                // e.preventDefault();
+                e.preventDefault();
                 console.log(user);
                 mutation.mutate({
                   name: user?.name,
@@ -343,6 +349,7 @@ export function DialogInput(Prop?: prop) {
                   github: user?.github,
                   about: user?.about,
                 });
+                router.refresh();
               }}
             >
               <div className="flex flex-col gap-2 items-center">

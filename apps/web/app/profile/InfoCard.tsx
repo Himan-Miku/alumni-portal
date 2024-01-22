@@ -4,7 +4,7 @@ import React from "react";
 
 import { CgMail } from "react-icons/cg";
 
-import { DialogInput } from "app/components/Dialog";
+import { DialogInput } from "app/compo/Dialog";
 import { FaGithub } from "react-icons/fa";
 import { BiSolidBadgeDollar } from "react-icons/bi";
 import {
@@ -15,8 +15,8 @@ import {
 } from "components/ui/tooltip";
 
 import { User } from "app/types";
-import Logout from "app/components/Logout";
-import UtilButton from "app/components/FollowButton";
+import Logout from "app/compo/Logout";
+import UtilButton from "app/compo/FollowButton";
 // import { AvatarFallback } from "@radix-ui/react-avatar";
 
 interface prop {
