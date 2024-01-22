@@ -9,7 +9,6 @@ import LinkedinProvider from "next-auth/providers/linkedin";
 import User from "schemas/User";
 import connectDB from "lib/Connection";
 
-
 const handler = NextAuth({
   // adapter: MongoDBAdapter(clientPromise),
   providers: [

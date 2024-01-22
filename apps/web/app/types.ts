@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 
+export interface EUser extends User {
+  following?: User[];
+  followers?: User[];
+}
+
 export interface User {
   name: string;
   _id?: string;
   posts?: [];
-  followers?: string[];
-  following?: string[];
+  followers?: any[];
+  following?: any[];
   about?: string;
   email: string;
   password?: string;
