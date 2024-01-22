@@ -15,7 +15,7 @@ interface Props {
 const LikeComments = (prop: Props) => {
   let [open, isOpen] = useState<boolean>(false);
   let [liked, isLiked] = useState<boolean>(false);
-  // console.log(liked);
+  console.log(liked);
 
   return (
     <>
