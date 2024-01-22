@@ -21,10 +21,11 @@ import { Input } from "components/ui/input";
 import { FormError } from "../formerror";
 import { FormSuccess } from "../formSuccess";
 import { Register } from "actions/register";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const RegisterationForm = () => {
-  const router=useRouter();
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -32,25 +33,28 @@ const RegisterationForm = () => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      name:"",
+      name: "",
       email: "",
       password: "",
     },
   });
+
+  let asyncSignIn = async (values: { email: string; password: string }) => {
+    const { email, password } = values;
+    await signIn("credentials", { email, password, redirect: false });
+    router.push("/profile");
+  };
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof RegisterSchema>) {
-    setError("")
-    setSuccess("")
+    setError("");
+    setSuccess("");
     startTransition(() => {
-      Register(values).then((data) => {  
+      Register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
-        if(data.success){
-          router.push("/auth/login")
-        }
+        asyncSignIn(values);
       });
     });
-    
   }
   return (
     <CardWapper
@@ -61,20 +65,20 @@ const RegisterationForm = () => {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-        <FormField
+          <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-bold">Name</FormLabel>
                 <FormControl>
-                  <Input  {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        
+
           <FormField
             control={form.control}
             name="email"
@@ -91,7 +95,7 @@ const RegisterationForm = () => {
 
           <FormField
             control={form.control}
-            name="password" 
+            name="password"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-bold">Password</FormLabel>
@@ -108,7 +112,7 @@ const RegisterationForm = () => {
               </FormItem>
             )}
           />
-          <FormError message={error}/>
+          <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" className="w-full" disabled={isPending}>
             Create An Account
