@@ -78,13 +78,16 @@ const AddPost = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/metadata", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(metadata),
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL! + "api/metadata",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(metadata),
+        }
+      );
 
       if (response.ok) {
         const uriData = (await response.json()) as receivedMetadata;
@@ -108,7 +111,7 @@ const AddPost = () => {
 
             try {
               const mediaRes = await fetch(
-                `http://localhost:8000/api/metadata?folderName=${folderName}&objectKey=${actualKey}`,
+                `process.env.BACKEND_URLapi/metadata?folderName=${folderName}&objectKey=${actualKey}`,
                 {
                   method: "GET",
                 }
@@ -124,13 +127,16 @@ const AddPost = () => {
               };
 
               try {
-                const postRes = await fetch("http://localhost:8000/api/post", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(dataToSend),
-                });
+                const postRes = await fetch(
+                  process.env.NEXT_PUBLIC_BACKEND_URL! + "api/post",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(dataToSend),
+                  }
+                );
 
                 const data = await postRes.json();
 
@@ -216,7 +222,11 @@ const AddPost = () => {
               ref={fileInput}
               onChange={handleFileChange}
             />
-            <Button variant={"ghost"}  onClick={handleButtonClick} className="text-2xl text-bluebg">
+            <Button
+              variant={"ghost"}
+              onClick={handleButtonClick}
+              className="text-2xl text-bluebg"
+            >
               <MdPermMedia></MdPermMedia>
             </Button>
             <Button onClick={handleSubmit} className="bg-bluebg" type="submit">

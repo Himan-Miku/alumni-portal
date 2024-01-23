@@ -1,11 +1,7 @@
-import RegisterationForm from "app/components/auth/RegisterationFrom";
+import RegisterationForm from "app/compo/auth/RegisterationFrom";
 
 const Register = () => {
-
-  return (
-   <RegisterationForm />
-  );
- 
-}
+  return <RegisterationForm />;
+};
 
 export default Register;

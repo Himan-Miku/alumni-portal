@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from "components/ui/carousel";
 import { RxCross1 } from "react-icons/rx";
-import Showmore from "app/components/Showmore";
+import Showmore from "app/compo/Showmore";
 import Image from "next/image";
 
 import LikeComments from "./LikeComments";

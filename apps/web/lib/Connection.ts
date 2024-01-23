@@ -8,7 +8,6 @@ const connectDB = async (): Promise<void> => {
     process.env.NODE_ENV === "production"
       ? process.env.MONGODB_PRODUCTION_URI!
       : process.env.MONGODB_PRODUCTION_URL!;
-
   try {
     const mongoConnection = await mongoose.connect(mongoUrl);
     console.log(`Mongo running at : ${mongoConnection.connection.name}`);

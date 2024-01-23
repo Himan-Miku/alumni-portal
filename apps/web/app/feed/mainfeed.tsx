@@ -1,6 +1,6 @@
 import React from "react";
 import SearchUtility from "./SearchUtility";
-import Feed from "../components/Feed";
+import Feed from "../compo/Feed";
 import LoadMore from "./LoadMore";
 import { fetchFeed } from "../../actions/action";
 import { Post } from "app/types";

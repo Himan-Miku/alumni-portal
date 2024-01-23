@@ -1,6 +1,6 @@
 "use client";
 import Axios from "app/Axios";
-import Feed from "app/components/Feed";
+import Feed from "app/compo/Feed";
 import { Post } from "app/types";
 import { Button } from "components/ui/button";
 import { useSession } from "next-auth/react";
