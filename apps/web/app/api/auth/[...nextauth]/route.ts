@@ -111,13 +111,11 @@ const handler = NextAuth({
 
       if (account?.provider == "google") {
         await connectDB();
-
         const userExists = await User.findOne({ email: user?.email });
-        console.log("here");
 
         if (!userExists) {
           try {
-            let res = await fetch("http://localhost:3000/api/user", {
+            let res = await fetch(process.env.FRONTEND_URI + "/api/user", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
