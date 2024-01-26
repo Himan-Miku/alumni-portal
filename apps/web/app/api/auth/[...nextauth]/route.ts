@@ -123,13 +123,11 @@ const handler = NextAuth({
 
       if (account?.provider == "google" || account?.provider=="linkedin") {
         await connectDB();
-
         const userExists = await User.findOne({ email: user?.email });
-        console.log("here");
 
         if (!userExists) {
           try {
-            let res = await fetch("https://alumnirscoe.in/api/user", {
+            let res = await fetch(process.env.FRONTEND_URI + "/api/user", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
