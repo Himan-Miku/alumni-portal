@@ -25,7 +25,7 @@ export default async function RootLayout({
   const session = getServerSession();
   return (
     <html lang="en">
-      <body className={poppins.className + " bg-commonbg flex flex-col gap-2"}>
+      <body className={poppins.className + " bg-commonbg flex flex-col gap-2 "}>
         <TanstackProvider>
           <Provider session={session}>
             <Navbar></Navbar>

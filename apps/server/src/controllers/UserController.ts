@@ -9,6 +9,9 @@ import sendToken from "../utils/jwtToken";
 import { IReq, IRes } from "../utils/Types";
 import { ApiFeatures } from "../utils/ApiFeatures";
 import mongoose from "mongoose";
+import crypto from "crypto";
+import bcrypt from "bcrypt";
+import { SendMail } from "../utils/Mail";
 
 export const AddUser = catchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -48,21 +51,21 @@ export const UpdateFollow = catchAsyncError(
       }).length != 0;
     // console.log(isFollowing);
 
-    if (isFollowing) {
-      user!.following =
-        user?.following.filter((ele) => {
-          return String(ele._id) != String(req.params.id!);
-        }) || [];
-      followUser!.followers =
-        followUser?.followers.filter((ele) => {
-          return String(ele._id) != String(req.user._id!);
-        }) || [];
+    // if (isFollowing) {
+    //   user!.following =
+    //     user?.following.filter((ele) => {
+    //       return String(ele._id) != String(req.params.id!);
+    //     }) || [];
+    //   followUser!.followers =
+    //     followUser?.followers.filter((ele) => {
+    //       return String(ele._id) != String(req.user._id!);
+    //     }) || [];
 
-      // res.end();
-    } else {
-      user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
-      followUser?.followers.push(new mongoose.Types.ObjectId(req.user._id));
-    }
+    //   // res.end();
+    // } else {
+    //   user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
+    //   followUser?.followers.push(new mongoose.Types.ObjectId(req.user._id));
+    // }
     await user?.save();
     await followUser?.save();
     res.status(200).json({
@@ -89,8 +92,8 @@ export const append = catchAsyncError(
     if (!user) return next(new ErrorHandler("No such user found", 404));
     console.log(user);
     // console.log(req.body);
-    req.query.key == "exp" && user?.work.push(req.body);
-    req.query.key == "edu" && user?.education.push(req.body);
+    req.query.key == "exp" && user?.work?.push(req.body);
+    req.query.key == "edu" && user?.education?.push(req.body);
     let resp = await user.save();
 
     res.status(200).json({
@@ -180,6 +183,63 @@ export const SearchUser = catchAsyncError(
     res.status(200).json({
       success: true,
       user,
+    });
+  }
+);
+export const ForgetPassword = catchAsyncError(
+  async (req: IReq, res: IRes, next: NextFunction) => {
+    let resetToken = crypto.randomBytes(32).toString("hex");
+    const hash = await bcrypt.hash(resetToken, Number(10));
+
+    const expirationTime = new Date();
+    expirationTime.setHours(expirationTime.getHours() + 2);
+
+    let user = await User?.findOneAndUpdate(
+      { email: req?.query?.email },
+      { resetPassToken: hash, resetPassExpire: expirationTime },
+      { new: true }
+    );
+    if (!user) return next(new ErrorHandler("No such user found", 404));
+    SendMail({
+      recievermail: user?.email,
+      hash: resetToken,
+      id: String(user?._id),
+    });
+    res.status(200).json({
+      success: true,
+      message: "Recovery Mail Sent Successfully to " + user?.email,
+    });
+  }
+);
+
+export const recoverPassword = catchAsyncError(
+  async (req: IReq, res: IRes, next: NextFunction) => {
+    let { password, confirmPassword, token, _id } = req.body;
+    //check validations
+    // let user = await User?.findById(_id);
+
+    // if (!user) {
+    //   return next(new ErrorHandler("Invalid User", 401));
+    // }
+    // if (!user?.compareTokens(token, next)) {
+    //   return next(new ErrorHandler("Invalid Token Found", 404));
+    // }
+    // if (password !== confirmPassword) {
+    //   return next(
+    //     new ErrorHandler("Password And Confirmed Password Didnt Matched", 400)
+    //   );
+    // }
+    // let hash = await bcrypt.hash(password, 8);
+    // let save = await User?.findByIdAndUpdate(_id, {
+    //   password: hash,
+    //   resetPassToken: null,
+    //   resetPassExpire: null,
+    // });
+    // // console.log(save);
+    res?.status(200).json({
+      success: true,
+      message: "Password Changed Successfully",
+      // save,
     });
   }
 );

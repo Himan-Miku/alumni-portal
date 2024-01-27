@@ -2,8 +2,49 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { NextFunction } from "express";
+import ErrorHandler from "../utils/ErrorHandler";
 
-const userSchema = new mongoose.Schema(
+interface Education {
+  studyfrom: string;
+  studied: string;
+  duration: string;
+  percentage: string;
+}
+
+interface Work {
+  company: string;
+  position: string;
+  duration: string;
+}
+
+interface Post {
+  id: mongoose.Schema.Types.ObjectId;
+}
+
+interface IUser {
+  compareTokens(token: string, next: NextFunction): boolean;
+  getJwtToken(): boolean;
+  name: string;
+  posts: Post[];
+  followers: mongoose.Schema.Types.ObjectId[];
+  following: mongoose.Schema.Types.ObjectId[];
+  about?: string;
+  email: string;
+  password?: string;
+  education?: Education[];
+  work?: Work[];
+  dob?: Date;
+  gender?: "Male" | "Female" | "Other";
+  linkedin?: string;
+  github?: string;
+  image?: string;
+  userType?: "Student" | "Alumni";
+  resetPassToken?: string;
+  resetPassExpire?: Date;
+}
+
+const userSchema = new mongoose.Schema<IUser>(
   {
     name: {
       type: String,
@@ -76,6 +117,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["Student", "Alumni"],
     },
+    resetPassToken: String,
+    resetPassExpire: Date,
   },
   {
     timestamps: true,
@@ -83,6 +126,20 @@ const userSchema = new mongoose.Schema(
 );
 let expire = process.env.JWT_EXPIRE || "4d";
 
+userSchema.methods.compareTokens = function (
+  token: string,
+  next: NextFunction
+) {
+  let date = new Date();
+  let currentTime = date?.getMilliseconds();
+  if (currentTime > this.resetPassExpire) {
+    next(
+      new ErrorHandler("Recovery Session Timed Out...Please retry again", 400)
+    );
+    return false;
+  }
+  return bcrypt.compare(this.resetPassToken, token);
+};
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
