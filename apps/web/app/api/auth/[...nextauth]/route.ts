@@ -67,7 +67,7 @@ const handler = NextAuth({
           return user;
         } catch (error: any) {
           console.log(error);
-          return error;
+          return null;
         }
       },
     }),
@@ -76,7 +76,8 @@ const handler = NextAuth({
 
   session: { strategy: "jwt" },
   pages: {
-    signIn: "/auth/signin",
+    signIn: "/auth/login",
+    newUser: '/auth/register'
     // If set, new users will be directed here on first sign in
   },
 

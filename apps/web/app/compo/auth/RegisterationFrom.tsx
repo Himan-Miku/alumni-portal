@@ -1,6 +1,6 @@
 "use client";
 import { RegisterSchema } from "schemas";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import React from "react";
 import CardWapper from "./CardWapper";
 import * as z from "zod";
@@ -29,6 +29,7 @@ const RegisterationForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const [values, setValues] = useState<{ email: string; password: string } | null>(null);
   // 1. Define your form.
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -38,21 +39,29 @@ const RegisterationForm = () => {
       password: "",
     },
   });
+  useEffect(() => {
+    const asyncSignIn = async (values: { email: string; password: string }) => {
+      const { email, password } = values;
+      await signIn("credentials", { email, password, redirect: false });
+      router.push("/profile");
+    };
+    if(values)
+     asyncSignIn(values);
+  }, [success])
+  
+  
 
-  let asyncSignIn = async (values: { email: string; password: string }) => {
-    const { email, password } = values;
-    await signIn("credentials", { email, password, redirect: false });
-    router.push("/profile");
-  };
+ 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof RegisterSchema>) {
     setError("");
     setSuccess("");
+    setValues(values);
     startTransition(() => {
       Register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
-        asyncSignIn(values);
+       
       });
     });
   }
