@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   AddUser,
+  ForgetPassword,
   PopulatedFollowings,
   SearchUser,
   UpdateFollow,
@@ -9,6 +10,7 @@ import {
   deleteUser,
   getUser,
   login,
+  recoverPassword,
   selfinfo,
   updateIndividuals,
   updateUser,
@@ -34,4 +36,6 @@ router
   .route("/objupdate/:id")
   .put(isAuthenticated, updateIndividuals)
   .delete(isAuthenticated, deleteObj);
+
+router.route("/forgetpassword").get(ForgetPassword).post(recoverPassword);
 export default router;

@@ -9,7 +9,7 @@ import LoadMore from "./LoadMore";
 const FeedPage = async () => {
   return (
     <>
-      <div className="p-2">
+      <div className="p-2 min-h-[100vh]">
         <div className="grid grid-rows-3  lg:grid-cols-10 gap-3">
           {/* <SelfInfo></SelfInfo> */}
           <MainFeed></MainFeed>
