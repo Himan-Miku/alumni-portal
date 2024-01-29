@@ -22,7 +22,7 @@ const UserInfo = () => {
   // });
   const { data } = useSession();
   let user = data?.user;
-  console.log(user);
+  console.log("hiii in userinfo", user);
 
   return (
     <>

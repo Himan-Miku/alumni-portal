@@ -90,7 +90,7 @@ export const append = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
     const user = await User.findOne(req?.user?._id);
     if (!user) return next(new ErrorHandler("No such user found", 404));
-    console.log(user);
+    console.log(req?.body);
     // console.log(req.body);
     req.query.key == "exp" && user?.work?.push(req.body);
     req.query.key == "edu" && user?.education?.push(req.body);
@@ -98,7 +98,7 @@ export const append = catchAsyncError(
 
     res.status(200).json({
       success: true,
-      resp,
+      // resp,
     });
   }
 );

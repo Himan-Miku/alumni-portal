@@ -34,7 +34,10 @@ interface prop {
   qual?: {
     studyfrom: string;
     studied: string;
-    duration: string;
+    duration: {
+      start: Date;
+      end?: Date;
+    };
     percentage: string;
     _id?: string;
   };
@@ -46,9 +49,6 @@ interface prop {
   };
   // api: string;
 }
-
-let exp = ["company", "position", "duration"];
-let qual = ["Stream", "College", "Marks", "Duration"];
 
 export function DialogInput(Prop?: prop) {
   const [user, setUser] = useState<User>({ ...Prop?.userData! });
@@ -197,13 +197,25 @@ export function DialogInput(Prop?: prop) {
   };
   let Education = () => {
     let [ed, seted] = useState<{
-      studyfrom: string;
-      studied: string;
-      duration: string;
-      percentage: string;
+      studyfrom?: string;
+      studied?: string;
+      duration?: { start: Date; end?: Date };
+      percentage?: string;
     }>(
-      Prop?.qual || { studyfrom: "", studied: "", duration: "", percentage: "" }
+      {
+        ...Prop?.qual,
+        duration: {
+          start: new Date(Prop?.qual?.duration?.start!),
+          end: new Date(Prop?.qual?.duration?.end!),
+        },
+      } || {
+        studyfrom: "",
+        studied: "",
+        duration: { start: new Date() },
+        percentage: "",
+      }
     );
+    // console.log("Here", ed);
 
     let edumutate = useMutation({
       mutationFn: async (obj: any) => {
@@ -228,29 +240,91 @@ export function DialogInput(Prop?: prop) {
       <form
         onSubmit={(ev) => {
           edumutate.mutate({ data: ed });
-          // console.log(ed);
           ev.preventDefault();
-          // console.log(expmutate.data);
           router.refresh();
         }}
         className="flex flex-col gap-2"
       >
         {Object.entries(ed)?.map((e, ind) => {
-          return (
-            e?.[0] != "_id" && (
-              <div key={ind} className="grid grid-cols-3 gap-2 items-center">
-                <Label className="font-semibold text-medgray">
-                  {e[0].toLocaleUpperCase()}
-                </Label>
-                <Input
-                  type="text"
-                  value={e[1]}
-                  onChange={(ev) => {
-                    seted((old) => ({ ...old, [e[0]]: ev.target.value }));
-                  }}
-                  className="col-span-2 border-2"
-                ></Input>
-              </div>
+          return e[0] != "_id" && e[0] != "duration" ? (
+            <div key={ind} className="grid grid-cols-3 gap-2 items-center">
+              <Label className="font-semibold text-medgray">
+                {e[0].toLocaleUpperCase()}
+              </Label>
+              <Input
+                type={"text"}
+                value={typeof e[1] == typeof "" ? String(e[1]) : ""}
+                onChange={(ev) => {
+                  seted((old) => ({ ...old, [e[0]]: ev.target.value }));
+                }}
+                className="col-span-2 border-2"
+              ></Input>
+            </div>
+          ) : (
+            e[0] != "_id" && (
+              <>
+                <div
+                  key={Math.random() * 10}
+                  className="grid grid-cols-3 gap-2 items-center"
+                >
+                  <Label className="font-semibold text-medgray uppercase">
+                    Start Date
+                  </Label>
+                  <Input
+                    type="month"
+                    value={
+                      ed?.duration?.start
+                        ? `${ed.duration.start.getFullYear()}-${(
+                            ed.duration.start.getMonth() + 1
+                          )
+                            .toString()
+                            .padStart(2, "0")}`
+                        : ""
+                    }
+                    onChange={(event) => {
+                      seted((old) => ({
+                        ...old,
+                        duration: {
+                          start: new Date(event?.target?.value),
+                          end: old?.duration?.end,
+                        },
+                      }));
+                      // console.log(typeof event.target.value);
+                    }}
+                  ></Input>
+                </div>
+                <div
+                  key={Math.random() * 7}
+                  className="grid grid-cols-3 gap-2 items-center"
+                >
+                  <Label className="font-semibold text-medgray uppercase">
+                    End Date
+                  </Label>
+
+                  <Input
+                    type="month"
+                    value={
+                      ed?.duration?.end
+                        ? `${ed.duration.end.getFullYear()}-${(
+                            ed.duration.end.getMonth() + 1
+                          )
+                            .toString()
+                            .padStart(2, "0")}`
+                        : ""
+                    }
+                    onChange={(event) => {
+                      seted((old) => ({
+                        ...old,
+                        duration: {
+                          start: ed?.duration?.start!,
+                          end: new Date(event?.target?.value),
+                        },
+                      }));
+                      // console.log(ed.duration);
+                    }}
+                  ></Input>
+                </div>
+              </>
             )
           );
         })}

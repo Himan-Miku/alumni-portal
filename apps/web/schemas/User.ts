@@ -41,7 +41,10 @@ const userSchema = new mongoose.Schema(
       {
         studyfrom: String,
         studied: String,
-        duration: String,
+        duration: {
+          start: Date,
+          end: Date,
+        },
         percentage: String,
       },
     ],
