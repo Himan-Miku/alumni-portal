@@ -82,7 +82,7 @@ const handler = NextAuth({
   },
   cookies: {
     sessionToken: {
-      name: "next-auth.session-token",
+      name: "__Secure-next-auth.session-token",
       options: {
         httpOnly: true,
         sameSite: "none",
