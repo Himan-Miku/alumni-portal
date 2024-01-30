@@ -8,7 +8,6 @@ import comparePassword from "../utils/PassCheck";
 import sendToken from "../utils/jwtToken";
 import { IReq, IRes } from "../utils/Types";
 import { ApiFeatures } from "../utils/ApiFeatures";
-import mongoose from "mongoose";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
 import { SendMail } from "../utils/Mail";

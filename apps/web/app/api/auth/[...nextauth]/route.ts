@@ -79,7 +79,16 @@ const handler = NextAuth({
     signIn: "/auth/signin",
     // If set, new users will be directed here on first sign in
   },
-
+  cookies: {
+    sessionToken: {
+      name: "__Secure-next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      },
+    },
+  },
   callbacks: {
     async jwt({ token, user, account }) {
       // console.log(token,user)
