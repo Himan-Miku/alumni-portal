@@ -19,17 +19,17 @@ const handler = NextAuth({
     LinkedinProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID ?? "",
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET ?? "",
-      authorization: { params: { scope: 'profile email openid' } },
-      issuer: 'https://www.linkedin.com',
+      authorization: { params: { scope: "profile email openid" } },
+      issuer: "https://www.linkedin.com",
       jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
       async profile(profile) {
-          return {
-              id: profile.sub,
-              name: profile.name,
-             
-              email: profile.email,
-              image:profile.picture,
-          }
+        return {
+          id: profile.sub,
+          name: profile.name,
+
+          email: profile.email,
+          image: profile.picture,
+        };
       },
     }),
     CredentialsProvider({
@@ -80,7 +80,16 @@ const handler = NextAuth({
     newUser: '/auth/register'
     // If set, new users will be directed here on first sign in
   },
-
+  cookies: {
+    sessionToken: {
+      name: "__Secure-next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      },
+    },
+  },
   callbacks: {
     async jwt({ token, user, account }) {
       // console.log(token,user)
@@ -101,7 +110,8 @@ const handler = NextAuth({
         const userExists: any = await User.findOne({
           _id: token?.uid,
         });
-        let userData = { ...userExists };
+        // console.log("here boii", userExists);
+        // let userData = { ...userExists };
         if (userExists) {
           // console.log("userData", userData);
           session!.user = {
@@ -122,7 +132,7 @@ const handler = NextAuth({
       // console.log("account", account);
       // console.log("profile", profile);
 
-      if (account?.provider == "google" || account?.provider=="linkedin") {
+      if (account?.provider == "google" || account?.provider == "linkedin") {
         await connectDB();
         const userExists = await User.findOne({ email: user?.email });
 

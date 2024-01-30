@@ -18,7 +18,10 @@ export interface User {
     {
       studyfrom: string;
       studied: string;
-      duration: string;
+      duration: {
+        start: Date;
+        end?: Date;
+      };
       percentage: string;
       _id?: string;
     },

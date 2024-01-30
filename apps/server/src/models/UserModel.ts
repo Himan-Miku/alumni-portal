@@ -8,7 +8,10 @@ import ErrorHandler from "../utils/ErrorHandler";
 interface Education {
   studyfrom: string;
   studied: string;
-  duration: string;
+  duration: {
+    start: Date;
+    end?: Date;
+  };
   percentage: string;
 }
 
@@ -86,7 +89,10 @@ const userSchema = new mongoose.Schema<IUser>(
       {
         studyfrom: String,
         studied: String,
-        duration: String,
+        duration: {
+          start: Date,
+          end: Date,
+        },
         percentage: String,
       },
     ],
