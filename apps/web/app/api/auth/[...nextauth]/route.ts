@@ -77,15 +77,16 @@ const handler = NextAuth({
   session: { strategy: "jwt" },
   pages: {
     signIn: "/auth/login",
-    newUser: '/auth/register'
+    newUser: "/auth/register",
     // If set, new users will be directed here on first sign in
   },
   cookies: {
     sessionToken: {
-      name: "__Secure-next-auth.session-token",
+      name: "next-auth.session-token",
       options: {
         httpOnly: true,
         sameSite: "none",
+        path: "/",
         secure: true,
       },
     },

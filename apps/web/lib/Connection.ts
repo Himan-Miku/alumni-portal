@@ -5,6 +5,7 @@ import mongoose, { MongooseError } from "mongoose";
 
 const connectDB = async (): Promise<void> => {
   const mongoUrl = process.env.MONGODB_PRODUCTION_URI!;
+  console.log("mongo", mongoUrl);
   try {
     const mongoConnection = await mongoose.connect(mongoUrl);
     console.log(`Mongo running at : ${mongoConnection.connection.name}`);
