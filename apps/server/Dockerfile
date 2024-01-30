@@ -4,7 +4,7 @@ WORKDIR /usr/src/server
 
 COPY package*.json tsconfig.json ./
 
-RUN yarn install
+RUN rm -rf node_modules && yarn install
 
 COPY . .
 

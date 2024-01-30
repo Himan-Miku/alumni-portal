@@ -1,7 +1,7 @@
 docker-build:
 	docker build -t alumni-porta-server:1.0 .
 docker-run:
-	docker run --env-file .env -it -p 8080:8080 --name alumni-porta-server alumni-porta-server:1.0
+	docker run --env-file .env -d -p 8080:8080 --name alumni-porta-server alumni-porta-server:1.0
 mongo-local:
 	docker run -p 27017:27017 -d -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=password --name mongo-docker --net mongo-network mongo
 mongoexpress-local:

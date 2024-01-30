@@ -4,13 +4,11 @@ import User from "../models/UserModel";
 import { Request, Response } from "express";
 import ErrorHandler from "../utils/ErrorHandler";
 import comparePassword from "../utils/PassCheck";
-
 import sendToken from "../utils/jwtToken";
 import { IReq, IRes } from "../utils/Types";
 import { ApiFeatures } from "../utils/ApiFeatures";
-import mongoose from "mongoose";
 import crypto from "crypto";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { SendMail } from "../utils/Mail";
 
 export const AddUser = catchAsyncError(
