@@ -35,7 +35,6 @@ interface prop {
 
 const About = (Prop: prop) => {
   // console.log(Prop);
-  console.log(typeof Prop?.User?.education?.[0].duration.start);
   return (
     <div className="bg-white w-full flex flex-col gap-5 pb-3 shadow-sm rounded-sm">
       {Prop?.User?.about && (
@@ -151,8 +150,7 @@ const About = (Prop: prop) => {
                       <div className="text-sm text-lightgray">
                         {/* {console.log(elem?.duration?.start)} */}
                         {new Date(elem?.duration?.start!).getMonth() + 1}/
-                        {new Date(elem?.duration?.start!).getFullYear()}
-                         -
+                        {new Date(elem?.duration?.start!).getFullYear()}-
                         {new Date(elem?.duration?.end!).getMonth() + 1}/
                         {new Date(elem?.duration?.end!).getFullYear()}
                       </div>
@@ -170,7 +168,6 @@ const About = (Prop: prop) => {
                       <div className="text-sm text-medgray">
                         {/* {elem?.duration?.start?.getMonth()}-
                         {elem?.duration?.end?.getFullYear()} */}
-                        
                       </div>
                     )}
                   </div>
