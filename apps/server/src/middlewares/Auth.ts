@@ -20,6 +20,7 @@ export const isAuthenticated = catchAsyncError(
     let user: any = {};
     const { token } = req.cookies;
     console.log("Cookies Are === ",JSON.stringify(req.cookies));
+    console.log("Headers Are ===",JSON.stringify(req.headers));
 
     // console.log(token);
     if (!token) {
