@@ -19,6 +19,7 @@ export const isAuthenticated = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
     let user: any = {};
     const { token } = req.cookies;
+    console.log("Cookies Are === ",req.cookies);
 
     // console.log(token);
     if (!token) {
