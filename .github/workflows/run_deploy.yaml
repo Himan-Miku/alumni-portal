@@ -45,8 +45,12 @@
 name: Build and Deploy to Cloud Run
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
-    branches: ["main"]
+    branches-ignore:
+      - main
 
 env:
   PROJECT_ID: YOUR_PROJECT_ID # TODO: update Google Cloud project id
@@ -56,6 +60,8 @@ env:
 
 jobs:
   deploy:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged
+
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
       contents: "read"
