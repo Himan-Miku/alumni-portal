@@ -68,21 +68,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # NOTE: Alternative option - authentication via credentials json
       - name: Google Auth
         id: auth
-        uses: "google-github-actions/auth@v0"
+        uses: "google-github-actions/auth@v2"
         with:
-          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+          token_format: access_token
+          service_account: "cloud-run-artifact-registry@alumni-portal-412815.iam.gserviceaccount.com"
 
       # BEGIN - Docker auth and build (NOTE: If you already have a container image, these Docker steps can be omitted)
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: Docker Auth
         id: docker-auth
-        uses: "docker/login-action@v1"
+        uses: "docker/login-action@v3"
         with:
           username: "oauth2accesstoken"
           password: "${{ steps.auth.outputs.access_token }}"
