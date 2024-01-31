@@ -48,9 +48,7 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches-ignore:
-      - main
+    types: [closed]
 
 env:
   PROJECT_ID: alumni-portal-412815
@@ -60,7 +58,7 @@ env:
 
 jobs:
   deploy:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged
+    if: ${{ github.event.pull_request.merged }}
 
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
