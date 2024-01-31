@@ -86,6 +86,7 @@ const handler = NextAuth({
       options: {
         httpOnly: true,
         sameSite: "none",
+        domain:"https://alumni-backend-main.onrender.com",
         path: "/",
         secure: true,
       },
