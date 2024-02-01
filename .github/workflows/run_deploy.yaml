@@ -54,6 +54,7 @@ env:
   GAR_LOCATION: asia-south1
   SERVICE: alumni-portal-backend
   REGION: asia-south1
+  IMAGE_NAME: alumni-portal-back
 
 jobs:
   deploy:
@@ -87,8 +88,8 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" -f apps/server/Dockerfile ./apps/server
-          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
+          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.IMAGE_NAME }}:${{ github.sha }}" -f apps/server/Dockerfile ./apps/server
+          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
 
       # END - Docker auth and build
 
