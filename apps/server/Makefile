@@ -1,5 +1,5 @@
 docker-build:
-	docker build -t alumni-porta-server:1.0 .
+	docker build -t alumni-portal-server:1.0 .
 docker-run:
 	docker run --env-file .env -d -p 8080:8080 --name alumni-porta-server alumni-porta-server:1.0
 mongo-local:
