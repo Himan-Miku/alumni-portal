@@ -39,3 +39,4 @@ yarn-error.log*
 
 # Google Cloud Service Key
 cloud-run-sa.json
+base64-sa
