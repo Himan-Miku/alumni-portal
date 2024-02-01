@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-//defining all routes here
+//defining all routes here :
 app.use("/api", userRoutes, postRoutes);
 
 //error middleware
