@@ -16,8 +16,17 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
+    allowedHeaders: [
+      "Origin",
+      "X-Requested-With",
+      "Content-Type",
+      "Accept",
+      "X-Access-Token",
+    ],
+    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
     origin: process.env.FRONTEND_URL,
     credentials: true,
+    preflightContinue: true,
   })
 );
 
