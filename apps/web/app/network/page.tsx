@@ -3,12 +3,16 @@ import Axios from "app/Axios";
 import { EUser } from "app/types";
 import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "components/ui/tabs";
+import { useSession } from "next-auth/react";
 import React from "react";
 import { useQuery } from "react-query";
 
 const page = () => {
+  const session = useSession();
   let followdata = useQuery("followers", async () => {
-    let res = await Axios.get("/api/followers", { withCredentials: true });
+    let res = await Axios.get(`/api/followers/${session?.data?.user?._id}`, {
+      withCredentials: true,
+    });
     console?.log(res?.data?.user);
     return res?.data?.user as EUser;
   });

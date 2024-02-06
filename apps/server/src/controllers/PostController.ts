@@ -34,8 +34,7 @@ export const createPost = catchAsyncError(
     const body = req.body as receivedBody;
     const { mediaUrl, description } = body;
     try {
-      const user = await User.findOne({ _id: req.user._id });
-
+      const user = await User.findOne({ _id: req.body._id });
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -63,13 +62,13 @@ export const likes = catchAsyncError(
 
     req.query.action == "add" &&
       post?.likes.filter((elem) => {
-        return String(elem) == String(req.user._id);
+        return String(elem) == String(req?.body._id);
       }).length == 0 &&
-      post?.likes.push(req.user._id);
+      post?.likes.push(req?.body._id);
 
     if (req.query.action == "remove") {
       let temp = post?.likes.filter((elem) => {
-        return String(elem) != String(req.user._id);
+        return String(elem) != String(req?.body._id);
       })!;
       post!.likes = temp;
     }
@@ -88,7 +87,7 @@ export const comments = catchAsyncError(
 
     let comment = {
       text: text,
-      owner: req?.user?._id,
+      owner: req?.body?._id,
     };
     post?.comments?.push(comment);
     await post?.save();

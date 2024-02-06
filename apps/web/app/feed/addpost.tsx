@@ -16,6 +16,7 @@ import ReactTextareaAutosize from "react-textarea-autosize";
 import Media from "public/media.svg";
 import Image from "next/image";
 import { Input } from "components/ui/input";
+import { useSession } from "next-auth/react";
 
 type receivedMetadata = {
   putUri: string;
@@ -28,6 +29,7 @@ type receivedGetUri = {
 };
 
 const AddPost = () => {
+  let Session = useSession();
   const fileInput = useRef<HTMLInputElement>(null);
   const [media, setMedia] = useState<string | null>(null);
   const [fileToUpload, setFileToUpload] = useState<File | null>(null);
@@ -124,6 +126,7 @@ const AddPost = () => {
                 user: metadata.user,
                 mediaUrl: data.getUri,
                 description,
+                _id: Session?.data?.user?._id,
               };
 
               try {

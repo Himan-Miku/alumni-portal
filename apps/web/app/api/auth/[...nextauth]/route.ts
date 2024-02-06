@@ -72,6 +72,7 @@ const handler = NextAuth({
       },
     }),
   ],
+
   secret: process.env.NEXTAUTH_SECRET,
 
   session: { strategy: "jwt" },
@@ -86,18 +87,23 @@ const handler = NextAuth({
   //     options: {
   //       httpOnly: true,
   //       sameSite: "none",
-  //       domain: "",
+  //       // domain: ".",
   //       path: "/",
-  //       secure: true,
+  //       // secure: true,
   //     },
   //   },
   // },
   callbacks: {
     async jwt({ token, user, account }) {
       // console.log(token,user)
+      console.log("Account", account);
+      if (account) {
+        token.access_token = account.id_token;
+      }
 
       if (user) {
-        console.log("user found in token", user);
+        // console.log("user found in token", user);
+        // console.log("Cookie", document.cookie);
         token.uid = user?.id;
       }
 
@@ -105,17 +111,16 @@ const handler = NextAuth({
     },
     async session({ session, token, user }) {
       // session.user = token;
-      // console.log(token);
+      // console.log("Token in session", token);
       if (session != undefined && token) {
         session!.user!.id = token?.uid;
         await connectDB();
         const userExists: any = await User.findOne({
           _id: token?.uid,
         });
-        // console.log("here boii", userExists);
-        // let userData = { ...userExists };
+
+        session.access_token = token?.access_token;
         if (userExists) {
-          // console.log("userData", userData);
           session!.user = {
             ...session!.user,
             id: session!.user?.id!,
@@ -151,7 +156,7 @@ const handler = NextAuth({
               }),
             });
 
-            console.log(user);
+            // console.log(user);
             let response = await res.json();
             user.id = response.user._id;
 
@@ -164,7 +169,7 @@ const handler = NextAuth({
             return false;
           }
         }
-        console.log("Login User : ", userExists);
+        // console.log("Login User : ", userExists);
         user.id = userExists?._id.toString()!;
       }
       return true;

@@ -75,6 +75,7 @@ const About = (Prop: prop) => {
                     <div className="text-base md:text-lg ">
                       {elem?.position}
                     </div>
+                    
                     <div
                       className={` ${
                         Prop?.self ? "text-medgray" : "text-lightgray"
@@ -116,7 +117,7 @@ const About = (Prop: prop) => {
             <IoIosBook size={25}></IoIosBook>
             <span className="text-lg md:text-xl">Qualification</span>
           </div>
-
+            
           {Prop?.self && (
             <DialogInput
               userData={{ ...Prop?.User!, name: "", email: "" }}

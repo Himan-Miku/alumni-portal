@@ -7,11 +7,13 @@ declare module "next-auth" {
       id: string;
       image?: string;
     };
+    access_token?: string;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
     uid: string;
+    access_token?: string;
   }
 }
