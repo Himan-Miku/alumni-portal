@@ -19,12 +19,14 @@ export const isAuthenticated = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
     let user: any = {};
     const { token } = req.cookies;
+    // console.log("Cookies Are === ",JSON.stringify(req.cookies));
+    console.log("Header", req.headers);
 
     // console.log(token);
     if (!token) {
       const secret = process.env.NEXTAUTH_SECRET;
       const Nexttoken = await getToken({ req, secret });
-      // console.log(req.cookies["next-auth.session-token"]);
+      console.log(req.cookies["next-auth.session-token"]);
       if (!Nexttoken) {
         return next(new ErrorHandler("No user found", 404));
       }

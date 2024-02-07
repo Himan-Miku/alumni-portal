@@ -25,6 +25,7 @@ import { useToast } from "components/ui/use-toast";
 
 import Axios from "app/Axios";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { useSession } from "next-auth/react";
 
 interface prop {
   userData?: User;
@@ -51,6 +52,7 @@ interface prop {
 }
 
 export function DialogInput(Prop?: prop) {
+  const session = useSession();
   const [user, setUser] = useState<User>({ ...Prop?.userData! });
   const [image, setImage] = useState<string>("");
   const { toast } = useToast();
@@ -62,9 +64,13 @@ export function DialogInput(Prop?: prop) {
   };
   const mutation = useMutation({
     mutationFn: async (updateobj: Partial<User>) => {
-      let res = await Axios.put("/api/user", updateobj, {
-        withCredentials: true,
-      });
+      let res = await Axios.put(
+        "/api/user",
+        { ...updateobj, _id: session?.data?.user?._id },
+        {
+          withCredentials: true,
+        }
+      );
       console.log(res);
       toast({
         title: "Success",
@@ -90,19 +96,29 @@ export function DialogInput(Prop?: prop) {
       mutationFn: async (obj: any) => {
         let resp = Prop?.exp
           ? obj.action == "delete"
-            ? await Axios.delete(`/api/objupdate/${obj.data._id}?key=exp`, {
-                withCredentials: true,
-              })
-            : await Axios.put(
-                `/api/objupdate/${obj.data._id}?key=exp`,
-                obj.data,
+            ? await Axios.put(
+                `/api/objdelete/${obj.data._id}?key=exp`,
+                {
+                  _id: session?.data?.user?._id,
+                },
                 {
                   withCredentials: true,
                 }
               )
-          : await Axios.post("/api/append?key=exp", obj.data, {
-              withCredentials: true,
-            });
+            : await Axios.put(
+                `/api/objupdate/${obj.data._id}?key=exp`,
+                { ...obj.data, _id: session?.data?.user?._id },
+                {
+                  withCredentials: true,
+                }
+              )
+          : await Axios.post(
+              "/api/append?key=exp",
+              { ...obj.data, _id: session?.data?.user?._id },
+              {
+                withCredentials: true,
+              }
+            );
         // console.log(obj);
         // toast({
         //   title: "Success",
@@ -203,7 +219,7 @@ export function DialogInput(Prop?: prop) {
       percentage?: string;
     }>(
       {
-        ...Prop?.qual,
+        ...(Prop?.qual || { studyfrom: "", studied: "", percentage: "" }),
         duration: {
           start: new Date(Prop?.qual?.duration?.start!),
           end: new Date(Prop?.qual?.duration?.end!),
@@ -221,21 +237,32 @@ export function DialogInput(Prop?: prop) {
       mutationFn: async (obj: any) => {
         return Prop?.qual
           ? obj.action == "delete"
-            ? await Axios.delete(`/api/objupdate/${obj.data._id}?key=edu`, {
-                withCredentials: true,
-              })
-            : await Axios.put(
-                `/api/objupdate/${obj.data._id}?key=edu`,
-                obj.data,
+            ? await Axios.put(
+                `/api/objdelete/${obj.data._id}?key=edu`,
+                {
+                  _id: session?.data?.user?._id,
+                },
                 {
                   withCredentials: true,
                 }
               )
-          : await Axios.post("/api/append?key=edu", obj.data, {
-              withCredentials: true,
-            });
+            : await Axios.put(
+                `/api/objupdate/${obj.data._id}?key=edu`,
+                { ...obj.data, _id: session?.data?.user?._id },
+                {
+                  withCredentials: true,
+                }
+              ).then((res) => console.log(res))
+          : await Axios.post(
+              "/api/append?key=edu",
+              { ...obj.data, _id: session?.data?.user?._id },
+              {
+                withCredentials: true,
+              }
+            );
       },
     });
+    console.log(ed);
     return (
       <form
         onSubmit={(ev) => {

@@ -9,22 +9,21 @@ import errorfn from "./middlewares/error";
 import cors from "cors";
 
 const app = express();
-//cookie body and encoded url configurations
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
+    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
     origin: process.env.FRONTEND_URL,
     credentials: true,
+    preflightContinue: true,
   })
 );
 
 //defining all routes here :
 app.use("/api", userRoutes, postRoutes);
-
-//error middleware
 app.use(errorfn);
 
 export default app;

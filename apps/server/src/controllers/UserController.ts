@@ -41,7 +41,7 @@ export const login = catchAsyncError(
 
 export const UpdateFollow = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
-    const user = await User?.findOne({ _id: req.user?._id });
+    const user = await User?.findOne({ _id: req?.body?._id });
     const followUser = await User?.findOne({ _id: req.params.id });
     const isFollowing =
       user?.following.filter((ele) => {
@@ -56,13 +56,13 @@ export const UpdateFollow = catchAsyncError(
     //     }) || [];
     //   followUser!.followers =
     //     followUser?.followers.filter((ele) => {
-    //       return String(ele._id) != String(req.user._id!);
+    //       return String(ele._id) != String(req?.body._id!);
     //     }) || [];
 
     //   // res.end();
     // } else {
     //   user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
-    //   followUser?.followers.push(new mongoose.Types.ObjectId(req.user._id));
+    //   followUser?.followers.push(new mongoose.Types.ObjectId(req?.body._id));
     // }
     await user?.save();
     await followUser?.save();
@@ -77,7 +77,7 @@ export const UpdateFollow = catchAsyncError(
 
 export const updateUser = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
-    let user = await User.updateOne({ _id: req.user?._id }, { ...req.body });
+    let user = await User.updateOne({ _id: req?.body?._id }, { ...req.body });
     res.status(201).json({
       success: true,
       user,
@@ -86,7 +86,7 @@ export const updateUser = catchAsyncError(
 );
 export const append = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
-    const user = await User.findOne(req?.user?._id);
+    const user = await User.findOne({ _id: req?.body?._id });
     if (!user) return next(new ErrorHandler("No such user found", 404));
     console.log(req?.body);
     // console.log(req.body);
@@ -104,7 +104,7 @@ export const append = catchAsyncError(
 export const PopulatedFollowings = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
     const user = await User.findOne(
-      { _id: req?.user?._id },
+      { _id: req?.params?.id },
       { followers: 1, following: 1 }
     ).populate(["followers", "following"]);
 
@@ -120,7 +120,7 @@ export const updateIndividuals = catchAsyncError(
     const user =
       req.query.key == "exp"
         ? await User?.updateOne(
-            { _id: req.user?._id, "work._id": req.params.id },
+            { _id: req?.body?._id, "work._id": req.params.id },
             {
               $set: {
                 "work.$.company": req.body.company,
@@ -131,7 +131,7 @@ export const updateIndividuals = catchAsyncError(
           )
         : req.query.key == "edu" &&
           (await User?.updateOne(
-            { _id: req.user?._id, "education._id": req.params.id },
+            { _id: req?.body?._id, "education._id": req.params.id },
             {
               $set: {
                 "education.$.studyfrom": req.body.studyfrom,
@@ -156,13 +156,13 @@ export const deleteObj = catchAsyncError(
       req.query.key == "exp"
         ? await User?.updateOne(
             {
-              _id: req.user?._id,
+              _id: req?.body?._id,
             },
             { $pull: { work: { _id: req.params.id } } }
           )
         : await User?.updateOne(
             {
-              _id: req.user?._id,
+              _id: req?.body?._id,
             },
             { $pull: { education: { _id: req.params.id } } }
           );
@@ -255,7 +255,7 @@ export const getUser = catchAsyncError(
 
 export const selfinfo = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
-    let data = await User?.findOne({ _id: req.user?._id });
+    let data = await User?.findOne({ _id: req?.body?._id });
     if (!data) {
       return next(new ErrorHandler("No user found ", 404));
     }
@@ -268,7 +268,7 @@ export const selfinfo = catchAsyncError(
 
 export const deleteUser = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
-    let user = await User.deleteOne({ _id: req.user?._id });
+    let user = await User.deleteOne({ _id: req?.body?._id });
     res.status(201).json({
       success: true,
       user,

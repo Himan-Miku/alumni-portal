@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { RiUserFollowFill } from "react-icons/ri";
 import { useMutation } from "react-query";
 import Axios from "app/Axios";
+
 import { RiUserUnfollowFill } from "react-icons/ri";
 
 interface prop {
@@ -17,17 +18,19 @@ const FollowButton = (Prop: prop) => {
     data?.user?.following?.filter((elem) => {
       return elem == Prop?.uid;
     }).length != 0;
-  console.log(
-    data?.user?.following?.filter((elem) => {
-      return elem == Prop?.uid;
-    }).length != 0
-  );
+  // console.log(
+  //   data?.user?.following?.filter((elem) => {
+  //     return elem == Prop?.uid;
+  //   }).length != 0
+  // );
 
   let followMutate = useMutation({
     mutationFn: async (id: string) => {
       let res = await Axios.put(
         `/api/follow/${id}`,
-        {},
+        {
+          _id: data?.user?._id,
+        },
         {
           withCredentials: true,
         }

@@ -8,7 +8,6 @@ const connectDB = async (): Promise<void> => {
   console.log("mongo", mongoUrl);
   try {
     const mongoConnection = await mongoose.connect(mongoUrl);
-    console.log(`Mongo running at : ${mongoConnection.connection.name}`);
   } catch (error) {
     if (error instanceof MongooseError) {
       console.log(error.message);
