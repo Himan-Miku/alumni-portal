@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav
       className="sticky top-0 h-[100vh]
-  bg-white p-4"
+  bg-white p-4 shadow"
     >
       <div className="w-min xl:w-[18rem] flex flex-col gap-16 h-full">
         <div className="hidden xl:block">

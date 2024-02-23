@@ -79,4 +79,10 @@
   .nav-names {
     @apply hidden xl:block;
   }
+  .select_option {
+    @apply bg-blue-500 px-4 py-2 text-white rounded-md;
+  }
+  .un_select_option {
+    @apply border-2 border-blue-500 px-4 py-2 text-blue-500 rounded-md;
+  }
 }
