@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import FriendCard from "./FriendCard";
+import { MsgFriendStore } from "@/context/MsgFriendContext";
 
 export default function FriendList() {
   const list = [
@@ -36,12 +37,19 @@ export default function FriendList() {
     },
   ];
 
+  const { setMsgFriend } = MsgFriendStore();
   const [selectedFriend, setSelectedFriend] = useState<number | null>(null);
 
   return (
-    <div>
+    <div className="py-2">
       {list.map((f, i) => (
-        <div key={i} onClick={() => setSelectedFriend(f.id)}>
+        <div
+          key={i}
+          onClick={() => {
+            setSelectedFriend(f.id);
+            setMsgFriend(f);
+          }}
+        >
           <FriendCard friend={f} isSelected={selectedFriend === f.id} />
         </div>
       ))}
