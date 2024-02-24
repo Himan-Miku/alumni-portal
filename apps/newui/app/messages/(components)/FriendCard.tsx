@@ -5,8 +5,8 @@ interface FriendCardProps {
     id: number;
     name: string;
     lastMessage: string;
-  };
-  isSelected: boolean;
+  } | null;
+  isSelected?: boolean;
 }
 
 export default function FriendCard({ friend, isSelected }: FriendCardProps) {
@@ -27,8 +27,8 @@ export default function FriendCard({ friend, isSelected }: FriendCardProps) {
           </Avatar>
         </div>
         <div className="flex flex-col justify-center w-full">
-          <p className="text-lg font-semibold tracking-wider">{friend.name}</p>
-          <p className="text-sm font-medium">{friend.lastMessage}</p>
+          <p className="text-lg font-semibold tracking-wider">{friend?.name}</p>
+          <p className="text-sm font-medium">{friend?.lastMessage}</p>
         </div>
       </div>
     </div>
