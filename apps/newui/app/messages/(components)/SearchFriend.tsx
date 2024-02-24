@@ -1,11 +1,11 @@
 export default function SearchFriend() {
   return (
-    <>
+    <div className="border border-[#7199ff] py-2 px-2 rounded-xl">
       <input
-        className="bg-[#F5F5F5] rounded-md px-2 py-1 w-[90%] ml-3"
+        className="focus:outline-none rounded-md px-2 w-[90%] bg-inherit"
         type="text"
-        placeholder="zara larson"
+        placeholder="🔍 search alumni ..."
       />
-    </>
+    </div>
   );
 }
