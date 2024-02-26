@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className}>
-        <div className="flex bg-bg">
+        <div className="flex flex-col-reverse md:flex-row bg-bg">
           <Navbar></Navbar>
           {children}
         </div>
