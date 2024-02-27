@@ -11,12 +11,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiSquarePlus } from "react-icons/ci";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   let path = usePathname();
   const router=useRouter();
   console.log(path);
-
+  const { data: session } = useSession();
+  console.log(session)
   return (
     <nav
       className="sticky top-0 h-[100vh]
