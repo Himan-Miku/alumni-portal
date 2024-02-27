@@ -3,7 +3,7 @@
 
 import  bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
-import NextAuth from 'next-auth';
+import NextAuth, { DefaultSession } from 'next-auth';
 
 import GoogleProvider from "next-auth/providers/google";
 import LinkedinProvider from 'next-auth/providers/linkedin';
@@ -11,6 +11,14 @@ import LinkedinProvider from 'next-auth/providers/linkedin';
 
 import User from '@/schemas/User';
 import connectDB from "@/lib/Connection";
+export interface ExtendedSession extends DefaultSession {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    access_token?: string | null; // Added access_token property
+  };
+}
 
 const handler=NextAuth({
       providers: [
@@ -19,20 +27,33 @@ const handler=NextAuth({
           clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "" ,
         }),
         LinkedinProvider({
-          clientId: process.env.LINKEDIN_CLIENT_ID ?? "" ,
+          clientId: process.env.LINKEDIN_CLIENT_ID ?? "",
           clientSecret: process.env.LINKEDIN_CLIENT_SECRET ?? "",
+          authorization: { params: { scope: "profile email openid" } },
+          issuer: "https://www.linkedin.com",
+          jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
+          async profile(profile) {
+            return {
+              id: profile.sub,
+              name: profile.name,
+    
+              email: profile.email,
+              image: profile.picture,
+            };
+          },
         }),
         CredentialsProvider({
            id: "credentials",
           name: "credentials",
           credentials: {
-              email: { label: "email", type: "text",  },
+              email: { label: "email", type: "text" },
               password: { label: "password", type: "password" },
             },
             async authorize(credentials): Promise<any> {
                 if (!credentials) {
                     throw new Error('Credentials are not provided');
                   }
+                console.log(credentials)
                 await connectDB();
                 // check to see if email and password is there
                 try {
@@ -42,9 +63,10 @@ const handler=NextAuth({
                       if (!user) {
                         return null;
                       }
+                      console.log(user)
                     
                       // check password
-                      const isValid = await bcrypt.compare(credentials.password, user.hashedPassword);
+                      const isValid = await bcrypt.compare(credentials.password, user.password);
                       if (!isValid) {
                         return null;
                       }
@@ -53,28 +75,34 @@ const handler=NextAuth({
                       return  user ;
                     
                 } catch (error:any) {
-                     return error;
+                     return null;
                 }
                 
               }
       }),  
         ],
-    // session:{strategy:"jwt"},
+     session:{strategy:"jwt"},
+     secret: process.env.NEXTAUTH_SECRET,
     pages: {
-        signIn: '/auth/signin',
+        signIn: '/auth/sign-in',
+        newUser: "/auth/sign-up"
         // If set, new users will be directed here on first sign in
       },
       
      
       callbacks: {
         async jwt({ token, user,account }) {
-          // console.log(token,user)
-          return  token;
+          if (account) {
+            token.accessToken = account.access_token
+            console.log(token)
+          }
+          return token
+         
         },
         async session({ session, token, user, }) {
           // Send properties to the client, like an access_token from a provider.
-          session.user = token;
-           console.log(session)
+          
+           
           return session;
         },
         async signIn(profile){

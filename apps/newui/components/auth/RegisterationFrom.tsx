@@ -1,12 +1,12 @@
 "use client";
-import { RegisterSchema } from "schemas";
+import { RegisterSchema } from "@/schemas";
 import { useEffect, useState, useTransition } from "react";
 import React from "react";
 import CardWapper from "./CardWapper";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "components/ui/button";
+import { Button } from "@/components/ui/button";
 
 import {
   Form,
@@ -15,12 +15,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "components/ui/form";
-import { Input } from "components/ui/input";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
-import { FormError } from "../formerror";
-import { FormSuccess } from "../formSuccess";
-import { Register } from "actions/register";
+import { FormError } from "./formerror";
+import { FormSuccess } from "./formSuccess";
+import { Register } from "@/actions/register";
 import { redirect, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
@@ -29,7 +29,10 @@ const RegisterationForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [values, setValues] = useState<{ email: string; password: string } | null>(null);
+  const [values, setValues] = useState<{
+    email: string;
+    password: string;
+  } | null>(null);
   // 1. Define your form.
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -42,16 +45,17 @@ const RegisterationForm = () => {
   useEffect(() => {
     const asyncSignIn = async (values: { email: string; password: string }) => {
       const { email, password } = values;
-      await signIn("credentials", { email, password, redirect: false });
-      router.push("/profile");
+      const user = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      console.log(user);
+      // router.push("/profile");
     };
-    if(values)
-     asyncSignIn(values);
-  }, [success])
-  
-  
+    if (values) asyncSignIn(values);
+  }, [success]);
 
- 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof RegisterSchema>) {
     setError("");
@@ -61,7 +65,6 @@ const RegisterationForm = () => {
       Register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
-       
       });
     });
   }
@@ -69,7 +72,7 @@ const RegisterationForm = () => {
     <CardWapper
       headerLabel="Register to Login"
       baclButtonLabel="Already have account?"
-      backButtonHref="/auth/login"
+      backButtonHref="/auth/sign-in"
       showSocial
     >
       <Form {...form}>

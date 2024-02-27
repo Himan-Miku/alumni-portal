@@ -3,7 +3,7 @@ import { Inter, Urbanist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { getServerSession } from "next-auth";
-import Provider from "@/providers/SessionProviders";
+import Provider from "@/context/SessionProviders";
 const urbanist = Urbanist({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {

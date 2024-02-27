@@ -7,13 +7,13 @@ import {
   DialogFooter,
   DialogContent,
   DialogTrigger,
-} from "components/ui/dialog";
-import { FormItem } from "components/ui/form";
-import { Button } from "components/ui/button";
-import { Input } from "components/ui/input";
-import { Label } from "components/ui/label";
+} from "@/components/ui/dialog";
+import { FormItem } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Axios from "app/Axios";
-import { toast } from "components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 
 const RecoverPassword = () => {
   let [email, setEmail] = useState("");

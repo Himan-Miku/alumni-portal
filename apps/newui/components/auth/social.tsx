@@ -1,7 +1,7 @@
 'use client'
 import {FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
-import { Button } from "components/ui/button";
+import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
 export const Social = () => {
   const onClick = (provider:"google" | "linkedin") => {

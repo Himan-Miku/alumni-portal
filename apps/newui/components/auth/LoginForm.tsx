@@ -75,7 +75,7 @@ const LoginForm = () => {
       <CardWapper
         headerLabel="Enter the email and password"
         baclButtonLabel="Don't have an account?"
-        backButtonHref="/auth/register"
+        backButtonHref="/auth/sign-up"
         showSocial
       >
         <Form {...form}>
@@ -129,7 +129,7 @@ const LoginForm = () => {
               </DialogHeader>
             </DialogContent>
           </Dialog> */}
-            <RecoverPassword></RecoverPassword>
+            {/* <RecoverPassword></RecoverPassword> */}
             <FormError message={error} />
             <FormSuccess message={success} />
             <Button type="submit" className="w-full" disabled={isPending}>

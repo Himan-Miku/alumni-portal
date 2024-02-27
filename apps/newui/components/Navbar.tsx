@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiSquarePlus } from "react-icons/ci";
 import { useSession } from "next-auth/react";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   let path = usePathname();
@@ -84,13 +85,23 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="xl:mx-4 gap-6 flex flex-col">
-          <div className="flex items-center gap-2 text-xl">
+          { session ?
+          (<div className="flex items-center gap-2 text-xl">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" onClick={()=>{router.push('/profile')}} />
+              <AvatarImage src={session?.user?.image || "" } alt="@shadcn" onClick={()=>{router.push('/profile')}} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div className="nav-names">Vineet Babar</div>
-          </div>
+            <div className="nav-names">{session?.user?.name}</div>
+          </div>):(
+            <>
+            <Link href="/auth/sign-in">
+
+              <Button>
+                  Login
+              </Button>
+            </Link>
+            </>
+          )}
           <div className="flex items-center text-xl gap-6">
             <RxHamburgerMenu className="ml-2" />
             <div className="nav-names">More</div>
