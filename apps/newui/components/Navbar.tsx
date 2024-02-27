@@ -14,7 +14,7 @@ import { CiSquarePlus } from "react-icons/ci";
 
 const Navbar = () => {
   let path = usePathname();
-  const router=useRouter();
+  const router = useRouter();
   console.log(path);
 
   return (
@@ -84,7 +84,13 @@ const Navbar = () => {
         <div className="xl:mx-4 gap-6 flex flex-col">
           <div className="flex items-center gap-2 text-xl">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" onClick={()=>{router.push('/profile')}} />
+              <AvatarImage
+                src="https://github.com/shadcn.png"
+                alt="@shadcn"
+                onClick={() => {
+                  router.push("/profile");
+                }}
+              />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="nav-names">Vineet Babar</div>
