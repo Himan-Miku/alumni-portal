@@ -1,68 +1,68 @@
 export interface YoutubeModel {
-    kind:          string;
-    etag:          string;
-    nextPageToken: string;
-    regionCode:    string;
-    pageInfo:      PageInfo;
-    items:         Item[];
+  kind: string;
+  etag: string;
+  nextPageToken: string;
+  regionCode: string;
+  pageInfo: PageInfo;
+  items: Item[];
 }
 
 export interface Item {
-    kind:    ItemKind;
-    etag:    string;
-    id:      ID;
-    snippet: Snippet;
+  kind: ItemKind;
+  etag: string;
+  id: ID;
+  snippet: Snippet;
 }
 
 export interface ID {
-    kind:    IDKind;
-    videoId: string;
+  kind: IDKind;
+  videoId: string;
 }
 
 export enum IDKind {
-    YoutubeVideo = "youtube#video",
+  YoutubeVideo = "youtube#video",
 }
 
 export enum ItemKind {
-    YoutubeSearchResult = "youtube#searchResult",
+  YoutubeSearchResult = "youtube#searchResult",
 }
 
 export interface Snippet {
-    publishedAt:          Date;
-    channelId:            ChannelID;
-    title:                string;
-    description:          string;
-    thumbnails:           Thumbnails;
-    channelTitle:         ChannelTitle;
-    liveBroadcastContent: LiveBroadcastContent;
-    publishTime:          Date;
+  publishedAt: Date;
+  channelId: ChannelID;
+  title: string;
+  description: string;
+  thumbnails: Thumbnails;
+  channelTitle: ChannelTitle;
+  liveBroadcastContent: LiveBroadcastContent;
+  publishTime: Date;
 }
 
 export enum ChannelID {
-    UC4Pc9V7QjsJZKkUS8I0Iqw = "UC4Pc9V7-QjsJZKkUS8I0iqw",
+  UC4Pc9V7QjsJZKkUS8I0Iqw = "UC4Pc9V7-QjsJZKkUS8I0iqw",
 }
 
 export enum ChannelTitle {
-    RSCOESPIRCell = "RSCOE SP&IR Cell",
+  RSCOESPIRCell = "RSCOE SP&IR Cell",
 }
 
 export enum LiveBroadcastContent {
-    None = "none",
+  None = "none",
 }
 
 export interface Thumbnails {
-    default: Default;
-    medium:  Default;
-    high:    Default;
+  default: Default;
+  medium: Default;
+  high: Default;
 }
 
 export interface Default {
-    url:    string;
-    width:  number;
-    height: number;
+  url: string;
+  width: number;
+  height: number;
 }
 
 export interface PageInfo {
-    totalResults:   number;
-    resultsPerPage: number;
+  totalResults: number;
+  resultsPerPage: number;
 }

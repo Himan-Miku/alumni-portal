@@ -26,7 +26,7 @@ export const ShowPost = catchAsyncError(
       success: true,
       post,
     });
-  }
+  },
 );
 
 export const createPost = catchAsyncError(
@@ -53,7 +53,7 @@ export const createPost = catchAsyncError(
       console.error("Error uploading media to mongodb: ", error);
       res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
 );
 
 export const likes = catchAsyncError(
@@ -78,7 +78,7 @@ export const likes = catchAsyncError(
       success: true,
       likes: post?.likes?.length,
     });
-  }
+  },
 );
 export const comments = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
@@ -95,5 +95,5 @@ export const comments = catchAsyncError(
       success: true,
       data: comment,
     });
-  }
+  },
 );

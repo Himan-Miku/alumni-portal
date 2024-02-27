@@ -56,7 +56,7 @@ const handler = NextAuth({
           // check password
           const isValid = await bcrypt.compare(
             credentials.password,
-            user?.password!
+            user?.password!,
           );
           if (!isValid) {
             return null;

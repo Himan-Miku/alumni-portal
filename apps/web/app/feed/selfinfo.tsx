@@ -22,7 +22,6 @@ const SelfInfo = () => {
             />
             <AvatarFallback>SR</AvatarFallback>
           </Avatar>
-          
         </div>
         <hr></hr>
         <div className="grid grid-cols-2 grid-rows-3 text-md font-semibold text-white">
