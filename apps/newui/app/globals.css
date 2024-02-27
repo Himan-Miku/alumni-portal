@@ -74,7 +74,10 @@
     @apply bg-background text-foreground;
   }
   .navlink {
-    @apply p-1 hover:border-l-4 border-blue-400 rounded-sm;
+    @apply p-1 hover:border-l-4 border-blue-400 rounded-sm transition-all duration-75;
+  }
+  .navlink-2 {
+    @apply border-l-4 border-blue-400 rounded-md transition-all duration-75;
   }
   .nav-names {
     @apply hidden xl:block;
