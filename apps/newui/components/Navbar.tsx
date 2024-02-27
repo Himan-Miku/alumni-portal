@@ -7,14 +7,14 @@ import { PiStudentLight } from "react-icons/pi";
 import { CiStar } from "react-icons/ci";
 import { FiMessageSquare } from "react-icons/fi";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiSquarePlus } from "react-icons/ci";
 
 const Navbar = () => {
   let path = usePathname();
-
+  const router=useRouter();
   console.log(path);
 
   return (
@@ -84,7 +84,7 @@ const Navbar = () => {
         <div className="xl:mx-4 gap-6 flex flex-col">
           <div className="flex items-center gap-2 text-xl">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" onClick={()=>{router.push('/profile')}} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="nav-names">Vineet Babar</div>
