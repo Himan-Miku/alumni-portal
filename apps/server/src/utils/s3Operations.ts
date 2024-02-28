@@ -61,7 +61,7 @@ export async function getObjectUrl(key: string) {
 export async function putObject(
   user: string,
   fileName: string,
-  contentType: string
+  contentType: string,
 ) {
   const namespace = uuidv4();
   const uuidV5 = generateUUID(namespace, fileName);

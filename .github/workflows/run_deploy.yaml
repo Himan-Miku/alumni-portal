@@ -49,7 +49,7 @@ on:
     branches:
       - main
     paths:
-      - 'apps/server/**'
+      - "apps/server/**"
 
 env:
   PROJECT_ID: alumni-portal-412815

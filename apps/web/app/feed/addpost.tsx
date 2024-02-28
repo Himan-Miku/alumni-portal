@@ -68,7 +68,7 @@ const AddPost = () => {
   };
 
   const handleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
 
@@ -88,7 +88,7 @@ const AddPost = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(metadata),
-        }
+        },
       );
 
       if (response.ok) {
@@ -116,7 +116,7 @@ const AddPost = () => {
                 `process.env.BACKEND_URLapi/metadata?folderName=${folderName}&objectKey=${actualKey}`,
                 {
                   method: "GET",
-                }
+                },
               );
 
               const data = (await mediaRes.json()) as receivedGetUri;
@@ -138,7 +138,7 @@ const AddPost = () => {
                       "Content-Type": "application/json",
                     },
                     body: JSON.stringify(dataToSend),
-                  }
+                  },
                 );
 
                 const data = await postRes.json();

@@ -12,8 +12,9 @@ const Skills: React.FC<Skillsprops> = ({ skills, expertise }) => {
         <div className="flex flex-wrap gap-2 ml-16 justify-end">
           {expertise.map((expertiseItem, index) => (
             <React.Fragment key={index}>
-              <span className="bg-gray-200/60 p-3 rounded-lg font-[550]">{expertiseItem}</span>
-              
+              <span className="bg-gray-200/60 p-3 rounded-lg font-[550]">
+                {expertiseItem}
+              </span>
             </React.Fragment>
           ))}
         </div>
@@ -24,7 +25,7 @@ const Skills: React.FC<Skillsprops> = ({ skills, expertise }) => {
           {skills.map((skill, index) => (
             <React.Fragment key={index}>
               <span className="font-[550]">{skill}</span>
-              {index < skills.length -  1 && <LuDot className="w-6 h-6" />}
+              {index < skills.length - 1 && <LuDot className="w-6 h-6" />}
             </React.Fragment>
           ))}
         </div>
