@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Urbanist } from "next/font/google";
-import "./globals.css";
+import "./globals.css"
 import Navbar from "@/components/Navbar";
 import { getServerSession } from "next-auth";
 import Provider from "@/context/SessionProviders";
@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={urbanist.className}>
         <Provider session={session} >
         <div className="flex bg-bg">
-          <Navbar></Navbar>
+         
           {children}
         </div>
         </Provider>

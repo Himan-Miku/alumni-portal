@@ -1,7 +1,7 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 
 
-import  bcrypt from "bcryptjs";
+import  bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth, { DefaultSession } from 'next-auth';
 
@@ -11,6 +11,7 @@ import LinkedinProvider from 'next-auth/providers/linkedin';
 
 import User from '@/schemas/User';
 import connectDB from "@/lib/Connection";
+import { profile } from "console";
 export interface ExtendedSession extends DefaultSession {
   user?: {
     name?: string | null;
@@ -106,7 +107,7 @@ const handler=NextAuth({
           return session;
         },
         async signIn(profile){
-          console.log(profile.user)
+          console.log("profile",profile.user)
 
          try {
           await connectDB();
