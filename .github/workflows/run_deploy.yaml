@@ -48,6 +48,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'apps/server/**'
 
 env:
   PROJECT_ID: alumni-portal-412815

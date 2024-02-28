@@ -68,19 +68,19 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border tracking-wider;
   }
   body {
     @apply bg-background text-foreground;
   }
   .navlink {
-    @apply p-1 text-black hover:border-l-4 border-blue-400 rounded-sm w-full;
+    @apply p-1 text-black w-full hover:border-l-4 border-blue-400 rounded-sm transition-all duration-75;
   }
-  .selected {
-    @apply border-l-4 border-blue-400;
+  .navlink-2 {
+    @apply border-l-4 border-blue-400 rounded-md transition-all duration-75;
   }
   .nav-names {
-    @apply hidden xl:block;
+    @apply hidden xl:block text-lg;
   }
   .select_option {
     @apply bg-blue-500 px-4 py-2 text-white rounded-md;

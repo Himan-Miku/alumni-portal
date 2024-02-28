@@ -6,13 +6,14 @@ import { PiStudentLight } from "react-icons/pi";
 import { CiStar } from "react-icons/ci";
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiSquarePlus } from "react-icons/ci";
 
 const Navbar = () => {
   let path = usePathname();
+  const router = useRouter();
   console.log(path);
 
   return (
@@ -20,40 +21,39 @@ const Navbar = () => {
       className="sticky bottom-0 z-10 md:top-0  md:h-[100vh]
   bg-white p-4 shadow"
     >
-      <div className="w-full md:w-min xl:w-[18rem] justify-center flex md:flex-col  md:gap-16 h-full">
+      <div className="w-full md:w-min xl:w-[14rem] flex md:flex-col md:gap-12 h-full">
         <div className="hidden xl:block">
-          <h1 className="text-3xl flex gap-1 items-center text-blue-500">
+          <h1 className="text-2xl text-center flex gap-1 items-center text-blue-500">
             <span className="bg-blue-500 rounded-xl p-2 m-1 text-white">
               Alumni
             </span>
             Portal
           </h1>
         </div>
-        <div className="w-full md:w-min md:justify-start items-start flex md:flex-col xl:mx-4 md:gap-12 xl:gap-7 ">
+        <div className="w-full md:w-min md:justify-start items-start flex md:flex-col xl:mx-4 md:gap-12 xl:gap-[14px] ">
           <Link href={"/"} className={"navlink"}>
-            <div className="flex items-end gap-3 text-xl">
+            <div className="flex items-end gap-3 text-lg">
               <IoMdHome size={28} />
               <span className="nav-names">Home</span>
             </div>
           </Link>
           <Link href={"/alumni"} className="navlink">
-            <div className="flex items-end gap-3 text-xl">
+            <div className="flex items-end gap-3 text-lg">
               <PiStudentLight size={28} />
               <span className="nav-names">Alumni</span>
             </div>
           </Link>
           <Link href={"spir"} className="navlink">
-            <div className="flex items-end gap-3 text-xl">
+            <div className="flex items-end gap-3 text-lg">
               <CiStar size={28} />
               <span className="nav-names">SPIR</span>
             </div>
           </Link>
           <Link href={"messages"} className="navlink ">
-            <div className=" flex items-end gap-3 text-xl">
+            <div className=" flex items-end gap-3 text-lg">
               <div>
                 <AiOutlineMessage
                   size={28}
-                  stroke-width="0.1"
                   className="filter text-slate-500 brightness-75 saturate-50 "
                 />
               </div>
@@ -61,13 +61,13 @@ const Navbar = () => {
             </div>
           </Link>
           <Link href={"notifications"} className="navlink hidden md:block">
-            <div className="flex items-end gap-3 text-xl">
+            <div className="flex items-end gap-3 text-lg">
               <IoIosNotificationsOutline size={28}></IoIosNotificationsOutline>
               <span className="nav-names">Notifications</span>
             </div>
           </Link>
           <Link href={"threads"} className="navlink">
-            <div className="flex items-end gap-3 text-xl">
+            <div className="flex items-end gap-3 text-lg">
               <CiSquarePlus size={28} />
               <span className="nav-names">Threads</span>
             </div>
@@ -76,7 +76,13 @@ const Navbar = () => {
         <div className="xl:mx-4 text-black gap-6 flex flex-col">
           <div className="flex items-center gap-2 text-xl">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage
+                src="https://github.com/shadcn.png"
+                alt="@shadcn"
+                onClick={() => {
+                  router.push("/profile");
+                }}
+              />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="nav-names">Vineet Babar</div>
