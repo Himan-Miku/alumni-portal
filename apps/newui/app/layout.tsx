@@ -20,10 +20,10 @@ export default function RootLayout({
   const session = getServerSession();
 
   return (
-    <html lang="en">
+    <html lang="en" className="w-full h-full">
       <body className={urbanist.className}>
         <Provider session={session} >
-        <div className="flex bg-bg">
+        <div className="flex bg-bg w-full  h-full">
          
           {children}
         </div>

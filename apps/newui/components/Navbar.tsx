@@ -16,10 +16,10 @@ import { Button } from "./ui/button";
 
 const Navbar = () => {
   let path = usePathname();
-  const router=useRouter();
+  const router = useRouter();
   console.log(path);
   const { data: session } = useSession();
-  console.log(session)
+  console.log(session);
   return (
     <nav
       className="sticky top-0 h-[100vh]
@@ -41,7 +41,7 @@ const Navbar = () => {
               <span className="nav-names">Home</span>
             </div>
           </Link>
-          <Link href={"/alumni"} className="navlink">
+          <Link href={"/Alumni"} className="navlink">
             <div className="flex items-end gap-3 text-xl">
               <PiStudentLight size={28} />
               <span className="nav-names">Alumni</span>
@@ -77,29 +77,33 @@ const Navbar = () => {
               <span className="nav-names">Notifications</span>
             </div>
           </Link>
-          <Link href={"threads"} className="navlink">
+          <div className="navlink">
             <div className="flex items-end gap-3 text-xl">
               <CiSquarePlus size={28} />
               <span className="nav-names">Threads</span>
             </div>
-          </Link>
+          </div>
         </div>
         <div className="xl:mx-4 gap-6 flex flex-col">
-          { session ?
-          (<div className="flex items-center gap-2 text-xl">
-            <Avatar>
-              <AvatarImage src={session?.user?.image || "" } alt="@shadcn" onClick={()=>{router.push('/profile')}} />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div className="nav-names">{session?.user?.name}</div>
-          </div>):(
+          {session ? (
+            <div className="flex items-center gap-2 text-xl">
+              <Avatar>
+                <AvatarImage
+                  src={session?.user?.image || ""}
+                  alt="@shadcn"
+                  onClick={() => {
+                    router.push("/profile");
+                  }}
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className="nav-names">{session?.user?.name}</div>
+            </div>
+          ) : (
             <>
-            <Link href="/auth/sign-in">
-
-              <Button>
-                  Login
-              </Button>
-            </Link>
+              <Link href="/auth/sign-in">
+                <Button className="w-10">Login</Button>
+              </Link>
             </>
           )}
           <div className="flex items-center text-xl gap-6">
