@@ -69,7 +69,7 @@ export function DialogInput(Prop?: prop) {
         { ...updateobj, _id: session?.data?.user?._id },
         {
           withCredentials: true,
-        }
+        },
       );
       console.log(res);
       toast({
@@ -103,21 +103,21 @@ export function DialogInput(Prop?: prop) {
                 },
                 {
                   withCredentials: true,
-                }
+                },
               )
             : await Axios.put(
                 `/api/objupdate/${obj.data._id}?key=exp`,
                 { ...obj.data, _id: session?.data?.user?._id },
                 {
                   withCredentials: true,
-                }
+                },
               )
           : await Axios.post(
               "/api/append?key=exp",
               { ...obj.data, _id: session?.data?.user?._id },
               {
                 withCredentials: true,
-              }
+              },
             );
         // console.log(obj);
         // toast({
@@ -229,7 +229,7 @@ export function DialogInput(Prop?: prop) {
         studied: "",
         duration: { start: new Date() },
         percentage: "",
-      }
+      },
     );
     // console.log("Here", ed);
 
@@ -244,21 +244,21 @@ export function DialogInput(Prop?: prop) {
                 },
                 {
                   withCredentials: true,
-                }
+                },
               )
             : await Axios.put(
                 `/api/objupdate/${obj.data._id}?key=edu`,
                 { ...obj.data, _id: session?.data?.user?._id },
                 {
                   withCredentials: true,
-                }
+                },
               ).then((res) => console.log(res))
           : await Axios.post(
               "/api/append?key=edu",
               { ...obj.data, _id: session?.data?.user?._id },
               {
                 withCredentials: true,
-              }
+              },
             );
       },
     });

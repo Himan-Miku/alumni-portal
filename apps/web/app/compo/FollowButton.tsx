@@ -33,7 +33,7 @@ const FollowButton = (Prop: prop) => {
         },
         {
           withCredentials: true,
-        }
+        },
       );
 
       return res?.data;

@@ -20,13 +20,13 @@ const Activity = () => {
 
   const fetchPage = async (
     page: number | undefined = undefined,
-    limit: number | undefined = undefined
+    limit: number | undefined = undefined,
   ) => {
     const res = await Axios.get(
       `/api/showpost?_id=${data?.user?._id}&limit=${limit}&page=${page}`,
       {
         withCredentials: true,
-      }
+      },
     );
     console.log(res?.data);
     setPosts([...res?.data?.post]);
