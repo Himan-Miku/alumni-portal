@@ -3,7 +3,7 @@ import { Inter, Urbanist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-const urbanist = Urbanist({ subsets: ["latin"], weight: "500" });
+const urbanist = Urbanist({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className}>
-        <div className="flex bg-bg">
+        <div className="flex flex-col-reverse md:flex-row bg-bg">
           <Navbar></Navbar>
           {children}
         </div>
