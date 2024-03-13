@@ -5737,6 +5737,21 @@ next-auth@^4.24.5:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
+next-auth@^4.24.6:
+  version "4.24.6"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.24.6.tgz#8cb1848197fdb2479eac2f10e4efa1f1b6b0daaa"
+  integrity sha512-djQt3ZEaWEIxcsuh3HTW2uuzLfXMRjHH+ugAsichlQSbH4iA5MRcgMA2HvTNvsDTDLh44tyU72+/gWsxgTbAKg==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+    "@panva/hkdf" "^1.0.2"
+    cookie "^0.5.0"
+    jose "^4.11.4"
+    oauth "^0.9.15"
+    openid-client "^5.4.0"
+    preact "^10.6.3"
+    preact-render-to-string "^5.1.19"
+    uuid "^8.3.2"
+
 next@14.1.0:
   version "14.1.0"
   resolved "https://registry.yarnpkg.com/next/-/next-14.1.0.tgz#b31c0261ff9caa6b4a17c5af019ed77387174b69"

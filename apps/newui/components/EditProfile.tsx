@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import Logout from "./auth/Logout";
 const EditProfile = () => {
   return (
     <div>
@@ -22,6 +24,7 @@ const EditProfile = () => {
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
+          <Logout></Logout>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
@@ -34,12 +37,6 @@ const EditProfile = () => {
                 Name
               </Label>
               <Input id="name" value="Pedro Duarte" className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" value="@peduarte" className="col-span-3" />
             </div>
           </div>
           <DialogFooter>

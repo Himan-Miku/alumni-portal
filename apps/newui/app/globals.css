@@ -69,9 +69,10 @@
 @layer base {
   * {
     @apply border-border tracking-wider;
+    @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground h-full;
   }
   .navlink {
     @apply p-1 text-black w-full hover:border-l-4 border-blue-400 rounded-sm transition-all duration-75;

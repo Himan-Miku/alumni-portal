@@ -17,7 +17,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { ScrollArea } from "components/ui/scroll-area";
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useQuery } from "react-query";

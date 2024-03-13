@@ -1,5 +1,5 @@
-import MessagesList from "@/app/messages/(components)/MessagesList";
-import MessagesScreen from "@/app/messages/(components)/MessageScreen";
+import MessagesList from "./(components)/MessagesList";
+import MessagesScreen from "./(components)/MessageScreen";
 
 const MessagesPage = () => {
   return (

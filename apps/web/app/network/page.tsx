@@ -1,5 +1,5 @@
 "use client";
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import { EUser } from "app/types";
 import { Avatar, AvatarFallback, AvatarImage } from "components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "components/ui/tabs";

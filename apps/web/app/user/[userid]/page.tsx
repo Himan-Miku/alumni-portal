@@ -1,5 +1,5 @@
 "use client";
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import About from "app/profile/About";
 import Activity from "app/profile/Activity";
 import InfoCard from "app/profile/InfoCard";

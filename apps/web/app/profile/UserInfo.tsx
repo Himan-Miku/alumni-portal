@@ -5,7 +5,7 @@ import React, { use } from "react";
 import InfoCard from "./InfoCard";
 import About from "./About";
 // import { User } from "app/types";
-// import Axios from "app/Axios";
+// import Axios from "@/app/Axios";
 // import { Skeleton } from "components/ui/skeleton";
 import { useSession } from "next-auth/react";
 

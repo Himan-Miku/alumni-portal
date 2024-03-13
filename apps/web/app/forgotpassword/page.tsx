@@ -16,7 +16,7 @@ import {
 } from "components/ui/form";
 import { Input } from "components/ui/input";
 import { Button } from "components/ui/button";
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import { toast } from "components/ui/use-toast";
 import { UseQueryResult, useMutation, useQuery } from "react-query";
 import { useRouter } from "next/navigation";

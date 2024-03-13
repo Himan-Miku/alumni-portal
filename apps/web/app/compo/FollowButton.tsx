@@ -4,7 +4,7 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { RiUserFollowFill } from "react-icons/ri";
 import { useMutation } from "react-query";
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 
 import { RiUserUnfollowFill } from "react-icons/ri";
 

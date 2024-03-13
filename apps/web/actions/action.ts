@@ -1,6 +1,6 @@
 "use server";
 
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import { Post } from "app/types";
 
 export const fetchFeed = async (page: number) => {
