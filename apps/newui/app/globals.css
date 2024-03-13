@@ -69,7 +69,7 @@
 @layer base {
   * {
     @apply border-border tracking-wider;
-    @apply border-border ;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground h-full;

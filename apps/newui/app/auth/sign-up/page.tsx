@@ -1,12 +1,12 @@
-import RegisterationForm from '@/components/auth/RegisterationFrom'
-import React from 'react'
+import RegisterationForm from "@/components/auth/RegisterationFrom";
+import React from "react";
 
 const SignUp = () => {
   return (
     <div>
-      <RegisterationForm/>
+      <RegisterationForm />
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

@@ -22,7 +22,7 @@ export const Register = async (values: z.infer<typeof RegisterSchema>) => {
     email: email,
     password: hashedPassword,
   });
-  const user= await User.find();
+  const user = await User.find();
   console.log(user);
 
   return { success: "Registered Successfully!" };

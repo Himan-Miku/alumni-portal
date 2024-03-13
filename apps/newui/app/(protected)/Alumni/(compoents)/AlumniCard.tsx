@@ -1,12 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const AlumniCard = () => {
-  return (
+  return <div className=""></div>;
+};
 
-    <div className=''>
-      
-    </div>
-  )
-}
-
-export default AlumniCard
+export default AlumniCard;

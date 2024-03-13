@@ -16,7 +16,7 @@ import { Button } from "./ui/button";
 const Navbar = () => {
   let path = usePathname();
   const router = useRouter();
- 
+
   console.log(path);
   const { data: session } = useSession();
   console.log(session);

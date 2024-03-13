@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Urbanist } from "next/font/google";
-import "./globals.css"
+import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { getServerSession } from "next-auth";
 import Provider from "@/context/SessionProviders";
@@ -16,17 +16,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const session = getServerSession();
 
   return (
     <html lang="en" className="w-full h-full">
       <body className={urbanist.className}>
-        <Provider session={session} >
-        <div className="flex bg-bg w-full  h-full">
-         
-          {children}
-        </div>
+        <Provider session={session}>
+          <div className="flex bg-bg w-full  h-full">{children}</div>
         </Provider>
       </body>
     </html>
