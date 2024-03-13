@@ -27,7 +27,7 @@ export default function FriendCard({ friend, isSelected }: FriendCardProps) {
           </Avatar>
         </div>
         <div className="flex flex-col justify-center w-full">
-          <p className="text-lg font-semibold tracking-wider">{friend?.name}</p>
+          <p className="text-lg tracking-wider">{friend?.name}</p>
           <p className="text-sm font-medium">{friend?.lastMessage}</p>
         </div>
       </div>

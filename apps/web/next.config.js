@@ -15,7 +15,6 @@ module.exports = {
         protocol: "https",
         hostname: "media.licdn.com",
       },
-
     ],
   },
   staticPageGenerationTimeout: 1000,

@@ -24,7 +24,7 @@ const Skills: React.FC<Skillsprops> = ({ skills, expertise }) => {
           {skills.map((skill, index) => (
             <React.Fragment key={index}>
               <span className="font-[550]">{skill}</span>
-              {index < skills.length -  1 && <LuDot className="w-6 h-6" />}
+              {index < skills.length - 1 && <LuDot className="w-6 h-6" />}
             </React.Fragment>
           ))}
         </div>

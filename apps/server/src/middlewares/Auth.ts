@@ -45,5 +45,5 @@ export const isAuthenticated = catchAsyncError(
     }
     req.user = user;
     next();
-  }
+  },
 );

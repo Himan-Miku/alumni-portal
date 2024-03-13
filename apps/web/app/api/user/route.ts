@@ -8,6 +8,6 @@ export async function POST(req: Request) {
   let user = await User.create({ name, email });
   return NextResponse.json(
     { message: "User Registered", user },
-    { status: 201 }
+    { status: 201 },
   );
 }

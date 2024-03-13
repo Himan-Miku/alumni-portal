@@ -6,7 +6,7 @@ let errorfn = (
   err: HttpError,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "internal error";

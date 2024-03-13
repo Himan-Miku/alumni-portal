@@ -18,7 +18,7 @@ export const AddUser = catchAsyncError(
       success: true,
       user,
     });
-  }
+  },
 );
 
 export const login = catchAsyncError(
@@ -36,7 +36,7 @@ export const login = catchAsyncError(
       return next(new ErrorHandler("Email and Password are invalid", 400));
     }
     sendToken(user, 201, res);
-  }
+  },
 );
 
 export const UpdateFollow = catchAsyncError(
@@ -72,7 +72,7 @@ export const UpdateFollow = catchAsyncError(
         isFollowing ? "UnFollowed" : "Following"
       } ${followUser?.name}`,
     });
-  }
+  },
 );
 
 export const updateUser = catchAsyncError(
@@ -82,7 +82,7 @@ export const updateUser = catchAsyncError(
       success: true,
       user,
     });
-  }
+  },
 );
 export const append = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
@@ -98,21 +98,21 @@ export const append = catchAsyncError(
       success: true,
       // resp,
     });
-  }
+  },
 );
 
 export const PopulatedFollowings = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
     const user = await User.findOne(
       { _id: req?.params?.id },
-      { followers: 1, following: 1 }
+      { followers: 1, following: 1 },
     ).populate(["followers", "following"]);
 
     res?.status(200).json({
       success: true,
       user,
     });
-  }
+  },
 );
 
 export const updateIndividuals = catchAsyncError(
@@ -127,7 +127,7 @@ export const updateIndividuals = catchAsyncError(
                 "work.$.position": req.body.position,
                 "work.$.duration": req.body.duration,
               },
-            }
+            },
           )
         : req.query.key == "edu" &&
           (await User?.updateOne(
@@ -139,7 +139,7 @@ export const updateIndividuals = catchAsyncError(
                 "education.$.percentage": req.body.percentage,
                 "education.$.duration": req.body.duration,
               },
-            }
+            },
           ));
     // console.log(user);
     // console.log(user);
@@ -147,7 +147,7 @@ export const updateIndividuals = catchAsyncError(
       success: true,
       user,
     });
-  }
+  },
 );
 
 export const deleteObj = catchAsyncError(
@@ -158,19 +158,19 @@ export const deleteObj = catchAsyncError(
             {
               _id: req?.body?._id,
             },
-            { $pull: { work: { _id: req.params.id } } }
+            { $pull: { work: { _id: req.params.id } } },
           )
         : await User?.updateOne(
             {
               _id: req?.body?._id,
             },
-            { $pull: { education: { _id: req.params.id } } }
+            { $pull: { education: { _id: req.params.id } } },
           );
     res.status(200).json({
       success: true,
       user,
     });
-  }
+  },
 );
 
 export const SearchUser = catchAsyncError(
@@ -182,7 +182,7 @@ export const SearchUser = catchAsyncError(
       success: true,
       user,
     });
-  }
+  },
 );
 export const ForgetPassword = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
@@ -195,7 +195,7 @@ export const ForgetPassword = catchAsyncError(
     let user = await User?.findOneAndUpdate(
       { email: req?.query?.email },
       { resetPassToken: hash, resetPassExpire: expirationTime },
-      { new: true }
+      { new: true },
     );
     if (!user) return next(new ErrorHandler("No such user found", 404));
     SendMail({
@@ -207,7 +207,7 @@ export const ForgetPassword = catchAsyncError(
       success: true,
       message: "Recovery Mail Sent Successfully to " + user?.email,
     });
-  }
+  },
 );
 
 export const recoverPassword = catchAsyncError(
@@ -239,7 +239,7 @@ export const recoverPassword = catchAsyncError(
       message: "Password Changed Successfully",
       // save,
     });
-  }
+  },
 );
 export const getUser = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
@@ -250,7 +250,7 @@ export const getUser = catchAsyncError(
       success: true,
       user,
     });
-  }
+  },
 );
 
 export const selfinfo = catchAsyncError(
@@ -263,7 +263,7 @@ export const selfinfo = catchAsyncError(
       success: true,
       user: data,
     });
-  }
+  },
 );
 
 export const deleteUser = catchAsyncError(
@@ -273,5 +273,5 @@ export const deleteUser = catchAsyncError(
       success: true,
       user,
     });
-  }
+  },
 );

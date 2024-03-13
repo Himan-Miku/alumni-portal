@@ -23,7 +23,7 @@ export const getMetadata = catchAsyncError(
       const { url: presingedUrl, objectKey } = await putObject(
         user,
         name,
-        contentType
+        contentType,
       );
       res.status(200).json({
         putUri: presingedUrl,
@@ -36,7 +36,7 @@ export const getMetadata = catchAsyncError(
         message: "Something went wrong while sending putUri url to frontend",
       });
     }
-  }
+  },
 );
 
 export const sendMediaUrl = catchAsyncError(
@@ -54,5 +54,5 @@ export const sendMediaUrl = catchAsyncError(
         message: "Something went wrong while sending getUri url to frontend",
       });
     }
-  }
+  },
 );

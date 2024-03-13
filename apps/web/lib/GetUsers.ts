@@ -6,7 +6,7 @@ export default function GetUsers() {
     `/api/users`,
     {
       withCredentials: true,
-    }
+    },
   );
 
   return res;
