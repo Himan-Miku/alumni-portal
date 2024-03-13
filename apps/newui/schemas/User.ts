@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
-import { User } from "../app/types";
+import { User } from "@/types/types";
 const userSchema = new mongoose.Schema(
   {
     name: {
