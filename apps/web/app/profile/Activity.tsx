@@ -1,5 +1,5 @@
 "use client";
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import Feed from "app/compo/Feed";
 import { Post } from "app/types";
 import { Button } from "components/ui/button";
@@ -20,13 +20,13 @@ const Activity = () => {
 
   const fetchPage = async (
     page: number | undefined = undefined,
-    limit: number | undefined = undefined,
+    limit: number | undefined = undefined
   ) => {
     const res = await Axios.get(
       `/api/showpost?_id=${data?.user?._id}&limit=${limit}&page=${page}`,
       {
         withCredentials: true,
-      },
+      }
     );
     console.log(res?.data);
     setPosts([...res?.data?.post]);
