@@ -3,7 +3,7 @@ import { Inter, Urbanist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-const urbanist = Urbanist({ subsets: ["latin"], weight: "400" });
+const urbanist = Urbanist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",

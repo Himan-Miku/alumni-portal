@@ -31,19 +31,20 @@ const Thread = () => {
           </div>
           <div className="flex gap-2 items-center">
             <h5 className="text-slate-400">{data?.time}</h5>
+
             <SlOptionsVertical />
           </div>
         </div>
-        <div className="bg-text_bg leading-6 shadow-sm p-3  rounded-lg tracking-[0.5px]">
+        <div className="bg-text_bg leading-6 shadow-sm p-3  rounded-lg font-semibold tracking-[0.5px]">
           {data?.thread}
         </div>
-        <div className="flex  gap-10 items-center">
+        <div className="flex font-semibold text-slate-500  gap-10 items-center">
           <div className="flex gap-2 items-center">
-            <FaRegHeart size={22} className="text-slate-400" />
+            <FaRegHeart size={22} />
             {data?.likes} Likes
           </div>
           <div className="flex gap-2 items-center">
-            <FaRegComment size={22} className="text-slate-400" />
+            <FaRegComment size={22} />
             {data?.replies} Replies
           </div>
         </div>
