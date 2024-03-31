@@ -1,4 +1,6 @@
 "use client";
+
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { IoMdHome } from "react-icons/io";
@@ -10,11 +12,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiSquarePlus } from "react-icons/ci";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   let path = usePathname();
   const router = useRouter();
   console.log(path);
+  const { data: session } = useSession();
 
   return (
     <nav
@@ -75,17 +79,27 @@ const Navbar = () => {
         </div>
         <div className="xl:mx-4 text-black gap-6 flex flex-col">
           <div className="flex items-center gap-2 text-xl">
-            <Avatar>
-              <AvatarImage
-                src="https://github.com/shadcn.png"
-                alt="@shadcn"
-                onClick={() => {
-                  router.push("/profile");
-                }}
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div className="nav-names">Vineet Babar</div>
+            {session?.user ? (
+              <>
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="@shadcn"
+                    onClick={() => {
+                      router.push("/profile");
+                    }}
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </>
+            ) : (
+              <>
+                <Link href="/auth/sign-in">
+                  <Button className="w-16">Login</Button>
+                </Link>
+              </>
+            )}
+            {session?.user && <div className="nav-names">Vineet Babar</div>}
           </div>
           <div className="hidden md:flex items-center text-xl gap-6">
             <RxHamburgerMenu className="ml-2" />

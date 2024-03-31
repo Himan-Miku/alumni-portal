@@ -23,7 +23,7 @@ import { User } from "app/types";
 import { Mutation, useMutation } from "react-query";
 import { useToast } from "components/ui/use-toast";
 
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useSession } from "next-auth/react";
 

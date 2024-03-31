@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Urbanist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-
-const urbanist = Urbanist({ subsets: ["latin"] });
+import { getServerSession } from "next-auth";
+import Provider from "@/context/SessionProviders";
+const urbanist = Urbanist({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,13 +16,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = getServerSession();
+
   return (
-    <html lang="en">
+    <html lang="en" className="w-full h-full">
       <body className={urbanist.className}>
-        <div className="flex flex-col-reverse md:flex-row bg-bg">
-          <Navbar></Navbar>
-          {children}
-        </div>
+        <Provider session={session}>{children}</Provider>
       </body>
     </html>
   );

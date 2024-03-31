@@ -1,4 +1,4 @@
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import { User } from "app/types";
 
 export default function GetUsers() {

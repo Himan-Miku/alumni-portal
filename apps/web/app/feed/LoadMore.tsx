@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { fetchFeed } from "../../actions/action";
 import { Post } from "app/types";
 import Feed from "app/compo/Feed";
-import Axios from "app/Axios";
+import Axios from "@/app/Axios";
 import { useInfiniteQuery } from "react-query";
 
 const delay = (milliseconds: number): Promise<void> => {
