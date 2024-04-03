@@ -4,8 +4,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { AiOutlineHeart } from "react-icons/ai";
 import Image from "next/image";
 import { LuMessageCircle } from "react-icons/lu";
+import { Post } from "@/types/types";
+import { BsDot } from "react-icons/bs";
 
-const Post = () => {
+interface Prop {
+  data: Post;
+}
+
+const SinglePost = (prop: Prop) => {
   let data = {
     name: "Vineet babar",
     passoutYear: 2023,
@@ -17,31 +23,41 @@ const Post = () => {
   };
   return (
     <div className="flex items-start gap-2">
+      <div className="w-full flex flex-col gap-3">
+        <div className="flex gap-2">
       <Avatar>
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
-      <div className="w-full flex flex-col gap-3">
-        <div className="flex gap-2">
-          <div>
-            <div className="flex items-center gap-2">
-              <div className="text-lg font-semibold tracking-wider ">
+          <div className="">
+            <div className="flex md:items-center md:gap-2 md:flex-row flex-col">
+              <div className="text-lg font-semibold tracking-wider flex items-center gap-2">
                 {data?.name}
+                <Image
+                  alt="blue tick"
+                  src={"/tick.svg"}
+                  width={13}
+                  height={13}
+                />
               </div>
-              <Image alt="blue tick" src={"/tick.svg"} width={13} height={13} />
-              <div className="text-grey_text font-[600]">
-                Batch {data?.passoutYear}
+              <div className="flex items-center">
+                <div className="text-grey_text font-[600]">
+                  Batch {data?.passoutYear}
+                </div>
+                <BsDot className="text-grey_text"></BsDot>
+                <div className="text-grey_text font-[600]">
+                  {data?.position}
+                </div>
               </div>
-              <div className="text-grey_text font-[600]">{data?.position}</div>
             </div>
-            <div className="font-[600]">{data?.desc}</div>
+            <div className="">{prop?.data?.description}</div>
           </div>
         </div>
         <div className="flex justify-center items-center">
           <Slider></Slider>
         </div>
         <div>
-          <div className="flex gap-8 font-semibold ">
+          <div className="flex gap-8 font-semibold  p-3 border-l-0 border-r-0">
             <div className="flex items-center text-slate-500 gap-2">
               <AiOutlineHeart size={24} />
               <div>{data?.likes} Likes</div>
@@ -52,16 +68,16 @@ const Post = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-grey_text font-semibold">
-          <Avatar>
+        <div className="flex items-center gap-2 text-grey_text  font-semibold">
+          <Avatar className="w-8 h-8">
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <div>Write a reply ....</div>
+          <div className="text-sm md:text-base">Write a reply ....</div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Post;
+export default SinglePost;

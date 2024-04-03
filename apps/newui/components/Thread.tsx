@@ -35,7 +35,7 @@ const Thread = () => {
             <SlOptionsVertical />
           </div>
         </div>
-        <div className="bg-text_bg leading-6 shadow-sm p-3  rounded-lg font-semibold tracking-[0.5px]">
+        <div className="bg-text_bg leading-6 shadow-sm p-3  rounded-lg tracking-[0.5px]">
           {data?.thread}
         </div>
         <div className="flex font-semibold text-slate-500  gap-10 items-center">

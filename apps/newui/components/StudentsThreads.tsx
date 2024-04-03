@@ -10,12 +10,12 @@ const StudentsThreads = () => {
     <div className="bg-white flex flex-col gap-2 shadow p-4 rounded-xl">
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl font-semibold tracking-wide">Student Threads</h1>
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-wrap">
           {tags?.map((ele, ind) => {
             return (
               <span
                 key={ind}
-                className="bg-text_bg shadow py-1 px-3 rounded-md flex items-center justify-between gap-2 cursor-pointer font-semibold"
+                className="bg-text_bg text-sm shadow py-1 px-3 rounded-md flex  items-center justify-between gap-2 cursor-pointer font-semibold"
               >
                 {ele + " "}
                 <RxCross2></RxCross2>
