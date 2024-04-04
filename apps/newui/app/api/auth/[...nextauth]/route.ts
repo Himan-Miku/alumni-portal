@@ -66,7 +66,7 @@ const handler = NextAuth({
           // check password
           const isValid = await bcrypt.compare(
             credentials.password,
-            user?.password!,
+            user?.password!
           );
           if (!isValid) {
             return null;
@@ -106,7 +106,9 @@ const handler = NextAuth({
 
       try {
         await connectDB();
-        const ifuserexist = await User.findOne({ email: profile.user.email });
+        const ifuserexist = await User.findOne({
+          email: String(profile.user.email!),
+        });
 
         if (!ifuserexist) {
           await User.create({

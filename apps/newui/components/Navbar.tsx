@@ -1,4 +1,6 @@
 "use client";
+
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { IoMdHome } from "react-icons/io";
@@ -10,16 +12,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiSquarePlus } from "react-icons/ci";
-import { useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 
 const Navbar = () => {
   let path = usePathname();
   const router = useRouter();
-
   console.log(path);
   const { data: session } = useSession();
-  console.log(session);
+
   return (
     <nav
       className="sticky bottom-0 z-10 md:top-0  md:h-[100vh]
@@ -41,8 +41,8 @@ const Navbar = () => {
               <span className="nav-names">Home</span>
             </div>
           </Link>
-          <Link href={"/Alumni"} className="navlink">
-            <div className="flex items-end gap-3 text-xl">
+          <Link href={"/alumni"} className="navlink">
+            <div className="flex items-end gap-3 text-lg">
               <PiStudentLight size={28} />
               <span className="nav-names">Alumni</span>
             </div>
@@ -70,35 +70,38 @@ const Navbar = () => {
               <span className="nav-names">Notifications</span>
             </div>
           </Link>
-          <div className="navlink">
-            <div className="flex items-end gap-3 text-xl">
+          <Link href={"threads"} className="navlink">
+            <div className="flex items-end gap-3 text-lg">
               <CiSquarePlus size={28} />
               <span className="nav-names">Threads</span>
             </div>
-          </div>
+          </Link>
         </div>
-        <div className="xl:mx-4 gap-6 flex flex-col">
-          {session ? (
-            <div
-              className="flex items-center gap-2 text-xl cursor-pointer"
-              onClick={() => {
-                router.push("/profile");
-              }}
-            >
-              <Avatar>
-                <AvatarImage src={session?.user?.image || ""} alt="@shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <div className="nav-names">{session?.user?.name}</div>
-            </div>
-          ) : (
-            <>
-              <Link href="/auth/sign-in">
-                <Button className="w-10">Login</Button>
-              </Link>
-            </>
-          )}
-          <div className="flex items-center text-xl gap-6">
+        <div className="xl:mx-4 text-black gap-6 flex flex-col">
+          <div className="flex items-center gap-2 text-xl">
+            {session?.user ? (
+              <>
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="@shadcn"
+                    onClick={() => {
+                      router.push("/profile");
+                    }}
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </>
+            ) : (
+              <>
+                <Link href="/auth/sign-in">
+                  <Button className="w-16">Login</Button>
+                </Link>
+              </>
+            )}
+            {session?.user && <div className="nav-names">Vineet Babar</div>}
+          </div>
+          <div className="hidden md:flex items-center text-xl gap-6">
             <RxHamburgerMenu className="ml-2" />
             <div className="nav-names">More</div>
           </div>

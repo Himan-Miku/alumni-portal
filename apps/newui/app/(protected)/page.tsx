@@ -1,3 +1,4 @@
+import AlumniPosts from "@/components/AlumniPosts";
 import CreateThread from "@/components/CreateThread";
 import SelectOptions from "@/components/SelectOptions";
 import StudentsThreads from "@/components/StudentsThreads";
@@ -8,7 +9,10 @@ const page = () => {
     <div className="md:py-5 md:px-8 grid grid-cols-10 gap-6 w-full">
       <div className="col-span-10 lg:col-span-7 flex flex-col gap-4 md:px-16 w-full">
         <CreateThread></CreateThread>
-        <StudentsThreads></StudentsThreads>
+        <div className="flex flex-col gap-10">
+          <StudentsThreads></StudentsThreads>
+          <AlumniPosts></AlumniPosts>
+        </div>
       </div>
       <div className="hidden lg:block col-span-3">
         <SelectOptions></SelectOptions>

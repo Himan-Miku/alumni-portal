@@ -3,8 +3,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SlOptionsVertical } from "react-icons/sl";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
+import { Thread } from "@/types/types";
 
-const Thread = () => {
+interface Prop {
+  singleThread: Thread;
+}
+const SingleThread = (prop: Prop) => {
   let data = {
     name: "Sam Altman",
     class: "TY IT",
@@ -26,25 +30,26 @@ const Thread = () => {
       <div className="w-full flex flex-col gap-3">
         <div className="w-full flex justify-between">
           <div className="flex gap-2 items-center">
-            <h3 className="font-semibold">{data.name}</h3>
+            <h3 className="font-semibold">{prop?.singleThread?.Uid?.name}</h3>
             <h4 className="text-slate-400">{data?.class}</h4>
           </div>
           <div className="flex gap-2 items-center">
             <h5 className="text-slate-400">{data?.time}</h5>
+
             <SlOptionsVertical />
           </div>
         </div>
         <div className="bg-text_bg leading-6 shadow-sm p-3  rounded-lg tracking-[0.5px]">
-          {data?.thread}
+          {prop?.singleThread?.thread}
         </div>
-        <div className="flex  gap-10 items-center">
+        <div className="flex font-semibold text-slate-500  gap-10 items-center">
           <div className="flex gap-2 items-center">
-            <FaRegHeart size={22} className="text-slate-400" />
-            {data?.likes} Likes
+            <FaRegHeart size={22} />
+            {prop?.singleThread?.likes?.length} Likes
           </div>
           <div className="flex gap-2 items-center">
-            <FaRegComment size={22} className="text-slate-400" />
-            {data?.replies} Replies
+            <FaRegComment size={22} />
+            {prop?.singleThread?.comments?.length} Replies
           </div>
         </div>
       </div>
@@ -52,4 +57,4 @@ const Thread = () => {
   );
 };
 
-export default Thread;
+export default SingleThread;

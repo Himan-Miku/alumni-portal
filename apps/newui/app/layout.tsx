@@ -21,9 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="w-full h-full">
       <body className={urbanist.className}>
-        <Provider session={session}>
-          <div className="flex bg-bg w-full  h-full">{children}</div>
-        </Provider>
+        <Provider session={session}>{children}</Provider>
       </body>
     </html>
   );

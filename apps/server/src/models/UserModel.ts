@@ -30,6 +30,9 @@ interface IUser {
   getJwtToken(): boolean;
   name: string;
   posts: Post[];
+  class?: string;
+  skills?: string[];
+  expertise?: string[];
   followers: mongoose.Schema.Types.ObjectId[];
   following: mongoose.Schema.Types.ObjectId[];
   about?: string;
@@ -85,6 +88,19 @@ const userSchema = new mongoose.Schema<IUser>(
       type: String,
       // required: true,
     },
+    class: {
+      type: String,
+    },
+    skills: [
+      {
+        type: String,
+      },
+    ],
+    expertise: [
+      {
+        type: String,
+      },
+    ],
     education: [
       {
         studyfrom: String,
@@ -128,19 +144,19 @@ const userSchema = new mongoose.Schema<IUser>(
   },
   {
     timestamps: true,
-  },
+  }
 );
 let expire = process.env.JWT_EXPIRE || "4d";
 
 userSchema.methods.compareTokens = function (
   token: string,
-  next: NextFunction,
+  next: NextFunction
 ) {
   let date = new Date();
   let currentTime = date?.getMilliseconds();
   if (currentTime > this.resetPassExpire) {
     next(
-      new ErrorHandler("Recovery Session Timed Out...Please retry again", 400),
+      new ErrorHandler("Recovery Session Timed Out...Please retry again", 400)
     );
     return false;
   }
