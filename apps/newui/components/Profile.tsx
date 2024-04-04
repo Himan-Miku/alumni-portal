@@ -21,9 +21,9 @@ export interface ProfileProps {
   image?: string;
   name: string;
   passoutyear: number;
-  Domain?: string;
+  Department?: string;
   Heading?: string;
-  linkedin?: string;
+  linkedin?: URL;
   lastseen?: Date;
   alumni: boolean;
   skills: string[];
@@ -33,7 +33,7 @@ const Profile: React.FC<ProfileProps> = ({
   image,
   name,
   passoutyear,
-  Domain,
+  Department,
   Heading,
   linkedin,
   lastseen,
@@ -65,7 +65,7 @@ const Profile: React.FC<ProfileProps> = ({
             <div className="flex items-center justify-start   ">
               <h3>Batch {passoutyear}</h3>
               <LuDot />
-              <h3>{Domain}</h3>
+              <h3>{Department}</h3>
             </div>
             <div className="flex text-base/3 text-muted-foreground">
               <h3>{Heading}</h3>

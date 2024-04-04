@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { BiGridAlt } from "react-icons/bi";
 import { LuSettings2 } from "react-icons/lu";
+ 
 
 const AlumniList = () => {
   const [listView, setListView] = useState(false);
@@ -19,7 +20,7 @@ const AlumniList = () => {
             height={20}
             className="m-2 ml-4 border-none"
           ></Image>
-          <Input className=" m-2"></Input>
+          <Input className=" m-2 border-none focus:border-none" ></Input>
         </div>
         <div
           className="flex justify-center items-center bg-white m-2 p-2 rounded-xl "
@@ -39,9 +40,14 @@ const AlumniList = () => {
       <div className="m-2 bg-white  rounded-xl ">
         <h2 className="p-2 pl-4">Best results matching your needs</h2>
         <div className="bg-slate-500 h-[1px]  mx-4"></div>
-        <div className="grid grid-cols-2">
+        <div className="flex  gap-1  flex-wrap justify-around mt-5 ">
+
           <AlumniCard></AlumniCard>
           <AlumniCard></AlumniCard>
+          <AlumniCard></AlumniCard>
+          <AlumniCard></AlumniCard>
+          <AlumniCard></AlumniCard>
+          
         </div>
       </div>
     </>
@@ -49,3 +55,4 @@ const AlumniList = () => {
 };
 
 export default AlumniList;
+

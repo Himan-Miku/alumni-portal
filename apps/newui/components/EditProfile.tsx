@@ -14,7 +14,44 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Logout from "./auth/Logout";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import LinkedIn from "next-auth/providers/linkedin";
+
+const formSchema = z.object({
+  Name: z.string().min(2).max(50),
+  Department: z.string().min(2).max(50),
+  Batch: z.number().lte(2027).gte(2000),
+  LinkedIn: z.string().startsWith("linkedin.com"),
+  Heading: z.string().min(2).max(50),
+});
 const EditProfile = () => {
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      Name: "",
+      Department: "",
+      Batch: 2025,
+      LinkedIn: "",
+      Heading: "",
+    },
+  });
+
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
+  }
   return (
     <div>
       <Dialog>
@@ -24,24 +61,99 @@ const EditProfile = () => {
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
-          <Logout></Logout>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
               Make changes to your profile here. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" value="Pedro Duarte" className="col-span-3" />
-            </div>
+          <div>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
+                <FormField
+                  control={form.control}
+                  name="Name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="shadcn" {...field} />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="Batch"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Batch</FormLabel>
+                      <FormControl>
+                        <Input placeholder="shadcn" {...field} />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="Department"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Deapartment</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Department in which you were in college "
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="Heading"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Heading</FormLabel>
+                      <FormControl>
+                        <Input placeholder="write about yourself" {...field} />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="LinkedIn"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>LinkedIn Url</FormLabel>
+                      <FormControl>
+                        <Input placeholder="linkedin.com/in/" {...field} />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="flex justify-between">
+                  <Button type="submit">Save</Button>
+
+                  <Logout></Logout>
+                </div>
+              </form>
+            </Form>
           </div>
-          <DialogFooter>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

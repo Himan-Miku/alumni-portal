@@ -4,33 +4,7 @@ import Skills from "@/components/Skills";
 import { useSession } from "next-auth/react";
 import React from "react";
 
-const user: ProfileProps = {
-  image: "/Image.png",
-  name: "Sam Altman",
 
-  passoutyear: 2020,
-  Domain: "IT",
-  Heading: "Web Dev",
-
-  alumni: true,
-  skills: [
-    "javascript",
-    "React",
-    "react",
-    "javascript",
-    "React",
-    "react",
-    "javascript",
-    "React",
-    "react",
-  ],
-  expertise: [
-    "Frontend Development",
-    "Full Stack Development",
-    "Frontend Development",
-    "Frontend Development",
-  ],
-};
 
 const page = () => {
   const { data: session } = useSession();
@@ -40,7 +14,7 @@ const page = () => {
     name: session?.user?.name || "Sam Altman",
 
     passoutyear: 2020,
-    Domain: "IT",
+    Department: "IT",
     Heading: "Web Dev",
 
     alumni: true,
