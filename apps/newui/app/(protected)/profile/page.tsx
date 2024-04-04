@@ -4,8 +4,6 @@ import Skills from "@/components/Skills";
 import { useSession } from "next-auth/react";
 import React from "react";
 
-
-
 const page = () => {
   const { data: session } = useSession();
 

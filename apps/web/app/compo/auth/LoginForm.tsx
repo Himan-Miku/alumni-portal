@@ -56,7 +56,7 @@ const LoginForm = () => {
     setSuccess("");
     const { email, password } = values;
     console.log("values", values);
-    startTransition( () => {
+    startTransition(() => {
       const user = signIn("credentials", {
         email,
         password,

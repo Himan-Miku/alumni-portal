@@ -2,7 +2,7 @@
 
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
-import NextAuth, { NextAuthOptions } from "next-auth";   
+import NextAuth, { NextAuthOptions } from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
 import LinkedinProvider from "next-auth/providers/linkedin";

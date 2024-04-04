@@ -79,15 +79,14 @@ const Navbar = () => {
         </div>
         <div className="xl:mx-4 gap-6 flex flex-col">
           {session ? (
-            <div className="flex items-center gap-2 text-xl cursor-pointer" onClick={() => {
-              router.push("/profile");
-            }}>
+            <div
+              className="flex items-center gap-2 text-xl cursor-pointer"
+              onClick={() => {
+                router.push("/profile");
+              }}
+            >
               <Avatar>
-                <AvatarImage
-                  src={session?.user?.image || ""}
-                  alt="@shadcn"
-                  
-                />
+                <AvatarImage src={session?.user?.image || ""} alt="@shadcn" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div className="nav-names">{session?.user?.name}</div>
