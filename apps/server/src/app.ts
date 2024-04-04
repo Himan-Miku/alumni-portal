@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoute";
 import postRoutes from "./routes/postRoute";
+import threadRoute from "./routes/threadRoute";
 
 import errorfn from "./middlewares/error";
 
@@ -19,11 +20,11 @@ app.use(
     origin: process.env.FRONTEND_URL,
     credentials: true,
     preflightContinue: true,
-  }),
+  })
 );
 
 //defining all routes here :
-app.use("/api", userRoutes, postRoutes);
+app.use("/api", userRoutes, postRoutes, threadRoute);
 app.use(errorfn);
 
 export default app;

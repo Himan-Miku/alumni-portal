@@ -55,3 +55,10 @@ export interface Post {
   likes: string[]; // Reference to User
   comments: Comment[];
 }
+
+export interface Thread {
+  Uid: User; // Reference to User
+  thread: string;
+  likes: string[]; // Reference to User
+  comments: Comment[];
+}
