@@ -20,7 +20,7 @@ app.use(
     origin: process.env.FRONTEND_URL,
     credentials: true,
     preflightContinue: true,
-  })
+  }),
 );
 
 //defining all routes here :

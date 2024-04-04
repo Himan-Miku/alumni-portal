@@ -10,7 +10,7 @@ export const fetchFeed = async (page: number) => {
       `${process.env.NEXT_PUBLIC_BACKEND}/api/showpost?page=${page}&limit=3`,
       {
         credentials: "include",
-      }
+      },
     );
     const data = await res.json();
     // console.log(data);
@@ -26,7 +26,7 @@ export const fetchThread = async (page: number) => {
       `${process.env.NEXT_PUBLIC_BACKEND}/api/showthread?page=${page}&limit=4`,
       {
         credentials: "include",
-      }
+      },
     );
     const data = await res.json();
     // console.log(data?.threads[0]);
