@@ -25,7 +25,7 @@ const page = () => {
     ],
   };
   return (
-    <div className=" w-full rounded-xl flex flex-col items-center  gap-5 h-full">
+    <div className=" w-full rounded-xl flex flex-col items-center justify-start  gap-5 h-full">
       <Profile {...user} />
     </div>
   );
