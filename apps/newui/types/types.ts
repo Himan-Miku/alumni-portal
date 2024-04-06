@@ -1,16 +1,13 @@
 import mongoose from "mongoose";
 
-export interface EUser extends User {
-  following?: User[];
-  followers?: User[];
-}
+
 
 export interface User {
   name: string;
   _id?: string;
   posts?: [];
-  followers?: any[];
-  following?: any[];
+  Connection?: [];
+  
   about?: string;
   email: string;
   password?: string;
@@ -39,7 +36,7 @@ export interface User {
   linkedin?: string;
   github?: string;
   image?: string;
-  userType?: "Student" | "Alumni";
+  isAlumni?:boolean;
 }
 
 interface Comment {

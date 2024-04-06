@@ -33,8 +33,8 @@ interface IUser {
   class?: string;
   skills?: string[];
   expertise?: string[];
-  followers: mongoose.Schema.Types.ObjectId[];
-  following: mongoose.Schema.Types.ObjectId[];
+  Connections: mongoose.Schema.Types.ObjectId[];
+  isAlumni:boolean;
   about?: string;
   email: string;
   password?: string;
@@ -64,18 +64,16 @@ const userSchema = new mongoose.Schema<IUser>(
         },
       },
     ],
-    followers: [
+    Connections: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
-    following: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    isAlumni:{
+      type:Boolean,
+      default:true
+    },  
     about: {
       type: String,
     },

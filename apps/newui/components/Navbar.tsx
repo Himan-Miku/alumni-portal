@@ -13,12 +13,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiSquarePlus } from "react-icons/ci";
 import { Button } from "./ui/button";
+import { User } from "next-auth";
 
 const Navbar = () => {
   let path = usePathname();
   const router = useRouter();
   console.log(path);
   const { data: session } = useSession();
+  console.log(session)
 
   return (
     <nav
@@ -41,7 +43,7 @@ const Navbar = () => {
               <span className="nav-names">Home</span>
             </div>
           </Link>
-          <Link href={"/alumni"} className="navlink">
+          <Link href={"Alumni"} className="navlink">
             <div className="flex items-end gap-3 text-lg">
               <PiStudentLight size={28} />
               <span className="nav-names">Alumni</span>
@@ -53,7 +55,7 @@ const Navbar = () => {
               <span className="nav-names">SPIR</span>
             </div>
           </Link>
-          <Link href={"messages"} className="navlink ">
+          <Link href={"/messages"} className="navlink ">
             <div className=" flex items-end gap-3 text-lg">
               <div>
                 <AiOutlineMessage
@@ -83,7 +85,7 @@ const Navbar = () => {
               <>
                 <Avatar>
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src={session?.user?.image||"https://github.com/shadcn.png"} 
                     alt="@shadcn"
                     onClick={() => {
                       router.push("/profile");
@@ -99,7 +101,7 @@ const Navbar = () => {
                 </Link>
               </>
             )}
-            {session?.user && <div className="nav-names">Vineet Babar</div>}
+            {session?.user && <div className="nav-names">{session.user.name}</div>}
           </div>
           <div className="hidden md:flex items-center text-xl gap-6">
             <RxHamburgerMenu className="ml-2" />

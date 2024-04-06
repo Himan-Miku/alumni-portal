@@ -1,9 +1,11 @@
+
 import type { Metadata } from "next";
 import { Inter, Urbanist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { getServerSession } from "next-auth";
 import Provider from "@/context/SessionProviders";
+import { MyUserContextPorvider } from "@/hooks/useUser";
 const urbanist = Urbanist({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
@@ -21,7 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="w-full h-full">
       <body className={urbanist.className}>
-        <Provider session={session}>{children}</Provider>
+        <Provider session={session}>
+          <MyUserContextPorvider>
+          {children}
+          </MyUserContextPorvider>
+          </Provider>
       </body>
     </html>
   );

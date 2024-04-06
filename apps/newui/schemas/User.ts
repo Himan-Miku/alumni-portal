@@ -71,9 +71,9 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    userType: {
-      type: String,
-      enum: ["Student", "Alumni"],
+    isAlumni: {
+      type: Boolean,
+      
     },
   },
   {

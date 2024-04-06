@@ -44,9 +44,9 @@ export const UpdateFollow = catchAsyncError(
     const user = await User?.findOne({ _id: req?.body?._id });
     const followUser = await User?.findOne({ _id: req.params.id });
     const isFollowing =
-      user?.following.filter((ele) => {
-        return String(ele) == req.params.id!;
-      }).length != 0;
+      // user?.following.filter((ele) => {
+      //   return String(ele) == req.params.id!;
+      // }).length != 0;
     // console.log(isFollowing);
 
     // if (isFollowing) {
@@ -275,3 +275,13 @@ export const deleteUser = catchAsyncError(
     });
   },
 );
+
+export const getUserByEmail =catchAsyncError(
+  async(req:IReq,res:Response)=>{
+    let user=await User.findOne({email:req.params.email});
+    res.status(201).json({
+      success:true,
+      user,
+    })
+  }
+)
