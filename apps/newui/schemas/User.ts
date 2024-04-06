@@ -73,7 +73,6 @@ const userSchema = new mongoose.Schema(
     },
     isAlumni: {
       type: Boolean,
-      
     },
   },
   {

@@ -1,13 +1,11 @@
 import mongoose from "mongoose";
 
-
-
 export interface User {
   name: string;
   _id?: string;
   posts?: [];
   Connection?: [];
-  
+
   about?: string;
   email: string;
   password?: string;
@@ -36,7 +34,7 @@ export interface User {
   linkedin?: string;
   github?: string;
   image?: string;
-  isAlumni?:boolean;
+  isAlumni?: boolean;
 }
 
 interface Comment {

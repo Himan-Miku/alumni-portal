@@ -34,7 +34,7 @@ interface IUser {
   skills?: string[];
   expertise?: string[];
   Connections: mongoose.Schema.Types.ObjectId[];
-  isAlumni:boolean;
+  isAlumni: boolean;
   about?: string;
   email: string;
   password?: string;
@@ -70,10 +70,10 @@ const userSchema = new mongoose.Schema<IUser>(
         ref: "User",
       },
     ],
-    isAlumni:{
-      type:Boolean,
-      default:true
-    },  
+    isAlumni: {
+      type: Boolean,
+      default: true,
+    },
     about: {
       type: String,
     },

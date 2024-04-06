@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FcApproval } from "react-icons/fc";
@@ -43,7 +43,7 @@ const Profile: React.FC<ProfileProps> = ({
   skills,
   expertise,
 }) => {
-  const {user}=useUser();
+  const { user } = useUser();
   console.log(user);
   return (
     <>

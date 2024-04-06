@@ -20,7 +20,7 @@ const Navbar = () => {
   const router = useRouter();
   console.log(path);
   const { data: session } = useSession();
-  console.log(session)
+  console.log(session);
 
   return (
     <nav
@@ -85,7 +85,9 @@ const Navbar = () => {
               <>
                 <Avatar>
                   <AvatarImage
-                    src={session?.user?.image||"https://github.com/shadcn.png"} 
+                    src={
+                      session?.user?.image || "https://github.com/shadcn.png"
+                    }
                     alt="@shadcn"
                     onClick={() => {
                       router.push("/profile");
@@ -101,7 +103,9 @@ const Navbar = () => {
                 </Link>
               </>
             )}
-            {session?.user && <div className="nav-names">{session.user.name}</div>}
+            {session?.user && (
+              <div className="nav-names">{session.user.name}</div>
+            )}
           </div>
           <div className="hidden md:flex items-center text-xl gap-6">
             <RxHamburgerMenu className="ml-2" />

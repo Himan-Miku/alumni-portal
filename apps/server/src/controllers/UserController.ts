@@ -47,24 +47,24 @@ export const UpdateFollow = catchAsyncError(
       // user?.following.filter((ele) => {
       //   return String(ele) == req.params.id!;
       // }).length != 0;
-    // console.log(isFollowing);
+      // console.log(isFollowing);
 
-    // if (isFollowing) {
-    //   user!.following =
-    //     user?.following.filter((ele) => {
-    //       return String(ele._id) != String(req.params.id!);
-    //     }) || [];
-    //   followUser!.followers =
-    //     followUser?.followers.filter((ele) => {
-    //       return String(ele._id) != String(req?.body._id!);
-    //     }) || [];
+      // if (isFollowing) {
+      //   user!.following =
+      //     user?.following.filter((ele) => {
+      //       return String(ele._id) != String(req.params.id!);
+      //     }) || [];
+      //   followUser!.followers =
+      //     followUser?.followers.filter((ele) => {
+      //       return String(ele._id) != String(req?.body._id!);
+      //     }) || [];
 
-    //   // res.end();
-    // } else {
-    //   user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
-    //   followUser?.followers.push(new mongoose.Types.ObjectId(req?.body._id));
-    // }
-    await user?.save();
+      //   // res.end();
+      // } else {
+      //   user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
+      //   followUser?.followers.push(new mongoose.Types.ObjectId(req?.body._id));
+      // }
+      await user?.save();
     await followUser?.save();
     res.status(200).json({
       success: true,
@@ -276,12 +276,12 @@ export const deleteUser = catchAsyncError(
   },
 );
 
-export const getUserByEmail =catchAsyncError(
-  async(req:IReq,res:Response)=>{
-    let user=await User.findOne({email:req.params.email});
+export const getUserByEmail = catchAsyncError(
+  async (req: IReq, res: Response) => {
+    let user = await User.findOne({ email: req.params.email });
     res.status(201).json({
-      success:true,
+      success: true,
       user,
-    })
-  }
-)
+    });
+  },
+);

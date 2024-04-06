@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Inter, Urbanist } from "next/font/google";
 import "./globals.css";
@@ -24,10 +23,8 @@ export default function RootLayout({
     <html lang="en" className="w-full h-full">
       <body className={urbanist.className}>
         <Provider session={session}>
-          <MyUserContextPorvider>
-          {children}
-          </MyUserContextPorvider>
-          </Provider>
+          <MyUserContextPorvider>{children}</MyUserContextPorvider>
+        </Provider>
       </body>
     </html>
   );
