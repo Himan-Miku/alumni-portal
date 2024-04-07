@@ -33,8 +33,8 @@ interface IUser {
   class?: string;
   skills?: string[];
   expertise?: string[];
-  followers: mongoose.Schema.Types.ObjectId[];
-  following: mongoose.Schema.Types.ObjectId[];
+  Connections: mongoose.Schema.Types.ObjectId[];
+  isAlumni: boolean;
   about?: string;
   email: string;
   password?: string;
@@ -64,18 +64,16 @@ const userSchema = new mongoose.Schema<IUser>(
         },
       },
     ],
-    followers: [
+    Connections: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
-    following: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    isAlumni: {
+      type: Boolean,
+      default: true,
+    },
     about: {
       type: String,
     },
@@ -144,19 +142,19 @@ const userSchema = new mongoose.Schema<IUser>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 let expire = process.env.JWT_EXPIRE || "4d";
 
 userSchema.methods.compareTokens = function (
   token: string,
-  next: NextFunction
+  next: NextFunction,
 ) {
   let date = new Date();
   let currentTime = date?.getMilliseconds();
   if (currentTime > this.resetPassExpire) {
     next(
-      new ErrorHandler("Recovery Session Timed Out...Please retry again", 400)
+      new ErrorHandler("Recovery Session Timed Out...Please retry again", 400),
     );
     return false;
   }

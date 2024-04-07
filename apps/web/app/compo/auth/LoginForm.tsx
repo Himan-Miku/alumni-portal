@@ -56,14 +56,14 @@ const LoginForm = () => {
     setSuccess("");
     const { email, password } = values;
     console.log("values", values);
-    startTransition(async () => {
-      const user = await signIn("credentials", {
+    startTransition(() => {
+      const user = signIn("credentials", {
         email,
         password,
         redirect: false,
       });
       console.log("user", user);
-      if (user?.error == null) {
+      if (user != null) {
         setSuccess("Login Successful");
         router.push("/profile");
       } else setError("Invalid Credentials");

@@ -44,27 +44,27 @@ export const UpdateFollow = catchAsyncError(
     const user = await User?.findOne({ _id: req?.body?._id });
     const followUser = await User?.findOne({ _id: req.params.id });
     const isFollowing =
-      user?.following.filter((ele) => {
-        return String(ele) == req.params.id!;
-      }).length != 0;
-    // console.log(isFollowing);
+      // user?.following.filter((ele) => {
+      //   return String(ele) == req.params.id!;
+      // }).length != 0;
+      // console.log(isFollowing);
 
-    // if (isFollowing) {
-    //   user!.following =
-    //     user?.following.filter((ele) => {
-    //       return String(ele._id) != String(req.params.id!);
-    //     }) || [];
-    //   followUser!.followers =
-    //     followUser?.followers.filter((ele) => {
-    //       return String(ele._id) != String(req?.body._id!);
-    //     }) || [];
+      // if (isFollowing) {
+      //   user!.following =
+      //     user?.following.filter((ele) => {
+      //       return String(ele._id) != String(req.params.id!);
+      //     }) || [];
+      //   followUser!.followers =
+      //     followUser?.followers.filter((ele) => {
+      //       return String(ele._id) != String(req?.body._id!);
+      //     }) || [];
 
-    //   // res.end();
-    // } else {
-    //   user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
-    //   followUser?.followers.push(new mongoose.Types.ObjectId(req?.body._id));
-    // }
-    await user?.save();
+      //   // res.end();
+      // } else {
+      //   user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
+      //   followUser?.followers.push(new mongoose.Types.ObjectId(req?.body._id));
+      // }
+      await user?.save();
     await followUser?.save();
     res.status(200).json({
       success: true,
@@ -269,6 +269,16 @@ export const selfinfo = catchAsyncError(
 export const deleteUser = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
     let user = await User.deleteOne({ _id: req?.body?._id });
+    res.status(201).json({
+      success: true,
+      user,
+    });
+  },
+);
+
+export const getUserByEmail = catchAsyncError(
+  async (req: IReq, res: Response) => {
+    let user = await User.findOne({ email: req.params.email });
     res.status(201).json({
       success: true,
       user,

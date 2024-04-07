@@ -25,10 +25,10 @@ const SinglePost = (prop: Prop) => {
     <div className="flex items-start gap-2">
       <div className="w-full flex flex-col gap-3">
         <div className="flex gap-2">
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
           <div className="">
             <div className="flex md:items-center md:gap-2 md:flex-row flex-col">
               <div className="text-lg font-semibold tracking-wider flex items-center gap-2">

@@ -1,6 +1,7 @@
+import React from "react";
 import LoginForm from "app/compo/auth/LoginForm";
 
-const LoginPage = () => {
+const LoginPage: React.FC = (): JSX.Element => {
   return <LoginForm />;
 };
 

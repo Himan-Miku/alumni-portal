@@ -9,6 +9,7 @@ import {
   deleteObj,
   deleteUser,
   getUser,
+  getUserByEmail,
   login,
   recoverPassword,
   selfinfo,
@@ -30,6 +31,6 @@ router.route("/user/:_id").get(getUser);
 router.route("/follow/:id").put(UpdateFollow);
 router.route("/append").post(append);
 router.route("/objupdate/:id").put(updateIndividuals);
-
+router.route("/user/email/:email").get(getUserByEmail);
 router.route("/forgetpassword").get(ForgetPassword).post(recoverPassword);
 export default router;
