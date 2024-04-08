@@ -90,3 +90,22 @@
     @apply border-2 border-blue-500 px-4 py-2 text-blue-500 rounded-md;
   }
 }
+@keyframes sparkle {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply the animation to the heart icon */
+.heart-icon {
+  animation: sparkle 0.5s;
+}

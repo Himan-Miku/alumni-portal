@@ -6,7 +6,7 @@ const Protectedlayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <div className="flex flex-col-reverse md:flex-row bg-bg">
         <Navbar></Navbar>
-        {children}
+        <div className="h-full">{children}</div>
       </div>
     </>
   );

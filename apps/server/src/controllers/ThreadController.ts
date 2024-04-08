@@ -55,24 +55,36 @@ export const likes = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
     let thread = await Thread.findOne({ ...req.params });
 
-    req.query.action == "add" &&
-      thread?.likes.filter((elem) => {
-        return String(elem) == String(req?.body._id);
-      }).length == 0 &&
-      thread?.likes.push(req?.body._id);
-
-    if (req.query.action == "remove") {
-      let temp = thread?.likes.filter((elem) => {
-        return String(elem) != String(req?.body._id);
-      })!;
-      thread!.likes = temp;
+    if (req.query.action == "add") {
+      if (!thread?.likes?.includes(req?.body?._id)) {
+        thread?.likes.push(req?.body._id);
+        await thread?.save();
+        res.status(200).json({
+          success: true,
+          likes: thread?.likes?.length,
+        });
+      } else {
+        res.status(401).json({
+          success: false,
+          message: "Already Liked",
+        });
+      }
+    } else {
+      if (req.query.action == "remove") {
+        let temp = thread?.likes.filter((elem) => {
+          return String(elem) != String(req?.body._id);
+        })!;
+        thread!.likes = temp;
+        await thread?.save();
+        res.status(200).json({
+          success: true,
+          likes: thread?.likes?.length,
+        });
+      }
     }
-    await thread?.save();
+
     // console.log(post);
-    res.status(200).json({
-      success: true,
-      likes: thread?.likes?.length,
-    });
+    // if(req?.query?.action=="add")
   }
 );
 export const comments = catchAsyncError(

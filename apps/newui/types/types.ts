@@ -42,13 +42,14 @@ export interface User {
   userType?: "Student" | "Alumni";
 }
 
-interface Comment {
+export interface Comment {
   text: string;
   owner: string; // Reference to User
 }
 
 // Post Schema
 export interface Post {
+  _id: string;
   Uid: User; // Reference to User
   description?: string;
   media: string[];
@@ -57,6 +58,7 @@ export interface Post {
 }
 
 export interface Thread {
+  _id: string;
   Uid: User; // Reference to User
   thread: string;
   likes: string[]; // Reference to User

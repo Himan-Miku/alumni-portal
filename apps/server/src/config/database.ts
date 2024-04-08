@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import mongoose, { MongooseError } from "mongoose";
 
 const connectDB = async (): Promise<void> => {
-  const mongoUrl = process.env.MONGODB_PRODUCTION_URI!;
+  const mongoUrl = process.env.MONGODB_URI!;
   console.log(mongoUrl);
 
   try {

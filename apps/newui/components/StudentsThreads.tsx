@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Thread from "./Thread";
 import { RxCross2 } from "react-icons/rx";
