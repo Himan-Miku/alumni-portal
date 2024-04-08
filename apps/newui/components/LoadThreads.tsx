@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { fetchThread } from "@/actions/action";
 import { Thread } from "@/types/types";
-
 import SingleThread from "./Thread";
 
 const delay = (milliseconds: number): Promise<void> => {
@@ -29,7 +28,7 @@ const LoadMore = () => {
 
   useEffect(() => {
     if (inView) {
-    //   console.log("At the end");
+      //   console.log("At the end");
       loadMoreFn();
     }
   }, [inView]);

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SlOptionsVertical } from "react-icons/sl";
@@ -11,7 +12,6 @@ interface Prop {
   singleThread: Thread;
 }
 const SingleThread = (prop: Prop) => {
-  console?.log(prop);
   return (
     <div className="flex gap-2">
       <div className="flex gap-2 flex-col items-center">
@@ -29,8 +29,9 @@ const SingleThread = (prop: Prop) => {
           </div>
           <div className="flex gap-2 items-center">
             <h5 className="text-slate-400">2d</h5>
-
-            <SlOptionsVertical />
+            <div>
+              <SlOptionsVertical />
+            </div>
           </div>
         </div>
         <div className="bg-text_bg leading-6 shadow-sm p-3  rounded-lg tracking-[0.5px]">

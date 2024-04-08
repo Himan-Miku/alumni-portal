@@ -5,6 +5,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { Comment } from "@/types/types";
 import Axios from "@/app/Axios";
+import { Button } from "./ui/button";
 
 interface Prop {
   likes: string[];
@@ -41,34 +42,28 @@ const ThreadLikeComments = (prop: Prop) => {
   let [likes, setLikes] = useState<string[]>(prop?.likes);
   const [like, setLike] = useState(false);
 
-  const handleClick = () => {
-    setLike(!like);
-  };
-
   return (
     <>
       <div className="flex font-semibold text-slate-500  gap-10 items-center">
-        <div
-          className="flex gap-2 items-center cursor-pointer"
-          onClick={handleClick}
-        >
+        <div className="flex gap-2 items-center cursor-pointer">
           {likes?.includes("6599324e7893780c49538d65") ? (
-            <AiFillHeart
-              size={25}
-              className="text-blue-500 heart-icon"
+            <button
               onClick={() => {
+                // prompt("Hello clocked");
                 LikeFn("remove");
               }}
-            />
+            >
+              <AiFillHeart size={25} className="text-blue-500 heart-icon" />
+            </button>
           ) : (
-            <FaRegHeart
-              size={25}
-              className=""
+            <button
               onClick={() => {
                 playSound("/like.mp3");
                 LikeFn("add");
               }}
-            />
+            >
+              <FaRegHeart size={25} className="" />
+            </button>
           )}
           {likes?.length} Likes
         </div>

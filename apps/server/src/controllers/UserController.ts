@@ -10,6 +10,7 @@ import { ApiFeatures } from "../utils/ApiFeatures";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { SendMail } from "../utils/Mail";
+import mongoo from "mongoose";
 
 export const AddUser = catchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -18,7 +19,7 @@ export const AddUser = catchAsyncError(
       success: true,
       user,
     });
-  },
+  }
 );
 
 export const login = catchAsyncError(
@@ -36,43 +37,41 @@ export const login = catchAsyncError(
       return next(new ErrorHandler("Email and Password are invalid", 400));
     }
     sendToken(user, 201, res);
-  },
+  }
 );
 
-export const UpdateFollow = catchAsyncError(
+export const UpdateConnections = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
-    const user = await User?.findOne({ _id: req?.body?._id });
-    const followUser = await User?.findOne({ _id: req.params.id });
-    const isFollowing =
-      user?.following.filter((ele) => {
-        return String(ele) == req.params.id!;
-      }).length != 0;
-    // console.log(isFollowing);
+    const user1 = await User?.findOne({ _id: req?.body?._id });
+    const user2 = await User?.findOne({ _id: req.params.id });
+    if (!user1 || !user2) {
+      return next(new ErrorHandler("No Such User Found", 404));
+    }
+    const isFollowing = user1?.Connections?.includes(user2?._id);
+    console.log(isFollowing);
 
-    // if (isFollowing) {
-    //   user!.following =
-    //     user?.following.filter((ele) => {
-    //       return String(ele._id) != String(req.params.id!);
-    //     }) || [];
-    //   followUser!.followers =
-    //     followUser?.followers.filter((ele) => {
-    //       return String(ele._id) != String(req?.body._id!);
-    //     }) || [];
+    if (isFollowing) {
+      user1.Connections = user1?.Connections.filter((ele) => {
+        return ele != user2?._id;
+      });
+      user2.Connections = user2?.Connections.filter((ele) => {
+        return ele != user1?._id;
+      });
+      // res.end();
+    } else {
+      user1?.Connections?.concat([user2?._id]);
+      user2?.Connections?.concat([user1?._id]);
 
-    //   // res.end();
-    // } else {
-    //   user?.following.push(new mongoose.Types.ObjectId(req.params.id!));
-    //   followUser?.followers.push(new mongoose.Types.ObjectId(req?.body._id));
-    // }
-    await user?.save();
-    await followUser?.save();
+    }
+    await user1?.save();
+    await user2?.save();
     res.status(200).json({
       success: true,
-      Message: `${
-        isFollowing ? "UnFollowed" : "Following"
-      } ${followUser?.name}`,
+      Message: `${user1?.name} ${
+        isFollowing ? "Disconnected with" : "Connected with"
+      } ${user2?.name}`,
     });
-  },
+  }
 );
 
 export const updateUser = catchAsyncError(
@@ -82,7 +81,7 @@ export const updateUser = catchAsyncError(
       success: true,
       user,
     });
-  },
+  }
 );
 export const append = catchAsyncError(
   async (req: IReq, res: Response, next: NextFunction) => {
@@ -98,21 +97,21 @@ export const append = catchAsyncError(
       success: true,
       // resp,
     });
-  },
+  }
 );
 
-export const PopulatedFollowings = catchAsyncError(
+export const PopulateConnections = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
     const user = await User.findOne(
       { _id: req?.params?.id },
-      { followers: 1, following: 1 },
-    ).populate(["followers", "following"]);
+      { Connections: 1 }
+    ).populate(["Connections"]);
 
     res?.status(200).json({
       success: true,
       user,
     });
-  },
+  }
 );
 
 export const updateIndividuals = catchAsyncError(
@@ -127,7 +126,7 @@ export const updateIndividuals = catchAsyncError(
                 "work.$.position": req.body.position,
                 "work.$.duration": req.body.duration,
               },
-            },
+            }
           )
         : req.query.key == "edu" &&
           (await User?.updateOne(
@@ -139,7 +138,7 @@ export const updateIndividuals = catchAsyncError(
                 "education.$.percentage": req.body.percentage,
                 "education.$.duration": req.body.duration,
               },
-            },
+            }
           ));
     // console.log(user);
     // console.log(user);
@@ -147,7 +146,7 @@ export const updateIndividuals = catchAsyncError(
       success: true,
       user,
     });
-  },
+  }
 );
 
 export const deleteObj = catchAsyncError(
@@ -158,19 +157,19 @@ export const deleteObj = catchAsyncError(
             {
               _id: req?.body?._id,
             },
-            { $pull: { work: { _id: req.params.id } } },
+            { $pull: { work: { _id: req.params.id } } }
           )
         : await User?.updateOne(
             {
               _id: req?.body?._id,
             },
-            { $pull: { education: { _id: req.params.id } } },
+            { $pull: { education: { _id: req.params.id } } }
           );
     res.status(200).json({
       success: true,
       user,
     });
-  },
+  }
 );
 
 export const SearchUser = catchAsyncError(
@@ -182,7 +181,7 @@ export const SearchUser = catchAsyncError(
       success: true,
       user,
     });
-  },
+  }
 );
 export const ForgetPassword = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
@@ -195,7 +194,7 @@ export const ForgetPassword = catchAsyncError(
     let user = await User?.findOneAndUpdate(
       { email: req?.query?.email },
       { resetPassToken: hash, resetPassExpire: expirationTime },
-      { new: true },
+      { new: true }
     );
     if (!user) return next(new ErrorHandler("No such user found", 404));
     SendMail({
@@ -207,7 +206,7 @@ export const ForgetPassword = catchAsyncError(
       success: true,
       message: "Recovery Mail Sent Successfully to " + user?.email,
     });
-  },
+  }
 );
 
 export const recoverPassword = catchAsyncError(
@@ -239,7 +238,7 @@ export const recoverPassword = catchAsyncError(
       message: "Password Changed Successfully",
       // save,
     });
-  },
+  }
 );
 export const getUser = catchAsyncError(
   async (req: IReq, res: IRes, next: NextFunction) => {
@@ -250,7 +249,7 @@ export const getUser = catchAsyncError(
       success: true,
       user,
     });
-  },
+  }
 );
 
 export const selfinfo = catchAsyncError(
@@ -263,7 +262,7 @@ export const selfinfo = catchAsyncError(
       success: true,
       user: data,
     });
-  },
+  }
 );
 
 export const deleteUser = catchAsyncError(
@@ -273,5 +272,15 @@ export const deleteUser = catchAsyncError(
       success: true,
       user,
     });
-  },
+  }
+);
+
+export const getUserByEmail = catchAsyncError(
+  async (req: IReq, res: Response) => {
+    let user = await User.findOne({ email: req.params.email });
+    res.status(201).json({
+      success: true,
+      user,
+    });
+  }
 );

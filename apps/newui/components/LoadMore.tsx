@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { fetchFeed } from "@/actions/action";
 import { Post } from "@/types/types";
-
 import SinglePost from "./Post";
 
 const delay = (milliseconds: number): Promise<void> => {

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FcApproval } from "react-icons/fc";
@@ -16,14 +17,15 @@ import {
 } from "@/components/ui/dialog";
 import EditProfile from "./EditProfile";
 import Skills from "./Skills";
+import { useUser } from "@/hooks/useUser";
 
 export interface ProfileProps {
   image?: string;
   name: string;
   passoutyear: number;
-  Domain?: string;
+  Department?: string;
   Heading?: string;
-  linkedin?: string;
+  linkedin?: URL;
   lastseen?: Date;
   alumni: boolean;
   skills: string[];
@@ -33,7 +35,7 @@ const Profile: React.FC<ProfileProps> = ({
   image,
   name,
   passoutyear,
-  Domain,
+  Department,
   Heading,
   linkedin,
   lastseen,
@@ -41,6 +43,8 @@ const Profile: React.FC<ProfileProps> = ({
   skills,
   expertise,
 }) => {
+  const { user } = useUser();
+  console.log(user);
   return (
     <>
       <div className="flex bg-white w-full max-w-[600px] rounded-2xl  justify-between items-center md:mt-5">
@@ -51,8 +55,8 @@ const Profile: React.FC<ProfileProps> = ({
           </Avatar>
 
           <div className="flex flex-col gap-1 ml-1">
-            <div className="flex justify-center items-center gap-3">
-              <h2 className="text-xl/4 font-bold">{name}</h2>
+            <div className="flex justify-between items-center gap-3">
+              <h2 className="text-xl/4 font-bold text-left">{name}</h2>
               {alumni && (
                 <Image
                   src="/verify.svg"
@@ -65,7 +69,7 @@ const Profile: React.FC<ProfileProps> = ({
             <div className="flex items-center justify-start   ">
               <h3>Batch {passoutyear}</h3>
               <LuDot />
-              <h3>{Domain}</h3>
+              <h3>{Department}</h3>
             </div>
             <div className="flex text-base/3 text-muted-foreground">
               <h3>{Heading}</h3>

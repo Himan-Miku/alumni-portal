@@ -30,7 +30,7 @@ const ThreadSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Thread = mongoose.model("Thread", ThreadSchema);

@@ -19,7 +19,7 @@ const PORT = process.env.PORT ? process.env.PORT : 8000;
 connectDB();
 let server = new Server();
 app.listen(PORT, () => {
-  console.log(`Server running on the PORT:${PORT}`); 
+  console.log(`Server running on the PORT:${PORT}`);
 });
 //unhandled rejection handling
 process.on("unhandledRejection", (err: Error) => {

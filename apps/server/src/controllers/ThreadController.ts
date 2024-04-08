@@ -23,7 +23,7 @@ export const ShowThread = catchAsyncError(
       success: true,
       threads,
     });
-  }
+  },
 );
 
 export const createThread = catchAsyncError(
@@ -48,7 +48,7 @@ export const createThread = catchAsyncError(
     } catch (error) {
       res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
 );
 
 export const likes = catchAsyncError(
@@ -102,5 +102,5 @@ export const comments = catchAsyncError(
       success: true,
       data: comment,
     });
-  }
+  },
 );
