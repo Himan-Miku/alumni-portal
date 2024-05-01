@@ -39,7 +39,9 @@ export interface User {
 
 export interface Comment {
   text: string;
-  owner: string; // Reference to User
+  owner: User;
+  likes: string[];
+  _id: string;
 }
 
 // Post Schema

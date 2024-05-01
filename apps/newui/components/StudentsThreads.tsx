@@ -3,19 +3,27 @@ import React, { useEffect, useState } from "react";
 import SingleThread from "./Thread";
 import { RxCross2 } from "react-icons/rx";
 import LoadThreads from "../components/LoadThreads";
+import ThreadSkeleton from "@/components/ThreadSkeleton";
 import { Thread } from "@/types/types";
 import Axios from "@/app/Axios";
 
 const StudentsThreads = () => {
   let tags = ["All", "Job Opportunities", "Achievements"];
   let [data, setData] = useState<Thread[]>([]);
+  let [loading, setLoading] = useState<"Loading" | "Loaded" | "Not Found">(
+    "Loading"
+  );
+
   useEffect(() => {
     let fetch = async () => {
       try {
+        setLoading("Loading");
         const res = await Axios.get("api/showthread?page=0&limit=4");
         setData(res?.data?.threads as Thread[]);
+        setLoading("Loaded");
       } catch (error) {
         console.log(error);
+        setLoading("Not Found");
       }
     };
     fetch();
@@ -43,18 +51,29 @@ const StudentsThreads = () => {
         </div>
         <div className="w-full h-[1px] bg-slate-400"></div>
       </div>
-      <div className="threads flex flex-col gap-4 pt-3">
-        {data?.map((ele, ind) => {
-          return (
-            <>
-              <SingleThread singleThread={ele} key={ind}></SingleThread>
-              <hr></hr>
-            </>
-          );
-        })}
+      <div className="threads flex flex-col gap-6 pt-3">
+        {loading == "Loading" ? (
+          <>
+            <ThreadSkeleton></ThreadSkeleton>
+            <ThreadSkeleton></ThreadSkeleton>
+          </>
+        ) : loading == "Loaded" ? (
+          data?.map((ele, ind) => {
+            return (
+              <div className="flex flex-col gap-4 " key={ind}>
+                <SingleThread singleThread={ele} key={ind}></SingleThread>
+                <hr></hr>
+              </div>
+            );
+          })
+        ) : (
+          <div className="text-xl font-semibold text-slate-500 text-center ">
+            No Threads Found
+          </div>
+        )}
       </div>
-      {<LoadThreads></LoadThreads>}
-      <hr className="mt-4"></hr>
+      {loading != "Not Found" && <LoadThreads></LoadThreads>}
+      {/* <hr className="mt-4"></hr> */}
       {/* <div className="grid place-content-center">
         <Button
           variant={"ghost"}

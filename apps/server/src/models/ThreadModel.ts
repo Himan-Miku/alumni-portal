@@ -9,6 +9,12 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const ThreadSchema = new mongoose.Schema(
@@ -30,7 +36,7 @@ const ThreadSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const Thread = mongoose.model("Thread", ThreadSchema);

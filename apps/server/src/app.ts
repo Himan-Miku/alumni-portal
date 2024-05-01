@@ -19,7 +19,7 @@ app.use(
     methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
     origin: process.env.FRONTEND_URL,
     credentials: true,
-    preflightContinue: true,
+    // preflightContinue: true,
   })
 );
 

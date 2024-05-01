@@ -71,6 +71,9 @@
     @apply border-border tracking-wider;
     @apply border-border;
   }
+  .smoother {
+    transition: max-height 0.5s ease;
+  }
   body {
     @apply bg-background text-foreground h-full;
   }
@@ -108,4 +111,16 @@
 /* Apply the animation to the heart icon */
 .heart-icon {
   animation: sparkle 0.5s;
+}
+
+.comments-container {
+  max-height: 0;
+  overflow: hidden;
+  @apply smoother;
+}
+.comments-container.open {
+  max-height: 250px; /* Adjust to the maximum height you want to allow */
+}
+.comments-container.closed {
+  max-height: 0; /* Collapse smoothly */
 }
