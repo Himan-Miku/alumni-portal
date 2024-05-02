@@ -2040,6 +2040,11 @@
     "@smithy/types" "^2.8.0"
     tslib "^2.5.0"
 
+"@stencil/core@^4.0.3":
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-4.14.1.tgz#0b1e81bf97d51c087ca51c8c9cf27a12ff0afa09"
+  integrity sha512-pTOxF0pYx+ripKGotmrWrn74El1SlfZPzrcHfifGPAYwyfxUPcKyoiVR7rvDaVLqgkGlRI4Lg04riEIfVGwH8Q==
+
 "@swc/helpers@0.5.2":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.5.2.tgz#85ea0c76450b61ad7d10a37050289eded783c27d"
@@ -4838,6 +4843,13 @@ invariant@^2.2.4:
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
   dependencies:
     loose-envify "^1.0.0"
+
+ionicons@^7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-7.3.1.tgz#a12a2c1c9290e3b1ee23b1a58b01565e104c7525"
+  integrity sha512-1boG4EQTBBpQ4/0PU60Yi78Iw/k8iNtKu9c0NmsbzHGnWAcwpiovG9Wi/rk5UlF+DC+CR4XDCxKo91YqvAxkww==
+  dependencies:
+    "@stencil/core" "^4.0.3"
 
 ip@^1.1.8:
   version "1.1.8"

@@ -33,7 +33,7 @@ interface IUser {
   class?: string;
   skills?: string[];
   expertise?: string[];
-  Connections: mongoose.Schema.Types.ObjectId[];
+  Connections: mongoose.Types.ObjectId[];
   isAlumni: boolean;
   about?: string;
   email: string;

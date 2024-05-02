@@ -1,13 +1,33 @@
-import React from "react";
-import Thread from "./Thread";
+"use client";
+import React, { useEffect, useState } from "react";
+import SingleThread from "./Thread";
 import { RxCross2 } from "react-icons/rx";
-import { Button } from "./ui/button";
-import { fetchThread } from "@/actions/action";
 import LoadThreads from "../components/LoadThreads";
+import ThreadSkeleton from "@/components/ThreadSkeleton";
+import { Thread } from "@/types/types";
+import Axios from "@/app/Axios";
 
-const StudentsThreads = async () => {
+const StudentsThreads = () => {
   let tags = ["All", "Job Opportunities", "Achievements"];
-  let data = await fetchThread(0);
+  let [data, setData] = useState<Thread[]>([]);
+  let [loading, setLoading] = useState<"Loading" | "Loaded" | "Not Found">(
+    "Loading"
+  );
+
+  useEffect(() => {
+    let fetch = async () => {
+      try {
+        setLoading("Loading");
+        const res = await Axios.get("api/showthread?page=0&limit=4");
+        setData(res?.data?.threads as Thread[]);
+        setLoading("Loaded");
+      } catch (error) {
+        console.log(error);
+        setLoading("Not Found");
+      }
+    };
+    fetch();
+  }, []);
   // console.log(data)
 
   return (
@@ -31,19 +51,29 @@ const StudentsThreads = async () => {
         </div>
         <div className="w-full h-[1px] bg-slate-400"></div>
       </div>
-      <div className="threads flex flex-col gap-4 pt-3">
-        {data?.map((ele) => {
-          return (
-            <>
-              <Thread singleThread={ele}></Thread>
-              <hr></hr>
-            </>
-          );
-        })}
-        {/* <Thread></Thread> */}
+      <div className="threads flex flex-col gap-6 pt-3">
+        {loading == "Loading" ? (
+          <>
+            <ThreadSkeleton></ThreadSkeleton>
+            <ThreadSkeleton></ThreadSkeleton>
+          </>
+        ) : loading == "Loaded" ? (
+          data?.map((ele, ind) => {
+            return (
+              <div className="flex flex-col gap-4 " key={ind}>
+                <SingleThread singleThread={ele} key={ind}></SingleThread>
+                <hr></hr>
+              </div>
+            );
+          })
+        ) : (
+          <div className="text-xl font-semibold text-slate-500 text-center ">
+            No Threads Found
+          </div>
+        )}
       </div>
-      <LoadThreads></LoadThreads>
-      <hr className="mt-4"></hr>
+      {loading != "Not Found" && <LoadThreads></LoadThreads>}
+      {/* <hr className="mt-4"></hr> */}
       {/* <div className="grid place-content-center">
         <Button
           variant={"ghost"}

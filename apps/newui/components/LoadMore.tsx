@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { fetchFeed } from "@/actions/action";
 import { Post } from "@/types/types";
 import SinglePost from "./Post";
+import { Button } from "./ui/button";
 
 const delay = (milliseconds: number): Promise<void> => {
   return new Promise((resolve) => {
@@ -26,12 +27,12 @@ const LoadMore = () => {
     // console.log(data);
   };
 
-  useEffect(() => {
-    if (inView) {
-      // console.log("At the end");
-      loadMoreFn();
-    }
-  }, [inView]);
+  // useEffect(() => {
+  //   if (inView) {
+  //     // console.log("At the end");
+  //     loadMoreFn();
+  //   }
+  // }, [inView]);
   return (
     <>
       {data?.map((elem, ind) => {
@@ -42,8 +43,8 @@ const LoadMore = () => {
           </>
         );
       })}
-      <section>
-        <div className="grid place-items-center">
+      <section className="flex">
+        {/* <div className="grid place-items-center">
           <div
             className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-blue-600 align-[-0.125em] text-slate-300 motion-reduce:animate-[spin_1.5s_linear_infinite]"
             role="status"
@@ -52,8 +53,15 @@ const LoadMore = () => {
               Loading...
             </span>
           </div>
-        </div>
-        <div ref={ref} className=""></div>
+        </div> */}
+        <Button
+          className="w-full"
+          onClick={() => {
+            loadMoreFn();
+          }}
+        >
+          Load More Threads
+        </Button>
       </section>
     </>
   );

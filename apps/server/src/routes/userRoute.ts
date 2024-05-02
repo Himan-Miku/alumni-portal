@@ -2,9 +2,9 @@ import { Router } from "express";
 import {
   AddUser,
   ForgetPassword,
-  PopulatedFollowings,
+  PopulateConnections,
   SearchUser,
-  UpdateFollow,
+  UpdateConnections,
   append,
   deleteObj,
   deleteUser,
@@ -26,9 +26,9 @@ router.route("/login").post(login);
 router.route("/users").get(SearchUser);
 router.route("/user").get(selfinfo).put(updateUser).delete(deleteUser);
 router.route("/objdelete/:id").put(deleteObj);
-router.route("/followers/:id").get(PopulatedFollowings);
+router.route("/connections/:id").get(PopulateConnections);
 router.route("/user/:_id").get(getUser);
-router.route("/follow/:id").put(UpdateFollow);
+router.route("/connect/:id").put(UpdateConnections);
 router.route("/append").post(append);
 router.route("/objupdate/:id").put(updateIndividuals);
 router.route("/user/email/:email").get(getUserByEmail);

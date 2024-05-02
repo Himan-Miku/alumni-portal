@@ -1,5 +1,3 @@
-"use server";
-
 import Axios from "@/app/Axios";
 import { Post, Thread } from "@/types/types";
 

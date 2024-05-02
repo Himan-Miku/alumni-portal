@@ -71,6 +71,9 @@
     @apply border-border tracking-wider;
     @apply border-border;
   }
+  .smoother {
+    transition: max-height 0.5s ease;
+  }
   body {
     @apply bg-background text-foreground h-full;
   }
@@ -89,4 +92,35 @@
   .un_select_option {
     @apply border-2 border-blue-500 px-4 py-2 text-blue-500 rounded-md;
   }
+}
+@keyframes sparkle {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply the animation to the heart icon */
+.heart-icon {
+  animation: sparkle 0.5s;
+}
+
+.comments-container {
+  max-height: 0;
+  overflow: hidden;
+  @apply smoother;
+}
+.comments-container.open {
+  max-height: 250px; /* Adjust to the maximum height you want to allow */
+}
+.comments-container.closed {
+  max-height: 0; /* Collapse smoothly */
 }
